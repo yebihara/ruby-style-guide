@@ -1674,7 +1674,7 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
     ```
 
 * クラス階層の設計を行うときは、
-  [Liskov Substitution Principle](http://en.wikipedia.org/wiki/Liskov_substitution_principle).
+  [リスコフの置換原則](http://ja.wikipedia.org/wiki/%E3%83%AA%E3%82%B9%E3%82%B3%E3%83%95%E3%81%AE%E7%BD%AE%E6%8F%9B%E5%8E%9F%E5%89%87).
   に従いましょう。
 * あなたのクラスを可能な限り
   [SOLID](http://en.wikipedia.org/wiki/SOLID_(object-oriented_design\))
@@ -1772,7 +1772,7 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
     end
     ```
 
-* 継承より[duck-typing](http://en.wikipedia.org/wiki/Duck_typing)が好まれます。
+* 継承より[ダック・タイピング](http://ja.wikipedia.org/wiki/%E3%83%80%E3%83%83%E3%82%AF%E3%83%BB%E3%82%BF%E3%82%A4%E3%83%94%E3%83%B3%E3%82%B0)が好まれます。
 
     ```Ruby
     # 悪い例
