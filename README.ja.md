@@ -51,6 +51,11 @@ Rubyのための慣習、語法、スタイル規定は、
 ["The Ruby Programming Language"](http://www.amazon.com/Ruby-Programming-Language-David-Flanagan/dp/0596516177)のような、
 様々な高度で評価の高いRubyプログラミングリソースに基づいています。
 
+特定のスタイルに関して、Rubyコミュニティ内での明らかな意見の一致を得ていない箇所もいくつかあります
+(文字列リテラルの引用記号、ハッシュリテラルの内側のスペース、複数行のメソッドチェーンのドットの位置、などなど)。
+そのようなシナリオでは、どの有名なスタイルも許容されるので、
+どれを選んで、一貫して用いるかはあなた次第です。
+
 このガイドはまだ未完成です - いくつかのルールはサンプルがなく、
 いくつかのルールは説明が不十分です。
 やがてこれらの課題は対応されます - 今後これらを記憶にとどめておきます。
@@ -66,8 +71,10 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
 * [中国語(簡体)](https://github.com/JuanitoFatas/ruby-style-guide/blob/master/README-zhCN.md)
 * [中国語(繁体)](https://github.com/JuanitoFatas/ruby-style-guide/blob/master/README-zhTW.md)
 * [フランス語](https://github.com/porecreat/ruby-style-guide/blob/master/README-frFR.md)
+* [日本語](https://github.com/fortissimo1997/ruby-style-guide/blob/japanese/README.ja.md)
 * [スペイン語](https://github.com/alemohamad/ruby-style-guide/blob/master/README-esLA.md)
 * [ベトナム語](https://github.com/scrum2b/ruby-style-guide/blob/master/README-viVN.md)
+* [ポルトガル語](https://github.com/rubensmabueno/ruby-style-guide/blob/master/README-PT-BR.md)
 
 ## 目次
 
@@ -405,17 +412,39 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
                 ' and second part of the long string'
   ```
 
-* メソッドチェーンを他の行につなげるときは、`.`は次の行に置きましょう。
+* 一貫した複数行のメソッドチェーンのスタイルを採用しましょう。
+  Rubyコミュニティには2つの有名なスタイル - 先頭に`.`を付けるもの (Option A)、
+  末尾に`.`を付けるもの (Option B) - があり、
+  どちらも良いと考えられています。
 
-  ```Ruby
-  # 悪い例 - ２行目を理解するのに１行目を調べなければなりません
-  one.two.three.
-    four
+  * **(Option A)** メソッドチェーンを次の行へつなげる時は、
+    `.`は次の行に置きましょう。
 
-  # 良い例 - ２行目で何が行われているかすぐに理解できます
-  one.two.three
-    .four
-  ```
+    ```Ruby
+    # 悪い例 - ２行目を理解するのに１行目を調べなければなりません
+    one.two.three.
+      four
+
+    # 良い例 - ２行目で何が行われているかすぐに理解できます
+    one.two.three
+      .four
+    ```
+
+  * **(Option B)** メソッドチェーンを次の行につなげる時は、
+    式が続くことを示すように最初の行に`.`を置きましょう。
+
+    ```Ruby
+    # 悪い例 - メソッドチェーンが続いているかを知るには、次の行を読む必要があります
+    one.two.three
+      .four
+
+    # 良い例 - 最初の行を越えて式が続くか一目瞭然です
+    one.two.three.
+      four
+    ```
+
+  双方のスタイルのメリットに関する議論は[こちら](https://github.com/bbatsov/ruby-style-guide/pull/176)
+  で見ることができます。
 
 * メソッド呼び出しが複数行に及ぶときは、引数は揃えましょう。
   １行の長さの制約のために、引数を揃えるのに適していない時は、
@@ -645,6 +674,25 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
 
 * `if x; ...`を使ってはいけません。代わりに三項演算子を使いましょう。
 
+* 結果を返す`if`や`case`式の値を活用しましょう。
+
+  ```Ruby
+  # 悪い例
+  if condition
+    result = x
+  else
+    result = y
+  end
+
+  # 良い例
+  retuls =
+    if condition
+      x
+    else
+      y
+    end
+  ```
+
 * １行の`case`文では`when x then ...`を使いましょう。
   代わりの表現である`when x: ...`は、Ruby 1.9で廃止されました。
 
@@ -720,6 +768,22 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
 
   # もう１つの良い例
   some_condition && do_something
+  ```
+
+* 重要な複数行のブロックに`if/unless`のガード節を用いるのは避けましょう。
+
+  ```Ruby
+  # 悪い例
+  10.times do
+    # 複数行のbody省略
+  end if some_condition
+
+  # 良い例
+  if some_condition
+    10.times do
+      # 複数行のbody省略
+    end
+  end
   ```
 
 * 否定形のときは`if`より`unless`が好まれます。(もしくは`||`構文を使いましょう)。
@@ -813,6 +877,23 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
 
   # 良い例
   do_something until some_condition
+  ```
+
+* 無限ループが必要な時は、`while/until`の代わりに`Kernel#loop`を用いましょう。
+
+  ```Ruby
+  # 悪い例
+  while true
+    do_something
+  end
+
+  until false
+    do_something
+  end
+
+  loop do
+    do_something
+  end
   ```
 
 * 後判定ループの場合、`begin/end/until`や`begin/end/while`より、`break`付きの`Kernel#loop`が好まれます。
@@ -1040,6 +1121,26 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   end
   ```
 
+* 利用できるときには省略された自己代入演算子を用いましょう。
+
+  ```Ruby
+  # 悪い例
+  x = x + y
+  x = x * y
+  x = x**y
+  x = x / y
+  x = x || y
+  x = x && y
+
+  # 良い例
+  x += y
+  x *= y
+  x **= y
+  x /= y
+  x ||= y
+  x &&= y
+  ```
+
 * 変数の初期化には、`||=`を自由に使いましょう。
 
   ```Ruby
@@ -1067,6 +1168,9 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   if something
     something = something.downcase
   end
+
+  # 悪い例
+  something = something ? nil : something.downcase
 
   # ok
   something = something.downcase if something
@@ -1176,14 +1280,26 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   l.call(1)
   ```
 
-* 使わないブロック引数には`_`を用いましょう。
+* 使わないブロック引数やローカル変数の先頭には`_`を付けましょう。
+  単に`_`を用いるのも許容されます
+  (少し説明不足ではありますが)。
+  この慣習はRubyインタープリタやRubocopのようなツールには認識されており、
+  変数を使っていないという警告を抑えることでしょう。
 
   ```Ruby
   # bad
   result = hash.map { |k, v| v + 1 }
 
+  def something(x)
+    unused_var, used_var = something_else(x)
+  end
+
   # good
   result = hash.map { |_, v| v + 1 }
+
+  def something(x)
+    _, used_var = something_else(x)
+  end
   ```
 
 * `STDOUT/STDERR/STDIN`の代わりに`$stdout/$stderr/$stdin`を用いましょう。
@@ -1291,6 +1407,22 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   end
   ```
 
+* ブーリアン値を扱わない限り、露骨な`nil`でないかの検査は避けましょう。
+
+  ```Ruby
+  # 悪い例
+  do_something if !something.nil?
+  do_something if something != nil
+
+  # 良い例
+  do_something if something
+
+  # 良い例 - ブーリアン値を扱うとき
+  def value_set?
+    !@some_boolean.nil?
+  end
+  ```
+
 * `BEGIN`ブロックの使用は避けましょう。
 
 * `END`ブロックを使ってはいけません。代わりに`Kernel#at_exit`を使いましょう。
@@ -1314,24 +1446,40 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
 
   ```Ruby
   # 悪い例
-    def compute_thing(thing)
-      if thing[:foo]
-        update_with_bar(thing)
-        if thing[:foo][:bar]
-          partial_compute(thing)
-        else
-          re_compute(thing)
-        end
+  def compute_thing(thing)
+    if thing[:foo]
+      update_with_bar(thing)
+      if thing[:foo][:bar]
+        partial_compute(thing)
+      else
+        re_compute(thing)
       end
     end
+  end
 
   # 良い例
-    def compute_thing(thing)
-      return unless thing[:foo]
-      update_with_bar(thing[:foo])
-      return re_compute(thing) unless thing[:foo][:bar]
-      partial_compute(thing)
+  def compute_thing(thing)
+    return unless thing[:foo]
+    update_with_bar(thing[:foo])
+    return re_compute(thing) unless thing[:foo][:bar]
+    partial_compute(thing)
+  end
+  ```
+
+  ループ内では条件判定ブロックよりも`next`が好まれます。
+  ```Ruby
+  # 悪い例
+  [0, 1, 2, 3].each do |item|
+    if item > 1
+      puts item
     end
+  end
+
+  # 良い例
+  [0, 1, 2, 3].each do |item|
+    next unless item > 1
+    puts item
+  end
   ```
 
 ## 命名規則
@@ -1403,6 +1551,10 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
     ...
   end
   ```
+
+* ファイル名には`sname_case`を用いましょう。例えば`hello_world.rb`のように。
+
+* ディレクトリ名には`sname_case`を用いましょう。例えば`lib/hello_world/hello_world.rb`のように。
 
 * 他の定数は`SCREAMING_SNAKE_CASE`を用いましょう。
 
@@ -1488,6 +1640,18 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   他の言語ではあまり一般的ではありません。
   `find_all`よりも`select`が推奨される理由は、
   `reject`と共に用いた時、その名前が極めて自己説明的だからです。
+
+* `size`の代わりに`count`を用いてはいけません。
+  `Array`以外の`Enumerable`オブジェクトでは、
+  サイズを求めるためにコレクション全てをイテレートしてしまいます。
+
+  ```Ruby
+  # 悪い例
+  some_hash.count
+
+  # 良い例
+  some_hash.size
+  ```
 
 * `map`と`flatten`の組み合わせの代わりに、`flat_map`を用いましょう。
   これは深さが２以上の配列には適用できません。
@@ -1626,6 +1790,48 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
     private
 
     def some_private_method
+    end
+  end
+  ```
+
+* 複数行のクラスの中に複数行のクラスをネストさせてはいけません。
+  そのようにネストされたクラスは、それが含まれるクラス名のフォルダの中に
+  それぞれのクラスのファイルを置くように努めましょう。
+
+  ```Ruby
+  # 悪い例
+
+  # foo.rb
+  class Foo
+    class Bar
+      # 中に30メソッド
+    end
+
+    class Car
+      # 中に20メソッド
+    end
+
+    # 中に30メソッド
+  end
+
+  # 良い例
+
+  # foo.rb
+  class Foo
+    # 中に30メソッド
+  end
+
+  # foo/bar.rb
+  class Foo
+    class Bar
+      # 中に30メソッド
+    end
+  end
+
+  # foo/car.rb
+  class Foo
+    class Car
+      # 中に20メソッド
     end
   end
   ```
@@ -2204,7 +2410,7 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
 
 * 変更のできるオブジェクトをハッシュのキーに使うのは避けましょう。
 
-* キーがシンボルの時は、ハッシュリテラルの構文を用いましょう。
+* ハッシュのキーがシンボルの時は、Ruby 1.9のハッシュリテラル記法を用いましょう。
 
   ```Ruby
   # 悪い例
@@ -2212,6 +2418,17 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
 
   # 良い例
   hash = { one: 1, two: 2, three: 3 }
+  ```
+
+* Ruby 1.9のハッシュ記法とハッシュロケットを同じハッシュリテラル内で混在させてはいけません。
+  シンボルでないキーがある場合は、ハッシュロケット記法を続けなければなりません。
+
+  ```Ruby
+  # 悪い例
+  { a: 1, 'b' => 2 }
+
+  # 良い例
+  { :a => 1, 'b' => 2 }
   ```
 
 * `Hash#has_key?`より`Hash#key?`を、
@@ -2267,12 +2484,24 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   batman.fetch(:powers) { get_batman_powers }
   ```
 
+* ハッシュから連続して複数の値が必要になる時は、`Hash#values_at`を用いましょう。
+
+  ```Ruby
+  # 悪い例
+  email = data['email']
+  nickname = data['nickname']
+
+  # 良い例
+  email, username = data.values_at('email', 'nickname')
+  ```
+
 * Ruby 1.9現在ではハッシュは順序付けられるということを信頼しましょう。
+
 * コレクションを走査している時に変更を加えてわいけません。
 
 ## 文字列
 
-* 文字列連結の代わりに文字列挿入を好みます。
+* 文字列連結の代わりに文字列挿入や文字列整形を好みます。
 
   ```Ruby
   # 悪い例
@@ -2280,6 +2509,9 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
 
   # 良い例
   email_with_name = "#{user.name} <#{user.email}>"
+
+  # 良い例
+  email_with_name = format('%s <%s>', user.name, user.email)
   ```
 
 * 文字列挿入時にはスペースを入れることを検討しましょう。
@@ -2289,16 +2521,37 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   "#{ user.last_name }, #{ user.first_name }"
   ```
 
-* 文字列挿入の必要がないときや、`\t`や`\n`｀’｀等の特別な文字がない場合は、
-  シングルクォーテーションが好まれます。
+* 一貫した文字列リテラルの引用記号のスタイルを採用しましょう。
+  Rubyコミュニティには2つの有名なスタイル - デフォルトでシングルクォートを用いるもの (Option A)、
+  ダブルクォートを用いるもの (Option B) - があり、
+  どちらも良いと考えられています。
 
-  ```Ruby
-  # 悪い例
-  name = "Bozhidar"
+  * **(Option A)** 文字列挿入の必要がないときや、`\t`や`\n`｀’｀等の特別な文字がない場合は、
+    シングルクォーテーションが好まれます。
 
-  # 良い例
-  name = 'Bozhidar'
-  ```
+    ```Ruby
+    # 悪い例
+    name = "Bozhidar"
+
+    # 良い例
+    name = 'Bozhidar'
+    ```
+
+  * **(Option B)** 文字列中に`"`を含んでいたり、エスケープ文字を抑えたいときでない限り、
+    ダブルクォーテーションが好まれます。
+
+    ```Ruby
+    # 悪い例
+    name = 'Bozhidar'
+
+    # 良い例
+    name = "Bozhidar"
+    ```
+
+  Rubyコミュニティの中では、ほぼ間違いなく
+  ２つ目のスタイルの方が有名です。
+  しかしながら、このガイド内の文字列リテラル表記は、
+  １つ目のスタイルを採用しています。
 
 * 文字リテラル構文`?x`を用いてはいけません。
   Ruby 1.9からは基本的には冗長です -
@@ -2341,6 +2594,17 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
 
   # 良い例
   puts "$global = #{$global}"
+  ```
+
+* 文字列に挿入するときに`Object#to_s`を使ってはいけません。
+  自動的に呼び出されます。
+
+  ```Ruby
+  # 悪い例
+  message = "This is the #{result.to_s}."
+
+  # 良い例
+  message = "This is the #{result}."
   ```
 
 * 大きなデータの塊を作る必要があるときは、`String#+`の使用は避けましょう。
@@ -2451,13 +2715,13 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   スペースが無視されることに注意しましょう。
 
   ```Ruby
-  regexp = %r{
+  regexp = /
     start         # some text
     \s            # white space char
     (group)       # first group
     (?:alt1|alt2) # some alternation
     end
-  }x
+  /x
   ```
 
 * `sub`/`gsub`での複雑な置換は、ブロックやハッシュを用いることで実現できます。
@@ -2692,6 +2956,11 @@ Rubyのコードスタイルに興味のある全ての人と共に取り組む�
 
 改善のために、遠慮せずチケットを立てたりプルリクエストを送ったりしてください。
 あなたの手助けに予め感謝します！
+
+また、このプロジェクト(とRubocop)への金銭的な貢献は、
+[gittip](https://www.gittip.com/bbatsov)経由で行うことができます。
+
+[![Gittip経由での支援](https://rawgithub.com/twolfson/gittip-badge/0.2.0/dist/gittip.png)](https://www.gittip.com/bbatsov)
 
 ## 貢献するには
 
