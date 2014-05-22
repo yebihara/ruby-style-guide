@@ -75,7 +75,7 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
 * [構文](#構文)
 * [命名規則](#命名規則)
 * [コメント](#コメント)
-    * [注釈](#注釈)
+  * [注釈](#注釈)
 * [クラス](#クラス)
 * [例外](#例外)
 * [Collections](#collections)
@@ -96,22 +96,22 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
 * ソースファイルのエンコーディングには`UTF-8`を用いましょう。
 * インデントには **スペース** 2つ(別名ソフトタブ)。 ハードタブを用いてはいけません。
 
-    ```Ruby
-    # 悪い例 - 4つのスペース
-    def some_method
-        do_something
-    end
-
-    # 良い例
-    def some_method
+  ```Ruby
+  # 悪い例 - 4つのスペース
+  def some_method
       do_something
-    end
-    ```
+  end
+
+  # 良い例
+  def some_method
+    do_something
+  end
+  ```
 
 * Unix-styleの改行にしましょう。
 (*BSD/Solaris/Linux/OS X ユーザーはデフォルトで設定されています。
   Windows ユーザーは特に注意が必要です。)
-    * もしGitを使っていれば、プロジェクトにWindowsの改行が紛れ込まないように、以下の設定を追加したほうがよいかもしれません:
+  * もしGitを使っていれば、プロジェクトにWindowsの改行が紛れ込まないように、以下の設定を追加したほうがよいかもしれません:
 
     ```bash
     $ git config --global core.autocrlf true
@@ -120,155 +120,143 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
 * 命令文や式の区切りに`;`を用いてはいけません。
   当然、１行につき式１つにしましょう。
 
-    ```Ruby
-    # 悪い例
-    puts 'foobar'; # 余分なセミコロンです。
+  ```Ruby
+  # 悪い例
+  puts 'foobar'; # 余分なセミコロンです。
 
-    puts 'foo'; puts 'bar' # ２つの式が１行にあります。
+  puts 'foo'; puts 'bar' # ２つの式が１行にあります。
 
-    # 良い例
-    puts 'foobar'
+  # 良い例
+  puts 'foobar'
 
-    puts 'foo'
-    puts 'bar'
+  puts 'foo'
+  puts 'bar'
 
-    puts 'foo', 'bar' # 特にputsでは適用されます。
-    ```
+  puts 'foo', 'bar' # 特にputsでは適用されます。
+  ```
 
 * 本文のないクラスは１行のフォーマットが好まれます。
 
-    ```Ruby
-    # 悪い例
-    class FooError < StandardError
-    end
+  ```Ruby
+  # 悪い例
+  class FooError < StandardError
+  end
 
-    # 悪くない例
-    class FooError < StandardError; end
+  # 悪くない例
+  class FooError < StandardError; end
 
-    # 良い例
-    FooError = Class.new(StandardError)
-    ```
+  # 良い例
+  FooError = Class.new(StandardError)
+  ```
 
 * １行のメソッドは避けましょう。
   いくらか使われているところもありますが、
   それらの定義構文の仕様が望ましくないとさせるいくつかの特殊性があります。
   ともかく - １行メソッドには多くとも式１つまでにすべきです。
 
-    ```Ruby
-    # 悪い例
-    def too_much; something; something_else; end
+  ```Ruby
+  # 悪い例
+  def too_much; something; something_else; end
 
-    # 悪くない例 - 最初の ; は必要です。
-    def no_braces_method; body end
+  # 悪くない例 - 最初の ; は必要です。
+  def no_braces_method; body end
 
-    # 悪くない例 - ２つ目の ; は任意です。
-    def no_braces_method; body; end
+  # 悪くない例 - ２つ目の ; は任意です。
+  def no_braces_method; body; end
 
-    # 悪くない例 - 文法上は正しいです。ただし、; がない記述は少し読みづらいです。
-    def some_method() body end
+  # 悪くない例 - 文法上は正しいです。ただし、; がない記述は少し読みづらいです。
+  def some_method() body end
 
-    # 良い例
-    def some_method
-      body
-    end
-    ```
+  # 良い例
+  def some_method
+    body
+  end
+  ```
 
-    本文が空のメソッドはこのルールの例外です。
+  本文が空のメソッドはこのルールの例外です。
 
-    ```Ruby
-    # 良い例
-    def no_op; end
-    ```
+  ```Ruby
+  # 良い例
+  def no_op; end
+  ```
 
 * 演算子の前後、コンマ、コロン、セミコロンの後ろに、`{`の前後、`}`の前にはスペースを入れましょう。
   スペースはRubyのインタープリタには(ほとんどの場合)重要ではありませんが、
   スペースの適切な使用は、読みやすいコードを容易に書くための鍵です。
 
-    ```Ruby
-    sum = 1 + 2
-    a, b = 1, 2
-    1 > 2 ? true : false; puts 'Hi'
-    [1, 2, 3].each { |e| puts e }
-    ```
+  ```Ruby
+  sum = 1 + 2
+  a, b = 1, 2
+  1 > 2 ? true : false; puts 'Hi'
+  [1, 2, 3].each { |e| puts e }
+  ```
 
-    演算子についてただひとつの例外は、指数演算子です:
+  演算子についてただひとつの例外は、指数演算子です:
 
-    ```Ruby
-    # 悪い例
-    e = M * c ** 2
+  ```Ruby
+  # 悪い例
+  e = M * c ** 2
 
-    # 良い例
-    e = M * c**2
-    ```
+  # 良い例
+  e = M * c**2
+  ```
 
-    `{` と `}`は、構文の明確化のために有用です。
-    だから、文字列に式を埋め込む時と同様に、
-    ブロックやハッシュ構文に使われます。
-    ハッシュ構文には、２つのスタイルが許容できます。
+  `{` と `}`は、構文の明確化のために有用です。
+  だから、文字列に式を埋め込む時と同様に、
+  ブロックやハッシュ構文に使われます。
+  ハッシュ構文には、２つのスタイルが許容できます。
 
-    ```Ruby
-    # 良い例 - スペースを { の後と } の前に入れる
-    { one: 1, two: 2 }
+  ```Ruby
+  # 良い例 - スペースを { の後と } の前に入れる
+  { one: 1, two: 2 }
 
-    # 良い例 - スペースを { の後と } の前に入れない
-    {one: 1, two: 2}
-    ```
+  # 良い例 - スペースを { の後と } の前に入れない
+  {one: 1, two: 2}
+  ```
 
-    １つ目の構文は、わずかながら少し読みやすいです(そして、ほぼ間違いなく一般的なRubyコミュニティで人気があります)。
-    ２つ目の構文は、ブロックとハッシュを視覚的に差別化できるという点で有利です。
-    どちらでも片方を採用すれば、常に同じ構文を採用しましょう。
+  １つ目の構文は、わずかながら少し読みやすいです(そして、ほぼ間違いなく一般的なRubyコミュニティで人気があります)。
+  ２つ目の構文は、ブロックとハッシュを視覚的に差別化できるという点で有利です。
+  どちらでも片方を採用すれば、常に同じ構文を採用しましょう。
 
-    文字列に埋め込む構文も、２つのスタイルが許容できます:
+  文字列に埋め込む構文も、２つのスタイルが許容できます:
 
-    ```Ruby
-    # 良い例 - スペースを入れない
-    "string#{expr}"
+  ```Ruby
+  # 良い例 - スペースを入れない
+  "string#{expr}"
 
-    # 良い例 - ほぼ間違いなくにこちらのほうが読みやすい
-    "string#{ expr }"
-    ```
+  # 良い例 - ほぼ間違いなくにこちらのほうが読みやすい
+  "string#{ expr }"
+  ```
 
-    １つ目の式は、他の式よりも非常に人気があり、一般的にこちらを使うように進められる書き方です。
-    一方２つ目は、(間違いなく)少し読みやすいです。
-    ハッシュと同じように - 片方を採用すれば、常に同じ方を採用しましょう。
+  １つ目の式は、他の式よりも非常に人気があり、一般的にこちらを使うように進められる書き方です。
+  一方２つ目は、(間違いなく)少し読みやすいです。
+  ハッシュと同じように - 片方を採用すれば、常に同じ方を採用しましょう。
 
 * `(`、 `[`の後と、`]`、 `)`の前にはスペースは入れません。
 
-    ```Ruby
-    some(arg).other
-    [1, 2, 3].size
-    ```
+  ```Ruby
+  some(arg).other
+  [1, 2, 3].size
+  ```
 
 * `!`の後にはスペースは入れません。
 
-    ```Ruby
-    # 悪い例
-    ! something
+  ```Ruby
+  # 悪い例
+  ! something
 
-    # 良い例
-    !something
-    ```
+  # 良い例
+  !something
+  ```
 
 * `when`は`case`と同じ深さに揃えましょう。
   多くの人が同意できないのを知っていますが、
   このスタイルは"The Ruby Programming Language"、"Programming Ruby"
   双方で確立されたものなのです。
 
-    ```Ruby
-    # 悪い例
-    case
-      when song.name == 'Misty'
-        puts 'Not again!'
-      when song.duration > 120
-        puts 'Too long!'
-      when Time.now.hour > 21
-        puts "It's too late"
-      else
-        song.play
-    end
-
-    # 良い例
-    case
+  ```Ruby
+  # 悪い例
+  case
     when song.name == 'Misty'
       puts 'Not again!'
     when song.duration > 120
@@ -277,15 +265,60 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
       puts "It's too late"
     else
       song.play
-    end
-    ```
+  end
+
+  # 良い例
+  case
+  when song.name == 'Misty'
+    puts 'Not again!'
+  when song.duration > 120
+    puts 'Too long!'
+  when Time.now.hour > 21
+    puts "It's too late"
+  else
+    song.play
+  end
+  ```
 
 * 条件式を変数に代入するときは、
   その式の通常のアラインメントを維持しましょう。
 
-    ```Ruby
-    # 悪い例 - かなり複雑です
-    kind = case year
+  ```Ruby
+  # 悪い例 - かなり複雑です
+  kind = case year
+  when 1850..1889 then 'Blues'
+  when 1890..1909 then 'Ragtime'
+  when 1910..1929 then 'New Orleans Jazz'
+  when 1930..1939 then 'Swing'
+  when 1940..1950 then 'Bebop'
+  else 'Jazz'
+  end
+
+  result = if some_cond
+    calc_something
+  else
+    calc_something_else
+  end
+
+  # 良い例 - 何が行われているか明らかです
+  kind = case year
+         when 1850..1889 then 'Blues'
+         when 1890..1909 then 'Ragtime'
+         when 1910..1929 then 'New Orleans Jazz'
+         when 1930..1939 then 'Swing'
+         when 1940..1950 then 'Bebop'
+         else 'Jazz'
+         end
+
+  result = if some_cond
+             calc_something
+           else
+             calc_something_else
+           end
+
+  # 良い例 (少しだけ幅の効率がよいです)
+  kind =
+    case year
     when 1850..1889 then 'Blues'
     when 1890..1909 then 'Ragtime'
     when 1910..1929 then 'New Orleans Jazz'
@@ -294,195 +327,162 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
     else 'Jazz'
     end
 
-    result = if some_cond
+  result =
+    if some_cond
       calc_something
     else
       calc_something_else
     end
-
-    # 良い例 - 何が行われているか明らかです
-    kind = case year
-           when 1850..1889 then 'Blues'
-           when 1890..1909 then 'Ragtime'
-           when 1910..1929 then 'New Orleans Jazz'
-           when 1930..1939 then 'Swing'
-           when 1940..1950 then 'Bebop'
-           else 'Jazz'
-           end
-
-    result = if some_cond
-               calc_something
-             else
-               calc_something_else
-             end
-
-    # 良い例 (少しだけ幅の効率がよいです)
-    kind =
-      case year
-      when 1850..1889 then 'Blues'
-      when 1890..1909 then 'Ragtime'
-      when 1910..1929 then 'New Orleans Jazz'
-      when 1930..1939 then 'Swing'
-      when 1940..1950 then 'Bebop'
-      else 'Jazz'
-      end
-
-    result =
-      if some_cond
-        calc_something
-      else
-        calc_something_else
-      end
-    ```
+  ```
 
 * 定義式の間には空行をいれ、
   メソッド内の論理的段落ごとに分割しましょう。
 
-    ```Ruby
-    def some_method
-      data = initialize(options)
+  ```Ruby
+  def some_method
+    data = initialize(options)
 
-      data.manipulate!
+    data.manipulate!
 
-      data.result
-    end
+    data.result
+  end
 
-    def some_method
-      result
-    end
-    ```
+  def some_method
+    result
+  end
+  ```
 
 * メソッド呼び出しの最後の引数の後ろのコンマは避けましょう。
   引数が複数行にわかれていない時は、特に避けましょう。
 
-    ```Ruby
-    # 悪い例 - 簡単に引数を移動・追加・削除できますが、それでもお奨めできません。
-    some_method(
-                 size,
-                 count,
-                 color,
-               )
+  ```Ruby
+  # 悪い例 - 簡単に引数を移動・追加・削除できますが、それでもお奨めできません。
+  some_method(
+               size,
+               count,
+               color,
+             )
 
-    # 悪い例
-    some_method(size, count, color, )
+  # 悪い例
+  some_method(size, count, color, )
 
-    # 良い例
-    some_method(size, count, color)
-    ```
+  # 良い例
+  some_method(size, count, color)
+  ```
 
 * メソッドの引数に初期値を割り当てるとき、
   `=`演算子の周りにはスペースを入れましょう。
 
-    ```Ruby
-    # 悪い例
-    def some_method(arg1=:default, arg2=nil, arg3=[])
-      # do something...
-    end
+  ```Ruby
+  # 悪い例
+  def some_method(arg1=:default, arg2=nil, arg3=[])
+    # do something...
+  end
 
-    # 良い例
-    def some_method(arg1 = :default, arg2 = nil, arg3 = [])
-      # do something...
-    end
-    ```
+  # 良い例
+  def some_method(arg1 = :default, arg2 = nil, arg3 = [])
+    # do something...
+  end
+  ```
 
-    いくつかのRuby本は最初のスタイルを提案しているけど、
-    ２つ目の方が、実用的により優れています
-    (そして、ほぼ間違いなく少し読みやすいです)。
+  いくつかのRuby本は最初のスタイルを提案しているけど、
+  ２つ目の方が、実用的により優れています
+  (そして、ほぼ間違いなく少し読みやすいです)。
 
 * 不要な`\`を用いた行の継続は避けましょう。
   実際、文字列連結以外での行の継続は避けましょう。
 
-    ```Ruby
-    # 悪い例
-    result = 1 - \
-             2
+  ```Ruby
+  # 悪い例
+  result = 1 - \
+           2
 
-    # 良い例 (しかしそれでも地獄のように醜い)
-    result = 1 \
-             - 2
+  # 良い例 (しかしそれでも地獄のように醜い)
+  result = 1 \
+           - 2
 
-    long_string = 'First part of the long string' \
-                  ' and second part of the long string'
-    ```
+  long_string = 'First part of the long string' \
+                ' and second part of the long string'
+  ```
 
 * メソッドチェーンを他の行につなげるときは、`.`は次の行に置きましょう。
 
-    ```Ruby
-    # 悪い例 - ２行目を理解するのに１行目を調べなければなりません
-    one.two.three.
-      four
+  ```Ruby
+  # 悪い例 - ２行目を理解するのに１行目を調べなければなりません
+  one.two.three.
+    four
 
-    # 良い例 - ２行目で何が行われているかすぐに理解できます
-    one.two.three
-      .four
-    ```
+  # 良い例 - ２行目で何が行われているかすぐに理解できます
+  one.two.three
+    .four
+  ```
 
 * メソッド呼び出しが複数行に及ぶときは、引数は揃えましょう。
   １行の長さの制約のために、引数を揃えるのに適していない時は、
   最初の引数以降をインデント１つ分で揃えるスタイルも許容できます。
 
-    ```Ruby
-    # 初期値 (１行がとても長いです)
-    def send_mail(source)
-      Mailer.deliver(to: 'bob@example.com', from: 'us@example.com', subject: 'Important message', body: source.text)
-    end
+  ```Ruby
+  # 初期値 (１行がとても長いです)
+  def send_mail(source)
+    Mailer.deliver(to: 'bob@example.com', from: 'us@example.com', subject: 'Important message', body: source.text)
+  end
 
-    # 悪い例 (インデント２つで揃えています)
-    def send_mail(source)
-      Mailer.deliver(
-          to: 'bob@example.com',
-          from: 'us@example.com',
-          subject: 'Important message',
-          body: source.text)
-    end
-
-    # 良い例
-    def send_mail(source)
-      Mailer.deliver(to: 'bob@example.com',
-                     from: 'us@example.com',
-                     subject: 'Important message',
-                     body: source.text)
-    end
-
-    # 良い例 (普通のインデントです)
-    def send_mail(source)
-      Mailer.deliver(
+  # 悪い例 (インデント２つで揃えています)
+  def send_mail(source)
+    Mailer.deliver(
         to: 'bob@example.com',
         from: 'us@example.com',
         subject: 'Important message',
-        body: source.text
-      )
-    end
-    ```
+        body: source.text)
+  end
+
+  # 良い例
+  def send_mail(source)
+    Mailer.deliver(to: 'bob@example.com',
+                   from: 'us@example.com',
+                   subject: 'Important message',
+                   body: source.text)
+  end
+
+  # 良い例 (普通のインデントです)
+  def send_mail(source)
+    Mailer.deliver(
+      to: 'bob@example.com',
+      from: 'us@example.com',
+      subject: 'Important message',
+      body: source.text
+    )
+  end
+  ```
 
 * 複数行に及ぶ配列は、要素を揃えましょう。
 
-    ```Ruby
-    # 悪い例 - インデント１つです
-    menu_item = ["Spam", "Spam", "Spam", "Spam", "Spam", "Spam", "Spam", "Spam",
-      "Baked beans", "Spam", "Spam", "Spam", "Spam", "Spam"]
+  ```Ruby
+  # 悪い例 - インデント１つです
+  menu_item = ["Spam", "Spam", "Spam", "Spam", "Spam", "Spam", "Spam", "Spam",
+    "Baked beans", "Spam", "Spam", "Spam", "Spam", "Spam"]
 
-    # 良い例
-    menu_item = [
-      "Spam", "Spam", "Spam", "Spam", "Spam", "Spam", "Spam", "Spam",
-      "Baked beans", "Spam", "Spam", "Spam", "Spam", "Spam"
-    ]
+  # 良い例
+  menu_item = [
+    "Spam", "Spam", "Spam", "Spam", "Spam", "Spam", "Spam", "Spam",
+    "Baked beans", "Spam", "Spam", "Spam", "Spam", "Spam"
+  ]
 
-    # 良い例
-    menu_item =
-      ["Spam", "Spam", "Spam", "Spam", "Spam", "Spam", "Spam", "Spam",
-       "Baked beans", "Spam", "Spam", "Spam", "Spam", "Spam"]
-    ```
+  # 良い例
+  menu_item =
+    ["Spam", "Spam", "Spam", "Spam", "Spam", "Spam", "Spam", "Spam",
+     "Baked beans", "Spam", "Spam", "Spam", "Spam", "Spam"]
+  ```
 
 * 可読性のため、大きな数値にはアンダースコアをつけましょう。
 
-    ```Ruby
-    # 悪い例 - 0はいくつありますか？
-    num = 1000000
+  ```Ruby
+  # 悪い例 - 0はいくつありますか？
+  num = 1000000
 
-    # 良い例 - 人の頭でもより簡単に解析できます
-    num = 1_000_000
-    ```
+  # 良い例 - 人の頭でもより簡単に解析できます
+  num = 1_000_000
+  ```
 
 * APIのドキュメントのため、RDocの規約に従いましょう。
   コメント行と`def`の間に空行を入れてはいけません。
@@ -492,17 +492,17 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   前にスペースが入ると機能しませんし、
   通常のコメントと違い、簡単に見分けが付きません。
 
-    ```Ruby
-    # 悪い例
-    == begin
-    comment line
-    another comment line
-    == end
+  ```Ruby
+  # 悪い例
+  == begin
+  comment line
+  another comment line
+  == end
 
-    # 良い例
-    # comment line
-    # another comment line
-    ```
+  # 良い例
+  # comment line
+  # another comment line
+  ```
 
 ## 構文
 
@@ -510,42 +510,42 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   コンストラクタ(例えば`Array()`や`Nokogiri::HTML()`)を参照するときにのみ使いましょう。
   通常のメソッド呼び出しでは`::`の使用は避けましょう。
 
-    ```Ruby
-    # 悪い例
-    SomeClass::some_method
-    some_object::some_method
+  ```Ruby
+  # 悪い例
+  SomeClass::some_method
+  some_object::some_method
 
-    # 良い例
-    SomeClass.some_method
-    some_object.some_method
-    SomeModule::SomeClass::SOME_CONST
-    SomeModule::SomeClass()
-    ```
+  # 良い例
+  SomeClass.some_method
+  some_object.some_method
+  SomeModule::SomeClass::SOME_CONST
+  SomeModule::SomeClass()
+  ```
 
 * 引数があるとき、`def`は`()`と共に使いましょう。
   引数がない場合は`()`は除きましょう。
 
-     ```Ruby
-     # 悪い例
-     def some_method()
-       # body omitted
-     end
+   ```Ruby
+   # 悪い例
+   def some_method()
+     # body omitted
+   end
 
-     # 良い例
-     def some_method
-       # body omitted
-     end
+   # 良い例
+   def some_method
+     # body omitted
+   end
 
-     # 悪い例
-     def some_method_with_arguments arg1, arg2
-       # body omitted
-     end
+   # 悪い例
+   def some_method_with_arguments arg1, arg2
+     # body omitted
+   end
 
-     # 良い例
-     def some_method_with_arguments(arg1, arg2)
-       # body omitted
-     end
-     ```
+   # 良い例
+   def some_method_with_arguments(arg1, arg2)
+     # body omitted
+   end
+   ```
 
 * あなたが使ってはならない理由を正確に知っていなければ、決して`for`を使ってはいけません。
   代わりにイテレータが使われるべきです。
@@ -553,92 +553,92 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   `for`は(`each`と違い)新しいスコープを導入せず、
   そのブロック内で定義された変数は、ブロックの外からも見えるようになってしまいます。
 
-    ```Ruby
-    arr = [1, 2, 3]
+  ```Ruby
+  arr = [1, 2, 3]
 
-    # 悪い例
-    for elem in arr do
-      puts elem
-    end
+  # 悪い例
+  for elem in arr do
+    puts elem
+  end
 
-    # elemはルーブの外からも参照できることに注意しましょう
-    elem #=> 3
+  # elemはルーブの外からも参照できることに注意しましょう
+  elem #=> 3
 
-    # 良い例
-    arr.each { |elem| puts elem }
+  # 良い例
+  arr.each { |elem| puts elem }
 
-    # elemはeachブロックの外からは参照できません
-    elem #=> NameError: undefined local variable or method `elem'
-    ```
+  # elemはeachブロックの外からは参照できません
+  elem #=> NameError: undefined local variable or method `elem'
+  ```
 
 * `then`は複数行にまたがる`if/unless`では使ってはいけません。
 
-    ```Ruby
-    # 悪い例
-    if some_condition then
-      # 本文省略
-    end
+  ```Ruby
+  # 悪い例
+  if some_condition then
+    # 本文省略
+  end
 
-    # 良い例
-    if some_condition
-      # 本文省略
-    end
-    ```
+  # 良い例
+  if some_condition
+    # 本文省略
+  end
+  ```
 
 * 複数行にまたがる`if/unless`では、条件式は常に`if/unless`と同じ行に置きましょう。
 
-    ```Ruby
-    # 悪い例
-    if
-      some_condition
-      do_something
-      do_something_else
-    end
+  ```Ruby
+  # 悪い例
+  if
+    some_condition
+    do_something
+    do_something_else
+  end
 
-    # 良い例
-    if some_condition
-      do_something
-      do_something_else
-    end
-    ```
+  # 良い例
+  if some_condition
+    do_something
+    do_something_else
+  end
+  ```
 
 * `if/then/else/end`構文よりも三項演算子(`?:`)を好みます。
   そちらの方がより明快で簡潔です。
 
-    ```Ruby
-    # 悪い例
-    result = if some_condition then something else something_else end
+  ```Ruby
+  # 悪い例
+  result = if some_condition then something else something_else end
 
-    # 良い例
-    result = some_condition ? something : something_else
-    ```
+  # 良い例
+  result = some_condition ? something : something_else
+  ```
 
 * 三項演算子は１つの式につき１つまでにしましょう。
   つまり、三項演算子はネストしてはいけません。
   このケースでは`if/else`の方がよいです。
 
-    ```Ruby
-    # 悪い例
-    some_condition ? (nested_condition ? nested_something : nested_something_else) : something_else
+  ```Ruby
+  # 悪い例
+  some_condition ? (nested_condition ? nested_something : nested_something_else) : something_else
 
-    # 良い例
-    if some_condition
-      nested_condition ? nested_something : nested_something_else
-    else
-      something_else
-    end
-    ```
+  # 良い例
+  if some_condition
+    nested_condition ? nested_something : nested_something_else
+  else
+    something_else
+  end
+  ```
 
 * `if x: ...`は使ってはいけません - Ruby 1.9現在は廃止されました。
   代わりに三項演算子を使いましょう。
 
-    ```Ruby
-    # 悪い例
-    result = if some_condition: something else something_else end
+  ```Ruby
+  # 悪い例
+  result = if some_condition: something else something_else end
 
-    # 良い例
-    result = some_condition ? something : something_else
-    ```
+  # 良い例
+  result = some_condition ? something : something_else
+  ```
 
 * `if x; ...`を使ってはいけません。代わりに三項演算子を使いましょう。
 
@@ -649,185 +649,185 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
 
 * `not`の代わりに`!`を使いましょう。
 
-    ```Ruby
-    # 悪い例 - 評価順のため、()が必要になります
-    x = (not something)
+  ```Ruby
+  # 悪い例 - 評価順のため、()が必要になります
+  x = (not something)
 
-    # 良い例
-    x = !something
-    ```
+  # 良い例
+  x = !something
+  ```
 
 * `!!`は避けましょう。
 
-    ```Ruby
-    # 悪い例
-    x = 'test'
-    # obscure nil check
-    if !!x
-      # body omitted
-    end
+  ```Ruby
+  # 悪い例
+  x = 'test'
+  # obscure nil check
+  if !!x
+    # body omitted
+  end
 
-    x = false
-    # 二重否定はbooleanとして役に立ちません。
-    !!x # => false
+  x = false
+  # 二重否定はbooleanとして役に立ちません。
+  !!x # => false
 
-    # 良い例
-    x = 'test'
-    unless x.nil?
-      # body omitted
-    end
-    ```
+  # 良い例
+  x = 'test'
+  unless x.nil?
+    # body omitted
+  end
+  ```
 
 * `and`と`or`の使用は禁止です。それらにその価値はありません。
    常に、代わりに`&&`と`||`を使いましょう。
 
-    ```Ruby
-    # 悪い例
-    # boolean式
-    if some_condition and some_other_condition
-      do_something
-    end
+  ```Ruby
+  # 悪い例
+  # boolean式
+  if some_condition and some_other_condition
+    do_something
+  end
 
-    # 制御構文
-    document.saved? or document.save!
+  # 制御構文
+  document.saved? or document.save!
 
-    # good
-    # boolean式
-    if some_condition && some_other_condition
-      do_something
-    end
+  # good
+  # boolean式
+  if some_condition && some_other_condition
+    do_something
+  end
 
-    # 制御構文
-    document.saved? || document.save!
-    ```
+  # 制御構文
+  document.saved? || document.save!
+  ```
 
 * 複数行にまたがる三項演算子`?:`は避けましょう; 代わりに`if/unless`を使いましょう。
 
 * 本文が１行のときは、`if/unless`はガード節にするのが好まれます。
   他の良い代替案としては`&&/||`を使った制御構文があります。
 
-    ```Ruby
-    # 悪い例
-    if some_condition
-      do_something
-    end
+  ```Ruby
+  # 悪い例
+  if some_condition
+    do_something
+  end
 
-    # 良い例
-    do_something if some_condition
+  # 良い例
+  do_something if some_condition
 
-    # もう１つの良い例
-    some_condition && do_something
-    ```
+  # もう１つの良い例
+  some_condition && do_something
+  ```
 
 * 否定形のときは`if`より`unless`が好まれます。(もしくは`||`構文を使いましょう)。
 
-    ```Ruby
-    # 悪い例
-    do_something if !some_condition
+  ```Ruby
+  # 悪い例
+  do_something if !some_condition
 
-    # 悪い例
-    do_something if not some_condition
+  # 悪い例
+  do_something if not some_condition
 
-    # 良い例
-    do_something unless some_condition
+  # 良い例
+  do_something unless some_condition
 
-    # もう１つの良い例
-    some_condition || do_something
-    ```
+  # もう１つの良い例
+  some_condition || do_something
+  ```
 
 * `unless`を`else`付きで使ってはいけません。
   肯定条件を先にして書き換えましょう。
 
-    ```Ruby
-    # 悪い例
-    unless success?
-      puts 'failure'
-    else
-      puts 'success'
-    end
+  ```Ruby
+  # 悪い例
+  unless success?
+    puts 'failure'
+  else
+    puts 'success'
+  end
 
-    # 良い例
-    if success?
-      puts 'success'
-    else
-      puts 'failure'
-    end
-    ```
+  # 良い例
+  if success?
+    puts 'success'
+  else
+    puts 'failure'
+  end
+  ```
 
 * `if/unless/while/until`構文では`()`の使用は避けましょう.
 
-    ```Ruby
-    # 悪い例
-    if (x > 10)
-      # body omitted
-    end
+  ```Ruby
+  # 悪い例
+  if (x > 10)
+    # body omitted
+  end
 
-    # 良い例
-    if x > 10
-      # body omitted
-    end
-    ```
+  # 良い例
+  if x > 10
+    # body omitted
+  end
+  ```
 
 * 複数行の`while/until`では、`while/until condition do`を使ってはいけません。
 
-    ```Ruby
-    # 悪い例
-    while x > 5 do
-      # 本文省略
-    end
+  ```Ruby
+  # 悪い例
+  while x > 5 do
+    # 本文省略
+  end
 
-    until x > 5 do
-      # 本文省略
-    end
+  until x > 5 do
+    # 本文省略
+  end
 
-    # 良い例
-    while x > 5
-      # 本文省略
-    end
+  # 良い例
+  while x > 5
+    # 本文省略
+  end
 
-    until x > 5
-      # 本文省略
-    end
-    ```
+  until x > 5
+    # 本文省略
+  end
+  ```
 
 * 本文が１行のときは、`while/until`はガード節にしましょう。
 
-    ```Ruby
-    # 悪い例
-    while some_condition
-      do_something
-    end
+  ```Ruby
+  # 悪い例
+  while some_condition
+    do_something
+  end
 
-    # 良い例
-    do_something while some_condition
-    ```
+  # 良い例
+  do_something while some_condition
+  ```
 
 * 否定形のときは、`while`よりも`until`の方が好まれます。
 
-    ```Ruby
-    # 悪い例
-    do_something while !some_condition
+  ```Ruby
+  # 悪い例
+  do_something while !some_condition
 
-    # 良い例
-    do_something until some_condition
-    ```
+  # 良い例
+  do_something until some_condition
+  ```
 
 * 後判定ループの場合、`begin/end/until`や`begin/end/while`より、`break`付きの`Kernel#loop`が好まれます。
 
-   ```Ruby
-   # 悪い例
-   begin
-     puts val
-     val += 1
-   end while val < 0
+  ```Ruby
+  # 悪い例
+  begin
+    puts val
+    val += 1
+  end while val < 0
 
-   # 良い例
-   loop do
-     puts val
-     val += 1
-     break unless val < 0
-   end
-   ```
+  # 良い例
+  loop do
+    puts val
+    val += 1
+    break unless val < 0
+  end
+  ```
 
 * 内部DSL(例えばRake,Rails,RSpecなど)、
   Ruby内で"キーワード"となるステータスを持ったメソッド(例えば`attr_reader` や`puts`など)や
@@ -835,61 +835,61 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   引数の周りの`()`を省略しましょう。
   それ以外のメソッドでは、メソッド呼び出しの時に`()`を付けましょう。
 
-    ```Ruby
-    class Person
-      attr_reader :name, :age
+  ```Ruby
+  class Person
+    attr_reader :name, :age
 
-      # 省略
-    end
+    # 省略
+  end
 
-    temperance = Person.new('Temperance', 30)
-    temperance.name
+  temperance = Person.new('Temperance', 30)
+  temperance.name
 
-    puts temperance.age
+  puts temperance.age
 
-    x = Math.sin(y)
-    array.delete(e)
+  x = Math.sin(y)
+  array.delete(e)
 
-    bowling.score.should == 0
-    ```
+  bowling.score.should == 0
+  ```
 
 * 暗黙のオプションハッシュの外側の`{}`は省略しましょう。
 
-    ```Ruby
-    # 悪い例
-    user.set({ name: 'John', age: 45, permissions: { read: true } })
+  ```Ruby
+  # 悪い例
+  user.set({ name: 'John', age: 45, permissions: { read: true } })
 
-    # 良い例
-    user.set(name: 'John', age: 45, permissions: { read: true })
-    ```
+  # 良い例
+  user.set(name: 'John', age: 45, permissions: { read: true })
+  ```
 
 * 内部DSLの一部として使われるメソッドの引数では、外側の`()`、`{}`は省略しましょう
 
-    ```Ruby
-    class Person < ActiveRecord::Base
-      # 悪い例
-      validates(:name, { presence: true, length: { within: 1..10 } })
+  ```Ruby
+  class Person < ActiveRecord::Base
+    # 悪い例
+    validates(:name, { presence: true, length: { within: 1..10 } })
 
-      # 良い例
-      validates :name, presence: true, length: { within: 1..10 }
-    end
-    ```
+    # 良い例
+    validates :name, presence: true, length: { within: 1..10 }
+  end
+  ```
 
 * 引数のないメソッド呼び出しの`()`は省略しましょう。
 
-    ```Ruby
-    # 悪い例
-    Kernel.exit!()
-    2.even?()
-    fork()
-    'test'.upcase()
+  ```Ruby
+  # 悪い例
+  Kernel.exit!()
+  2.even?()
+  fork()
+  'test'.upcase()
 
-    # 良い例
-    Kernel.exit!
-    2.even?
-    fork
-    'test'.upcase
-    ```
+  # 良い例
+  Kernel.exit!
+  2.even?
+  fork
+  'test'.upcase
+  ```
 
 * １行のブロックでは`do...end`より`{...}`の方が好まれます。
   複数行のブロックでは`{...}`は避けましょう
@@ -898,222 +898,222 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   (例えばRakefilesや特定のDSLなど)
   メソッドチェーンでの`do...end`は避けましょう。
 
-    ```Ruby
-    names = ['Bozhidar', 'Steve', 'Sarah']
+  ```Ruby
+  names = ['Bozhidar', 'Steve', 'Sarah']
 
-    # 悪い例
-    names.each do |name|
-      puts name
-    end
+  # 悪い例
+  names.each do |name|
+    puts name
+  end
 
-    # 良い例
-    names.each { |name| puts name }
+  # 良い例
+  names.each { |name| puts name }
 
-    # 悪い例
-    names.select do |name|
-      name.start_with?('S')
-    end.map { |name| name.upcase }
+  # 悪い例
+  names.select do |name|
+    name.start_with?('S')
+  end.map { |name| name.upcase }
 
-    # 良い例
-    names.select { |name| name.start_with?('S') }.map { |name| name.upcase }
-    ```
+  # 良い例
+  names.select { |name| name.start_with?('S') }.map { |name| name.upcase }
+  ```
 
-    `{...}`を用いた複数行のメソッドチェーンをOKと主張する人もいるかもしれないが、
-    自問してみてほしい - このコードは本当に読みやすいだろうか？
-    また、このブロックの本文は素早く展開できるだろうか？
+  `{...}`を用いた複数行のメソッドチェーンをOKと主張する人もいるかもしれないが、
+  自問してみてほしい - このコードは本当に読みやすいだろうか？
+  また、このブロックの本文は素早く展開できるだろうか？
 
 * 単に他のブロックに引数を渡すだけのブロックリテラルを避けるため、
   ブロック引数を明示することを検討しましょう。
   ただしブロックが`Proc`に変換されることでのパフォーマンスに気をつけましょう。
 
-    ```Ruby
-    require 'tempfile'
+  ```Ruby
+  require 'tempfile'
 
-    # 悪い例
-    def with_tmp_dir
-      Dir.mktmpdir do |tmp_dir|
-        Dir.chdir(tmp_dir) { |dir| yield dir }  # block just passes arguments
-      end
+  # 悪い例
+  def with_tmp_dir
+    Dir.mktmpdir do |tmp_dir|
+      Dir.chdir(tmp_dir) { |dir| yield dir }  # block just passes arguments
     end
+  end
 
-    # 良い例
-    def with_tmp_dir(&block)
-      Dir.mktmpdir do |tmp_dir|
-        Dir.chdir(tmp_dir, &block)
-      end
+  # 良い例
+  def with_tmp_dir(&block)
+    Dir.mktmpdir do |tmp_dir|
+      Dir.chdir(tmp_dir, &block)
     end
+  end
 
-    with_tmp_dir do |dir|
-      puts "dir is accessible as parameter and pwd is set: #{dir}"
-    end
-    ```
+  with_tmp_dir do |dir|
+    puts "dir is accessible as parameter and pwd is set: #{dir}"
+  end
+  ```
 
 * 制御構文上不要な`return`は避けましょう。
 
-    ```Ruby
-    # 悪い例
-    def some_method(some_arr)
-      return some_arr.size
-    end
+  ```Ruby
+  # 悪い例
+  def some_method(some_arr)
+    return some_arr.size
+  end
 
-    # 良い例
-    def some_method(some_arr)
-      some_arr.size
-    end
-    ```
+  # 良い例
+  def some_method(some_arr)
+    some_arr.size
+  end
+  ```
 
 * 不要な`self`は避けましょう (自身のアトリビュートへの書き込みでのみ必要です)。
 
-    ```Ruby
-    # 悪い例
-    def ready?
-      if self.last_reviewed_at > self.last_updated_at
-        self.worker.update(self.content, self.options)
-        self.status = :in_progress
-      end
-      self.status == :verified
+  ```Ruby
+  # 悪い例
+  def ready?
+    if self.last_reviewed_at > self.last_updated_at
+      self.worker.update(self.content, self.options)
+      self.status = :in_progress
     end
+    self.status == :verified
+  end
 
-    # 良い例
-    def ready?
-      if last_reviewed_at > last_updated_at
-        worker.update(content, options)
-        self.status = :in_progress
-      end
-      status == :verified
+  # 良い例
+  def ready?
+    if last_reviewed_at > last_updated_at
+      worker.update(content, options)
+      self.status = :in_progress
     end
-    ```
+    status == :verified
+  end
+  ```
 
 * 当然の帰結として、ローカル変数でメソッドを隠すのは、
   それらが等価なものでない限り避けましょう。
 
-    ```Ruby
-    class Foo
-      attr_accessor :options
+  ```Ruby
+  class Foo
+    attr_accessor :options
 
-      # ok
-      def initialize(options)
-        self.options = options
-        # both options and self.options are equivalent here
-      end
+    # ok
+    def initialize(options)
+      self.options = options
+      # both options and self.options are equivalent here
+    end
 
-      # 悪い例
-      def do_something(options = {})
-        unless options[:when] == :later
-          output(self.options[:message])
-        end
-      end
-
-      # 良い例
-      def do_something(params = {})
-        unless params[:when] == :later
-          output(options[:message])
-        end
+    # 悪い例
+    def do_something(options = {})
+      unless options[:when] == :later
+        output(self.options[:message])
       end
     end
-    ```
+
+    # 良い例
+    def do_something(params = {})
+      unless params[:when] == :later
+        output(options[:message])
+      end
+    end
+  end
+  ```
 
 * 代入部分を`()`で囲まずに、`=`の返り値を条件式に用いてはいけません。
   これは、Rubyistの中では *条件式内での安全な代入* としてとても有名です。
 
-    ```Ruby
-    # 悪い例 (+ 警告が出ます)
-    if v = array.grep(/foo/)
-      do_something(v)
-      ...
-    end
+  ```Ruby
+  # 悪い例 (+ 警告が出ます)
+  if v = array.grep(/foo/)
+    do_something(v)
+    ...
+  end
 
-    # 良い例 (MRIはこれでも文句を言いますが、RuboCopでは問題ありません)
-    if (v = array.grep(/foo/))
-      do_something(v)
-      ...
-    end
+  # 良い例 (MRIはこれでも文句を言いますが、RuboCopでは問題ありません)
+  if (v = array.grep(/foo/))
+    do_something(v)
+    ...
+  end
 
-    # 良い例
-    v = array.grep(/foo/)
-    if v
-      do_something(v)
-      ...
-    end
-    ```
+  # 良い例
+  v = array.grep(/foo/)
+  if v
+    do_something(v)
+    ...
+  end
+  ```
 
 * 変数の初期化には、`||=`を自由に使いましょう。
 
-    ```Ruby
-    # nameがnilかfalseでなければ、Bozhidarで初期化します
-    name ||= 'Bozhidar'
-    ```
+  ```Ruby
+  # nameがnilかfalseでなければ、Bozhidarで初期化します
+  name ||= 'Bozhidar'
+  ```
 
 * boolean変数には`||=`を用いてはいけません
   (現在の値が`false`であったときに何が起こるか考えてみましょう)。
 
-    ```Ruby
-    # 悪い例 - たとえenabledがfalseでもtrueが入ります
-    enabled ||= true
+  ```Ruby
+  # 悪い例 - たとえenabledがfalseでもtrueが入ります
+  enabled ||= true
 
-    # 良い例
-    enabled = true if enabled.nil?
-    ```
+  # 良い例
+  enabled = true if enabled.nil?
+  ```
 
 * 値が入っているかわからない変数の前処理のは`&&=`を用いましょう。
   `&&=`を使えば変数が存在するときのみ値を変更するので、
   存在確認に用いている不要な`if`を除去できます。
 
-    ```Ruby
-    # 悪い例
-    if something
-      something = something.downcase
-    end
+  ```Ruby
+  # 悪い例
+  if something
+    something = something.downcase
+  end
 
-    # ok
-    something = something.downcase if something
+  # ok
+  something = something.downcase if something
 
-    # 良い例
-    something = something && something.downcase
+  # 良い例
+  something = something && something.downcase
 
-    # より良い例
-    something &&= something.downcase
-    ```
+  # より良い例
+  something &&= something.downcase
+  ```
 
 * 等価演算子`===`の露骨な使用は避けましょう。
   その名が示す通り、`case`の条件判定で用いられており、
   その外で用いられると混乱のもとになります。
 
-    ```Ruby
-    # 悪い例
-    Array === something
-    (1..100) === 7
-    /something/ === some_string
+  ```Ruby
+  # 悪い例
+  Array === something
+  (1..100) === 7
+  /something/ === some_string
 
-    # 良い例
-    something.is_a?(Array)
-    (1..100).include?(7)
-    some_string =~ /something/
-    ```
+  # 良い例
+  something.is_a?(Array)
+  (1..100).include?(7)
+  some_string =~ /something/
+  ```
 
 * Perlスタイルの(`$:`や`$;`などのような)特別な変数の使用は避けましょう。
   それらは極めて不可解で、
   １行のスクリプト以外でそれらが使われるとやる気が削がれます。
   `English`ライブラリから提供される人にやさしいエイリアスを用いましょう。
 
-    ```Ruby
-    # 悪い例
-    $:.unshift File.dirname(__FILE__)
+  ```Ruby
+  # 悪い例
+  $:.unshift File.dirname(__FILE__)
 
-    # 良い例
-    require 'English'
-    $LOAD_PATH.unshift File.dirname(__FILE__)
-    ```
+  # 良い例
+  require 'English'
+  $LOAD_PATH.unshift File.dirname(__FILE__)
+  ```
 
 * メソッド名と引数の始まりの`(`の間にスペースを入れてはいけません。
 
-    ```Ruby
-    # 悪い例
-    f (3 + 2) + 1
+  ```Ruby
+  # 悪い例
+  f (3 + 2) + 1
 
-    # 良い例
-    f(3 + 2) + 1
-    ```
+  # 良い例
+  f(3 + 2) + 1
+  ```
 
 * メソッドの最初の引数が`(`で始まるならば、
   常にメソッド呼び出しに`()`を用いましょう。
@@ -1126,62 +1126,62 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
 * １行の本文を持つラムダには新しいリテラルを持ちましょう。
   `lambda`は複数行にまたがるときに使いましょう。
 
-    ```Ruby
-    # 悪い例
-    l = lambda { |a, b| a + b }
-    l.call(1, 2)
+  ```Ruby
+  # 悪い例
+  l = lambda { |a, b| a + b }
+  l.call(1, 2)
 
-    # 正しい例、ですがギクシャクしています
-    l = ->(a, b) do
-      tmp = a * 7
-      tmp * b / 50
-    end
+  # 正しい例、ですがギクシャクしています
+  l = ->(a, b) do
+    tmp = a * 7
+    tmp * b / 50
+  end
 
-    # 良い例
-    l = ->(a, b) { a + b }
-    l.call(1, 2)
+  # 良い例
+  l = ->(a, b) { a + b }
+  l.call(1, 2)
 
-    l = lambda do |a, b|
-      tmp = a * 7
-      tmp * b / 50
-    end
-    ```
+  l = lambda do |a, b|
+    tmp = a * 7
+    tmp * b / 50
+  end
+  ```
 
 * `Proc.new`より`proc`を好みます。
 
-    ```Ruby
-    # 悪い例
-    p = Proc.new { |n| puts n }
+  ```Ruby
+  # 悪い例
+  p = Proc.new { |n| puts n }
 
-    # 良い例
-    p = proc { |n| puts n }
-    ```
+  # 良い例
+  p = proc { |n| puts n }
+  ```
 
 * ラムダやprocの呼び出しには`proc[]`や`proc.()`より`proc.call()`を好みます。
 
-    ```Ruby
-    # 悪い例 - 列挙型のアクセスに似ているように見えます
-    l = ->(v) { puts v }
-    l[1]
+  ```Ruby
+  # 悪い例 - 列挙型のアクセスに似ているように見えます
+  l = ->(v) { puts v }
+  l[1]
 
-    # こちらも悪い例 - 珍しい構文です
-    l = ->(v) { puts v }
-    l.(1)
+  # こちらも悪い例 - 珍しい構文です
+  l = ->(v) { puts v }
+  l.(1)
 
-    # 良い例
-    l = ->(v) { puts v }
-    l.call(1)
-    ```
+  # 良い例
+  l = ->(v) { puts v }
+  l.call(1)
+  ```
 
 * 使わないブロック引数には`_`を用いましょう。
 
-    ```Ruby
-    # bad
-    result = hash.map { |k, v| v + 1 }
+  ```Ruby
+  # bad
+  result = hash.map { |k, v| v + 1 }
 
-    # good
-    result = hash.map { |_, v| v + 1 }
-    ```
+  # good
+  result = hash.map { |_, v| v + 1 }
+  ```
 
 * `STDOUT/STDERR/STDIN`の代わりに`$stdout/$stderr/$stdin`を用いましょう。
   `STDOUT/STDERR/STDIN`は定数であり、
@@ -1195,112 +1195,112 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
 
 * 不可解な`String#%`メソッドより`sprintf`や`format`を好みます。
 
-    ```Ruby
-    # 悪い例
-    '%d %d' % [20, 10]
-    # => '20 10'
+  ```Ruby
+  # 悪い例
+  '%d %d' % [20, 10]
+  # => '20 10'
 
-    # 良い例
-    sprintf('%d %d', 20, 10)
-    # => '20 10'
+  # 良い例
+  sprintf('%d %d', 20, 10)
+  # => '20 10'
 
-    # 良い例
-    sprintf('%{first} %{second}', first: 20, second: 10)
-    # => '20 10'
+  # 良い例
+  sprintf('%{first} %{second}', first: 20, second: 10)
+  # => '20 10'
 
-    format('%d %d', 20, 10)
-    # => '20 10'
+  format('%d %d', 20, 10)
+  # => '20 10'
 
-    # 良い例
-    format('%{first} %{second}', first: 20, second: 10)
-    # => '20 10'
-    ```
+  # 良い例
+  format('%{first} %{second}', first: 20, second: 10)
+  # => '20 10'
+  ```
 
 * 不可解な`Array#*`メソッドよりも`Array#join`を好みます。
 
-    ```Ruby
-    # 悪い例
-    %w(one two three) * ', '
-    # => 'one, two, three'
+  ```Ruby
+  # 悪い例
+  %w(one two three) * ', '
+  # => 'one, two, three'
 
-    # 良い例
-    %w(one two three).join(', ')
-    # => 'one, two, three'
-    ```
+  # 良い例
+  %w(one two three).join(', ')
+  # => 'one, two, three'
+  ```
 
 * 引数が配列かどうかわからないが、それを配列として扱って処理したいとき、
   配列のチェックを明示するより、`[*var]`や`Array()`を代わりに使いましょう。
 
-    ```Ruby
-    # 悪い例
-    paths = [paths] unless paths.is_a? Array
-    paths.each { |path| do_something(path) }
+  ```Ruby
+  # 悪い例
+  paths = [paths] unless paths.is_a? Array
+  paths.each { |path| do_something(path) }
 
-    # 良い例
-    [*paths].each { |path| do_something(path) }
+  # 良い例
+  [*paths].each { |path| do_something(path) }
 
-    # 良い例 (そして少し読みやすいです)
-    Array(paths).each { |path| do_something(path) }
-    ```
+  # 良い例 (そして少し読みやすいです)
+  Array(paths).each { |path| do_something(path) }
+  ```
 
 * 複雑な比較ロジックの代わりに、
   可能な限り`Range`や`Comparable#between?`を用いましょう。
 
-    ```Ruby
-    # 悪い例
-    do_something if x >= 1000 && x <= 2000
+  ```Ruby
+  # 悪い例
+  do_something if x >= 1000 && x <= 2000
 
-    # 良い例
-    do_something if (1000..2000).include?(x)
+  # 良い例
+  do_something if (1000..2000).include?(x)
 
-    # 良い例
-    do_something if x.between?(1000, 2000)
-    ```
+  # 良い例
+  do_something if x.between?(1000, 2000)
+  ```
 
 * `==`を明示した比較よりも判定メソッドを用いましょう。
   数値の比較はOKです。
 
-    ```Ruby
-    # 悪い例
-    if x % 2 == 0
-    end
+  ```Ruby
+  # 悪い例
+  if x % 2 == 0
+  end
 
-    if x % 2 == 1
-    end
+  if x % 2 == 1
+  end
 
-    if x == nil
-    end
+  if x == nil
+  end
 
-    # 良い例
-    if x.even?
-    end
+  # 良い例
+  if x.even?
+  end
 
-    if x.odd?
-    end
+  if x.odd?
+  end
 
-    if x.nil?
-    end
+  if x.nil?
+  end
 
-    if x.zero?
-    end
+  if x.zero?
+  end
 
-    if x == 0
-    end
-    ```
+  if x == 0
+  end
+  ```
 
 * `BEGIN`ブロックの使用は避けましょう。
 
 * `END`ブロックを使ってはいけません。代わりに`Kernel#at_exit`を使いましょう。
 
-    ```ruby
-    # 悪い例
+  ```ruby
+  # 悪い例
 
-    END { puts 'Goodbye!' }
+  END { puts 'Goodbye!' }
 
-    # 良い例
+  # 良い例
 
-    at_exit { puts 'Goodbye!' }
-    ```
+  at_exit { puts 'Goodbye!' }
+  ```
 
 * フリップフロップの使用は避けましょう。
 
@@ -1309,27 +1309,27 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   ガード節は、可能な限り関数から出ていくために、
   関数の先頭付近で宣言される条件式です。
 
-    ```Ruby
-    # 悪い例
-      def compute_thing(thing)
-        if thing[:foo]
-          update_with_bar(thing)
-          if thing[:foo][:bar]
-            partial_compute(thing)
-          else
-            re_compute(thing)
-          end
+  ```Ruby
+  # 悪い例
+    def compute_thing(thing)
+      if thing[:foo]
+        update_with_bar(thing)
+        if thing[:foo][:bar]
+          partial_compute(thing)
+        else
+          re_compute(thing)
         end
       end
+    end
 
-    # 良い例
-      def compute_thing(thing)
-        return unless thing[:foo]
-        update_with_bar(thing[:foo])
-        return re_compute(thing) unless thing[:foo][:bar]
-        partial_compute(thing)
-      end
-    ```
+  # 良い例
+    def compute_thing(thing)
+      return unless thing[:foo]
+      update_with_bar(thing[:foo])
+      return re_compute(thing) unless thing[:foo][:bar]
+      partial_compute(thing)
+    end
+  ```
 
 ## 命名規則
 
@@ -1338,78 +1338,78 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
 
 * 識別子は英語で名づけましょう。
 
-    ```Ruby
-    # 悪い例 - 識別子がnon-asciiな文字列です
-    заплата = 1_000
+  ```Ruby
+  # 悪い例 - 識別子がnon-asciiな文字列です
+  заплата = 1_000
 
-    # 悪い例 - (キリル文字の代わりに)ラテン文字で書かれてはいますが、識別子がブルガリア語です
-    zaplata = 1_000
+  # 悪い例 - (キリル文字の代わりに)ラテン文字で書かれてはいますが、識別子がブルガリア語です
+  zaplata = 1_000
 
-    # 良い例
-    salary = 1_000
-    ```
+  # 良い例
+  salary = 1_000
+  ```
 
 * シンボル、メソッド、変数には`snake_case`を用いましょう。
 
-    ```Ruby
-    # 悪い例
-    :'some symbol'
-    :SomeSymbol
-    :someSymbol
+  ```Ruby
+  # 悪い例
+  :'some symbol'
+  :SomeSymbol
+  :someSymbol
 
-    someVar = 5
+  someVar = 5
 
-    def someMethod
-      ...
-    end
+  def someMethod
+    ...
+  end
 
-    def SomeMethod
-     ...
-    end
+  def SomeMethod
+   ...
+  end
 
-    # 良い例
-    :some_symbol
+  # 良い例
+  :some_symbol
 
-    def some_method
-      ...
-    end
-    ```
+  def some_method
+    ...
+  end
+  ```
 
 * クラスやモジュールには`CamelCase`を用いましょう。(HTTP, RFC, XMLのような頭字語は大文字を保ちましょう)。
 
-    ```Ruby
-    # 悪い例
-    class Someclass
-      ...
-    end
+  ```Ruby
+  # 悪い例
+  class Someclass
+    ...
+  end
 
-    class Some_Class
-      ...
-    end
+  class Some_Class
+    ...
+  end
 
-    class SomeXml
-      ...
-    end
+  class SomeXml
+    ...
+  end
 
-    # 良い例
-    class SomeClass
-      ...
-    end
+  # 良い例
+  class SomeClass
+    ...
+  end
 
-    class SomeXML
-      ...
-    end
-    ```
+  class SomeXML
+    ...
+  end
+  ```
 
 * 他の定数は`SCREAMING_SNAKE_CASE`を用いましょう。
 
-    ```Ruby
-    # 悪い例
-    SomeConst = 5
+  ```Ruby
+  # 悪い例
+  SomeConst = 5
 
-    # 良い例
-    SOME_CONST = 5
-    ```
+  # 良い例
+  SOME_CONST = 5
+  ```
 
 * 条件判定メソッド(boolean値が返る)には`?`を末尾に付けましょう
   (すなわり`Array#empty?`のように)。
@@ -1420,59 +1420,59 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   は、 *危険* であることを示すため、
   末尾に`!`を付けましょう。
 
-    ```Ruby
-    # 悪い例 - '安全'なメソッドです
-    class Person
-      def update!
-      end
+  ```Ruby
+  # 悪い例 - '安全'なメソッドです
+  class Person
+    def update!
+    end
+  end
+
+  # 良い例
+  class Person
+    def update
+    end
+  end
+
+  # 良い例
+  class Person
+    def update!
     end
 
-    # 良い例
-    class Person
-      def update
-      end
+    def update
     end
-
-    # 良い例
-    class Person
-      def update!
-      end
-
-      def update
-      end
-    end
-    ```
+  end
+  ```
 
 * 可能な限り、危険なメソッドの観点から安全なメソッドを定義しましょう。
 
-    ```Ruby
-    class Array
-      def flatten_once!
-        res = []
+  ```Ruby
+  class Array
+    def flatten_once!
+      res = []
 
-        each do |e|
-          [*e].each { |f| res << f }
-        end
-
-        replace(res)
+      each do |e|
+        [*e].each { |f| res << f }
       end
 
-      def flatten_once
-        dup.flatten_once!
-      end
+      replace(res)
     end
-    ```
+
+    def flatten_once
+      dup.flatten_once!
+    end
+  end
+  ```
 
 * 短いブロックと共に`reduce`を使うとき、引数は`|a, e|`と名づけましょう。
   (accumulator, element).
 * 二項演算子を定義するとき、引数は`other`を用いましょう
   (`<<`と`[]`は意味が違ってくるので、このルールの例外です)。
 
-    ```Ruby
-    def +(other)
-      # body omitted
-    end
-    ```
+  ```Ruby
+  def +(other)
+    # body omitted
+  end
+  ```
 
 * `collect`より`map`、`detect`より`find`、`find_all`より`select`
   `inject`より`reduce`、`length`より`size`を好みます。
@@ -1490,24 +1490,24 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   `flat_map`より`map + flatten`を用いましょう。
   `flatten`は配列を全て平坦にするのに対し、`flat_map`は配列を１次元だけ平坦にします。
 
-    ```Ruby
-    # 悪い例
-    all_songs = users.map(&:songs).flatten.uniq
+  ```Ruby
+  # 悪い例
+  all_songs = users.map(&:songs).flatten.uniq
 
-    # 良い例
-    all_songs = users.flat_map(&:songs).uniq
-    ```
+  # 良い例
+  all_songs = users.flat_map(&:songs).uniq
+  ```
 
 * `reverse.each`の代わりに`reverse_each`を用いましょう。
   `reverse_each`は新しい配列を作らないので、それが利点です。
 
-    ```Ruby
-    # 悪い例
-    array.reverse.each { ... }
+  ```Ruby
+  # 悪い例
+  array.reverse.each { ... }
 
-    # 良い例
-    array.reverse_each { ... }
-    ```
+  # 良い例
+  array.reverse_each { ... }
+  ```
 
 ## コメント
 
@@ -1524,10 +1524,10 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   ピリオドの後に[one space](http://en.wikipedia.org/wiki/Sentence_spacing)を使いましょう。
 * 余計なコメントは避けましょう。
 
-    ```Ruby
-    # 悪い例
-    counter += 1 # Increments counter by one.
-    ```
+  ```Ruby
+  # 悪い例
+  counter += 1 # Increments counter by one.
+  ```
 
 * コメントは最新に保ちましょう。
   古くなったコメントは、コメントがないより悪いです。
@@ -1547,13 +1547,13 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
 * もし問題点の記述に複数行かかる場合は、
   後続の行は`#`の後ろにスペース２つでインデントしましょう。
 
-    ```Ruby
-    def bar
-      # FIXME: This has crashed occasionally since v3.2.1. It may
-      #   be related to the BarBazUtil upgrade.
-      baz(:quux)
-    end
-    ```
+  ```Ruby
+  def bar
+    # FIXME: This has crashed occasionally since v3.2.1. It may
+    #   be related to the BarBazUtil upgrade.
+    baz(:quux)
+  end
+  ```
 
 * もし問題が明らかで、記述が冗長な場合は、
   問題のある行の末尾に、本文なしの注釈だけ付けましょう。
@@ -1578,99 +1578,99 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
 
 * クラス定義は置いて一貫性のある構造にしましょう。
 
-    ```Ruby
-    class Person
-      # extend や include を最初に行います
-      extend SomeModule
-      include AnotherModule
+  ```Ruby
+  class Person
+    # extend や include を最初に行います
+    extend SomeModule
+    include AnotherModule
 
-      # 定数定義はその次です
-      SOME_CONSTANT = 20
+    # 定数定義はその次です
+    SOME_CONSTANT = 20
 
-      # その後ろはアトリビュートマクロです
-      attr_reader :name
+    # その後ろはアトリビュートマクロです
+    attr_reader :name
 
-      # 他のマクロが続きます(もしあれば)
-      validates :name
+    # 他のマクロが続きます(もしあれば)
+    validates :name
 
-      # public class methods が次に来ます
-      def self.some_method
-      end
-
-      # public instance methods が続きます
-      def some_method
-      end
-
-      # protected and private methods は後ろの方にまとめます
-      protected
-
-      def some_protected_method
-      end
-
-      private
-
-      def some_private_method
-      end
+    # public class methods が次に来ます
+    def self.some_method
     end
-    ```
+
+    # public instance methods が続きます
+    def some_method
+    end
+
+    # protected and private methods は後ろの方にまとめます
+    protected
+
+    def some_protected_method
+    end
+
+    private
+
+    def some_private_method
+    end
+  end
+  ```
 
 * クラスメソッドしかないクラスはモジュールであることが好まれます。
   クラスはインスタンスを生成することにのみ意味があります。
 
-    ```Ruby
-    # 悪い例
-    class SomeClass
-      def self.some_method
-        # body omitted
-      end
-
-      def self.some_other_method
-      end
+  ```Ruby
+  # 悪い例
+  class SomeClass
+    def self.some_method
+      # body omitted
     end
 
-    # 良い例
-    module SomeClass
-      module_function
-
-      def some_method
-        # body omitted
-      end
-
-      def some_other_method
-      end
+    def self.some_other_method
     end
-    ```
+  end
+
+  # 良い例
+  module SomeClass
+    module_function
+
+    def some_method
+      # body omitted
+    end
+
+    def some_other_method
+    end
+  end
+  ```
 
 * モジュールのインスタンスメソッドをクラスメソッドにしたいときは、
   `extend self`よりも`module_function`が好まれます。
 
-    ```Ruby
-    # 悪い例
-    module Utilities
-      extend self
+  ```Ruby
+  # 悪い例
+  module Utilities
+    extend self
 
-      def parse_something(string)
-        # do stuff here
-      end
-
-      def other_utility_method(number, string)
-        # do some more stuff
-      end
+    def parse_something(string)
+      # do stuff here
     end
 
-    # 良い例
-    module Utilities
-      module_function
-
-      def parse_something(string)
-        # do stuff here
-      end
-
-      def other_utility_method(number, string)
-        # do some more stuff
-      end
+    def other_utility_method(number, string)
+      # do some more stuff
     end
-    ```
+  end
+
+  # 良い例
+  module Utilities
+    module_function
+
+    def parse_something(string)
+      # do stuff here
+    end
+
+    def other_utility_method(number, string)
+      # do some more stuff
+    end
+  end
+  ```
 
 * クラス階層の設計を行うときは、
   [リスコフの置換原則](http://ja.wikipedia.org/wiki/%E3%83%AA%E3%82%B9%E3%82%B3%E3%83%95%E3%81%AE%E7%BD%AE%E6%8F%9B%E5%8E%9F%E5%89%87).
@@ -1680,81 +1680,81 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   に保ちましょう。
 * クラスの領分を説明するため、常に`to_s`メソッドを提供しましょう。
 
-    ```Ruby
-    class Person
-      attr_reader :first_name, :last_name
+  ```Ruby
+  class Person
+    attr_reader :first_name, :last_name
 
-      def initialize(first_name, last_name)
-        @first_name = first_name
-        @last_name = last_name
-      end
-
-      def to_s
-        "#{@first_name} #{@last_name}"
-      end
+    def initialize(first_name, last_name)
+      @first_name = first_name
+      @last_name = last_name
     end
-    ```
+
+    def to_s
+      "#{@first_name} #{@last_name}"
+    end
+  end
+  ```
 
 * 単純なアクセサやミューテータの定義には、`attr`群を用いましょう。
 
-    ```Ruby
-    # 悪い例
-    class Person
-      def initialize(first_name, last_name)
-        @first_name = first_name
-        @last_name = last_name
-      end
-
-      def first_name
-        @first_name
-      end
-
-      def last_name
-        @last_name
-      end
+  ```Ruby
+  # 悪い例
+  class Person
+    def initialize(first_name, last_name)
+      @first_name = first_name
+      @last_name = last_name
     end
 
-    # 良い例
-    class Person
-      attr_reader :first_name, :last_name
-
-      def initialize(first_name, last_name)
-        @first_name = first_name
-        @last_name = last_name
-      end
+    def first_name
+      @first_name
     end
-    ```
+
+    def last_name
+      @last_name
+    end
+  end
+
+  # 良い例
+  class Person
+    attr_reader :first_name, :last_name
+
+    def initialize(first_name, last_name)
+      @first_name = first_name
+      @last_name = last_name
+    end
+  end
+  ```
 
 * `attr`の使用は避けましょう。代わりに`attr_reader`や`attr_accessor`を使いましょう。
 
-    ```Ruby
-    # 悪い例 - １つのアクセサしか作れません(1.9で廃止されました)
-    attr :something, true
-    attr :one, :two, :three # attr_readerと同じです
+  ```Ruby
+  # 悪い例 - １つのアクセサしか作れません(1.9で廃止されました)
+  attr :something, true
+  attr :one, :two, :three # attr_readerと同じです
 
-    # 良い例
-    attr_accessor :something
-    attr_reader :one, :two, :three
-    ```
+  # 良い例
+  attr_accessor :something
+  attr_reader :one, :two, :three
+  ```
 
 * `Struct.new`の使用を考えましょう、
   それは、単純なアクセサ、コンストラクタや比較演算子を定義してくれます。
 
-    ```Ruby
-    # 良い例
-    class Person
-      attr_accessor :first_name, :last_name
+  ```Ruby
+  # 良い例
+  class Person
+    attr_accessor :first_name, :last_name
 
-      def initialize(first_name, last_name)
-        @first_name = first_name
-        @last_name = last_name
-      end
+    def initialize(first_name, last_name)
+      @first_name = first_name
+      @last_name = last_name
     end
+  end
 
-    # より良い例
-    Person = Struct.new(:first_name, :last_name) do
-    end
-    ````
+  # より良い例
+  Person = Struct.new(:first_name, :last_name) do
+  end
+  ````
 
 * `Struct.new`を拡張してはいけません - それは既に新しいクラスです。
   それは余分なクラスレベルをもたらし、
@@ -1763,73 +1763,73 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
 * あるクラスのインスタンス生成する追加の方法を提供したいときは、
   ファクトリメソッドの追加を検討しましょう。
 
-    ```Ruby
-    class Person
-      def self.create(options_hash)
-        # body omitted
-      end
+  ```Ruby
+  class Person
+    def self.create(options_hash)
+      # body omitted
     end
-    ```
+  end
+  ```
 
 * 継承より[ダック・タイピング](http://ja.wikipedia.org/wiki/%E3%83%80%E3%83%83%E3%82%AF%E3%83%BB%E3%82%BF%E3%82%A4%E3%83%94%E3%83%B3%E3%82%B0)が好まれます。
 
-    ```Ruby
-    # 悪い例
-    class Animal
-      # abstract method
-      def speak
-      end
+  ```Ruby
+  # 悪い例
+  class Animal
+    # abstract method
+    def speak
     end
+  end
 
-    # 継承
-    class Duck < Animal
-      def speak
-        puts 'Quack! Quack'
-      end
+  # 継承
+  class Duck < Animal
+    def speak
+      puts 'Quack! Quack'
     end
+  end
 
-    # 継承
-    class Dog < Animal
-      def speak
-        puts 'Bau! Bau!'
-      end
+  # 継承
+  class Dog < Animal
+    def speak
+      puts 'Bau! Bau!'
     end
+  end
 
-    # 良い例
-    class Duck
-      def speak
-        puts 'Quack! Quack'
-      end
+  # 良い例
+  class Duck
+    def speak
+      puts 'Quack! Quack'
     end
+  end
 
-    class Dog
-      def speak
-        puts 'Bau! Bau!'
-      end
+  class Dog
+    def speak
+      puts 'Bau! Bau!'
     end
-    ```
+  end
+  ```
 
 * 継承での振る舞いが"扱いづらい"ので、クラス変数(`@@`)の使用は避けましょう。
 
-    ```Ruby
-    class Parent
-      @@class_var = 'parent'
+  ```Ruby
+  class Parent
+    @@class_var = 'parent'
 
-      def self.print_class_var
-        puts @@class_var
-      end
+    def self.print_class_var
+      puts @@class_var
     end
+  end
 
-    class Child < Parent
-      @@class_var = 'child'
-    end
+  class Child < Parent
+    @@class_var = 'child'
+  end
 
-    Parent.print_class_var # => will print "child"
-    ```
+  Parent.print_class_var # => will print "child"
+  ```
 
-    クラス階層内の全てのクラスを見ることができるように、
-    実際にクラス変数を１つ共有してみましょう。
-    クラスインスタンス変数はクラス変数より好まれます。
+  クラス階層内の全てのクラスを見ることができるように、
+  実際にクラス変数を１つ共有してみましょう。
+  クラスインスタンス変数はクラス変数より好まれます。
 
 * 意図した使い方に沿って、可視性(`private`、`protected`)を設定しましょう。
   全てを`public`(デフォルトの設定)のままにしないようにしましょう。
@@ -1838,52 +1838,52 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   可視性を定義する識別子以降のメソッドに適用されることを強調するため、
   識別子の上下に空行を入れましょう。
 
-    ```Ruby
-    class SomeClass
-      def public_method
-        # ...
-      end
-
-      private
-
-      def private_method
-        # ...
-      end
-
-      def another_private_method
-        # ...
-      end
+  ```Ruby
+  class SomeClass
+    def public_method
+      # ...
     end
-    ```
+
+    private
+
+    def private_method
+      # ...
+    end
+
+    def another_private_method
+      # ...
+    end
+  end
+  ```
 
 * シングルトンメソッドを定義するときは`def self.method`を用いましょう。
   クラス名を繰り返さないので、簡単にリファクタリングできるようになります。
 
-    ```Ruby
-    class TestClass
-      # 悪い例
-      def TestClass.some_method
+  ```Ruby
+  class TestClass
+    # 悪い例
+    def TestClass.some_method
+      # body omitted
+    end
+
+    # 良い例
+    def self.some_other_method
+      # body omitted
+    end
+
+    # たくさんのシングルトンメソッドを定義しなければならない時
+    # この書き方も便利で、許容できます。
+    class << self
+      def first_method
         # body omitted
       end
 
-      # 良い例
-      def self.some_other_method
+      def second_method_etc
         # body omitted
-      end
-
-      # たくさんのシングルトンメソッドを定義しなければならない時
-      # この書き方も便利で、許容できます。
-      class << self
-        def first_method
-          # body omitted
-        end
-
-        def second_method_etc
-          # body omitted
-        end
       end
     end
-    ```
+  end
+  ```
 
 ## 例外
 
@@ -1891,36 +1891,36 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   `raise`は例外をキャッチして、再度発生させるときにのみ使いましょう
   (何故なら、ここでは落ちるのではなく、明示的に目的を持って例外を発生させているからです)。
 
-    ```Ruby
-    begin
-      fail 'Oops'
-    rescue => error
-      raise if error.message != 'Oops'
-    end
-    ```
+  ```Ruby
+  begin
+    fail 'Oops'
+  rescue => error
+    raise if error.message != 'Oops'
+  end
+  ```
 
 * ２引数の`fail/raise`では、`RuntimeError`を明示しないようにしましょう。
 
-    ```Ruby
-    # 悪い例
-    fail RuntimeError, 'message'
+  ```Ruby
+  # 悪い例
+  fail RuntimeError, 'message'
 
-    # 良い例 - デフォルトでRuntimeErrorが発生します
-    fail 'message'
-    ```
+  # 良い例 - デフォルトでRuntimeErrorが発生します
+  fail 'message'
+  ```
 
 * 例外インスタンスの代わりに、
   例外クラスとメッセージが分かれている`fail/raise`が好まれます。
 
-    ```Ruby
-    # 悪い例
-    fail SomeException.new('message')
-    # `fail SomeException.new('message'), backtrace`とする書き方が存在しないことに注意しましょう。
+  ```Ruby
+  # 悪い例
+  fail SomeException.new('message')
+  # `fail SomeException.new('message'), backtrace`とする書き方が存在しないことに注意しましょう。
 
-    # 良い例
-    fail SomeException, 'message'
-    # `fail SomeException, 'message', backtrace`の用法と一貫性があります
-    ```
+  # 良い例
+  fail SomeException, 'message'
+  # `fail SomeException, 'message', backtrace`の用法と一貫性があります
+  ```
 
 * `ensure`ブロックから`return`してはいけません。
   もし`ensure`から明示的に値を返したい場合は、
@@ -1928,178 +1928,178 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   例外など発生していなかったかのように値を返しましょう。
   事実上、例外は静かに捨てられます。
 
-    ```Ruby
-    def foo
-      begin
-        fail
-      ensure
-        return 'very bad idea'
-      end
+  ```Ruby
+  def foo
+    begin
+      fail
+    ensure
+      return 'very bad idea'
     end
-    ```
+  end
+  ```
 
 * 可能な場所では、 *暗黙のbeginブロック* を用いましょう。
 
-    ```Ruby
-    # 悪い例
-    def foo
-      begin
-        # main logic goes here
-      rescue
-        # failure handling goes here
-      end
-    end
-
-    # 良い例
-    def foo
+  ```Ruby
+  # 悪い例
+  def foo
+    begin
       # main logic goes here
     rescue
       # failure handling goes here
     end
-    ```
+  end
+
+  # 良い例
+  def foo
+    # main logic goes here
+  rescue
+    # failure handling goes here
+  end
+  ```
 
 * *不確実性のあるメソッド*(Avdi Grimmによって作られた言葉です)
   を用いて`begin`の蔓延を和らげましょう。
 
-    ```Ruby
-    # 悪い例
-    begin
-      something_that_might_fail
-    rescue IOError
-      # handle IOError
-    end
+  ```Ruby
+  # 悪い例
+  begin
+    something_that_might_fail
+  rescue IOError
+    # handle IOError
+  end
 
-    begin
-      something_else_that_might_fail
-    rescue IOError
-      # handle IOError
-    end
+  begin
+    something_else_that_might_fail
+  rescue IOError
+    # handle IOError
+  end
 
-    # 良い例
-    def with_io_error_handling
-       yield
-    rescue IOError
-      # handle IOError
-    end
+  # 良い例
+  def with_io_error_handling
+    yield
+  rescue IOError
+    # handle IOError
+  end
 
-    with_io_error_handling { something_that_might_fail }
+  with_io_error_handling { something_that_might_fail }
 
-    with_io_error_handling { something_else_that_might_fail }
-    ```
+  with_io_error_handling { something_else_that_might_fail }
+  ```
 
 * 例外をもみ消してはいけません。
 
-    ```Ruby
-    # 悪い例
-    begin
-      # an exception occurs here
-    rescue SomeError
-      # the rescue clause does absolutely nothing
-    end
+  ```Ruby
+  # 悪い例
+  begin
+    # an exception occurs here
+  rescue SomeError
+    # the rescue clause does absolutely nothing
+  end
 
-    # 悪い例
-    do_something rescue nil
-    ```
+  # 悪い例
+  do_something rescue nil
+  ```
 
 * `rescue`のガード節は避けましょう。
 
-    ```Ruby
-    # 悪い例 - StandardErrorとそれを継承した全てのクラスをキャッチしてしまします
-    read_file rescue handle_error($!)
+  ```Ruby
+  # 悪い例 - StandardErrorとそれを継承した全てのクラスをキャッチしてしまします
+  read_file rescue handle_error($!)
 
-    # 良い例 - Errno::ENOENTとそれを継承したクラスのみをキャッチします
-    def foo
-      read_file
-    rescue Errno::ENOENT => ex
-      handle_error(ex)
-    end
-    ```
+  # 良い例 - Errno::ENOENTとそれを継承したクラスのみをキャッチします
+  def foo
+    read_file
+  rescue Errno::ENOENT => ex
+    handle_error(ex)
+  end
+  ```
 
 
 * 制御フローに例外を使っては行けません。
 
-    ```Ruby
-    # 悪い例
-    begin
-      n / d
-    rescue ZeroDivisionError
-      puts 'Cannot divide by 0!'
-    end
+  ```Ruby
+  # 悪い例
+  begin
+    n / d
+  rescue ZeroDivisionError
+    puts 'Cannot divide by 0!'
+  end
 
-    # 良い例
-    if d.zero?
-      puts 'Cannot divide by 0!'
-    else
-      n / d
-    end
-    ```
+  # 良い例
+  if d.zero?
+    puts 'Cannot divide by 0!'
+  else
+    n / d
+  end
+  ```
 
 * `Exception`を`rescue`するのは避けましょう。
   これは`exit`のシグナルも捕捉するため、`kill -9`が必要になります。
 
-    ```Ruby
-    # 悪い例
-    begin
-      # calls to exit and kill signals will be caught (except kill -9)
-      exit
-    rescue Exception
-      puts "you didn't really want to exit, right?"
-      # exception handling
-    end
+  ```Ruby
+  # 悪い例
+  begin
+    # calls to exit and kill signals will be caught (except kill -9)
+    exit
+  rescue Exception
+    puts "you didn't really want to exit, right?"
+    # exception handling
+  end
 
-    # 良い例
-    begin
-      # a blind rescue rescues from StandardError, not Exception as many
-      # programmers assume.
-    rescue => e
-      # exception handling
-    end
+  # 良い例
+  begin
+    # a blind rescue rescues from StandardError, not Exception as many
+    # programmers assume.
+  rescue => e
+    # exception handling
+  end
 
-    # こちらも良い例
-    begin
-      # an exception occurs here
+  # こちらも良い例
+  begin
+    # an exception occurs here
 
-    rescue StandardError => e
-      # exception handling
-    end
+  rescue StandardError => e
+    # exception handling
+  end
 
-    ```
+  ```
 
 * より詳細な例外を`rescue`チェーンの上に配置しましょう。
   そうでなければ、決して`rescue`されません。
 
-    ```Ruby
-    # 悪い例
-    begin
-      # some code
-    rescue Exception => e
-      # some handling
-    rescue StandardError => e
-      # some handling
-    end
+  ```Ruby
+  # 悪い例
+  begin
+    # some code
+  rescue Exception => e
+    # some handling
+  rescue StandardError => e
+    # some handling
+  end
 
-    # 良い例
-    begin
-      # some code
-    rescue StandardError => e
-      # some handling
-    rescue Exception => e
-      # some handling
-    end
-    ```
+  # 良い例
+  begin
+    # some code
+  rescue StandardError => e
+    # some handling
+  rescue Exception => e
+    # some handling
+  end
+  ```
 
 * 外部リソースの含まれるプログラムでは、`ensure`で開放しましょう
 
-    ```Ruby
-    f = File.open('testfile')
-    begin
-      # .. process
-    rescue
-      # .. handle error
-    ensure
-      f.close unless f.nil?
-    end
-    ```
+  ```Ruby
+  f = File.open('testfile')
+  begin
+    # .. process
+  rescue
+    # .. handle error
+  ensure
+    f.close unless f.nil?
+  end
+  ```
 
 * 新しい例外クラスを導入するより、基本ライブラリの例外クラスを用いることが好まれます。
 
@@ -2108,64 +2108,64 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
 * 配列やハッシュのリテラルの方が好まれます。
   (コンストラクタに引数を渡す場合を除けば、ということですが)
 
-    ```Ruby
-    # 悪い例
-    arr = Array.new
-    hash = Hash.new
+  ```Ruby
+  # 悪い例
+  arr = Array.new
+  hash = Hash.new
 
-    # 良い例
-    arr = []
-    hash = {}
-    ```
+  # 良い例
+  arr = []
+  hash = {}
+  ```
 
 * (空文字列や、文字列内にスペースが入っていない)文字列の配列構文は、
   `%w`リテラルの方が好まれます。
   このルールは要素が２つ以上の配列に適用されます。
 
-    ```Ruby
-    # 悪い例
-    STATES = ['draft', 'open', 'closed']
+  ```Ruby
+  # 悪い例
+  STATES = ['draft', 'open', 'closed']
 
-    # 良い例
-    STATES = %w(draft open closed)
-    ```
+  # 良い例
+  STATES = %w(draft open closed)
+  ```
 
 * シンボルの配列が必要なときは`%i`が好まれます
   (Ruby 1.9との互換性の維持が必要で無ければ)。
   このルールは要素が２つ以上の配列に適用されます。
 
-    ```Ruby
-    # 悪い例
-    STATES = [:draft, :open, :closed]
+  ```Ruby
+  # 悪い例
+  STATES = [:draft, :open, :closed]
 
-    # 良い例
-    STATES = %i(draft open closed)
-    ```
+  # 良い例
+  STATES = %i(draft open closed)
+  ```
 
 * `Array`や`Hash`リテラルの最後の要素の後ろの`,`は避けましょう。
   複数行にわかれていない時は特に避けましょう。
 
-    ```Ruby
-    # 悪い例 - 簡単に要素を移動・追加・削除できますが、それでも好まれません。
-    VALUES = [
-               1001,
-               2020,
-               3333,
-             ]
+  ```Ruby
+  # 悪い例 - 簡単に要素を移動・追加・削除できますが、それでも好まれません。
+  VALUES = [
+             1001,
+             2020,
+             3333,
+           ]
 
-    # 悪い例
-    VALUES = [1001, 2020, 3333, ]
+  # 悪い例
+  VALUES = [1001, 2020, 3333, ]
 
-    # 良い例
-    VALUES = [1001, 2020, 3333]
-    ```
+  # 良い例
+  VALUES = [1001, 2020, 3333]
+  ```
 
 * 配列に大きな隙間を作るのは避けましょう。
 
-    ```Ruby
-    arr = []
-    arr[100] = 1 # now you have an array with lots of nils
-    ```
+  ```Ruby
+  arr = []
+  arr[100] = 1 # now you have an array with lots of nils
+  ```
 
 * 配列の最初や最後にアクセスしたいときは、
   `[0]`や`[-1]`より`first`や`last`が好まれます。
@@ -2175,78 +2175,78 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   これは`Array`の直感的な内部操作と、`Hash`の要素発見の速さが合わさっています。
 * ハッシュのキーには文字列よりシンボルが好まれます。
 
-    ```Ruby
-    # 悪い例
-    hash = { 'one' => 1, 'two' => 2, 'three' => 3 }
+  ```Ruby
+  # 悪い例
+  hash = { 'one' => 1, 'two' => 2, 'three' => 3 }
 
-    # 良い例
-    hash = { one: 1, two: 2, three: 3 }
-    ```
+  # 良い例
+  hash = { one: 1, two: 2, three: 3 }
+  ```
 
 * 変更のできるオブジェクトをハッシュのキーに使うのは避けましょう。
 
 * キーがシンボルの時は、ハッシュリテラルの構文を用いましょう。
 
-    ```Ruby
-    # 悪い例
-    hash = { :one => 1, :two => 2, :three => 3 }
+  ```Ruby
+  # 悪い例
+  hash = { :one => 1, :two => 2, :three => 3 }
 
-    # 良い例
-    hash = { one: 1, two: 2, three: 3 }
-    ```
+  # 良い例
+  hash = { one: 1, two: 2, three: 3 }
+  ```
 
 * `Hash#has_key?`より`Hash#key?`を、
   `Hash#has_value?`より`Hash#value?`を用いましょう。
     [ここ](http://blade.nagaokaut.ac.jp/cgi-bin/scat.rb/ruby/ruby-core/43765)
   でMatzが述べているように、長い記法は廃止が検討されています。
 
-    ```Ruby
-    # 悪い例
-    hash.has_key?(:test)
-    hash.has_value?(value)
+  ```Ruby
+  # 悪い例
+  hash.has_key?(:test)
+  hash.has_value?(value)
 
-    # 良い例
-    hash.key?(:test)
-    hash.value?(value)
-    ```
+  # 良い例
+  hash.key?(:test)
+  hash.value?(value)
+  ```
 
 * 存在すべきキーを扱う時は、`Hash#fetch`を用いましょう。
 
-    ```Ruby
-    heroes = { batman: 'Bruce Wayne', superman: 'Clark Kent' }
-    # 悪い例 - もし誤りがあってもすぐに気づくことができないかもしれません
-    heroes[:batman] # => "Bruce Wayne"
-    heroes[:supermann] # => nil
+  ```Ruby
+  heroes = { batman: 'Bruce Wayne', superman: 'Clark Kent' }
+  # 悪い例 - もし誤りがあってもすぐに気づくことができないかもしれません
+  heroes[:batman] # => "Bruce Wayne"
+  heroes[:supermann] # => nil
 
-    # 良い例 - fetchはKeyErrorを投げるので、問題が明らかになります
-    heroes.fetch(:supermann)
-    ```
+  # 良い例 - fetchはKeyErrorを投げるので、問題が明らかになります
+  heroes.fetch(:supermann)
+  ```
 
 * 独自のロジックを用いないようにするため、
   `Hash#fetch`経由でデフォルト値を導入しましょう。
 
-   ```Ruby
-   batman = { name: 'Bruce Wayne', is_evil: false }
+  ```Ruby
+  batman = { name: 'Bruce Wayne', is_evil: false }
 
-   # 悪い例 - falseと判定される値が入っていた場合、望んだとお降りに動かないかもしれません
-   batman[:is_evil] || true # => true
+  # 悪い例 - falseと判定される値が入っていた場合、望んだとお降りに動かないかもしれません
+  batman[:is_evil] || true # => true
 
-   # 良い例 - falseと判定される値が入っていても正しく動きます
-   batman.fetch(:is_evil, true) # => false
-   ```
+  # 良い例 - falseと判定される値が入っていても正しく動きます
+  batman.fetch(:is_evil, true) # => false
+  ```
 
 * `Hash#fetch`では、デフォルト値の代わりにブロックを用いることが好まれます。
 
-   ```Ruby
-   batman = { name: 'Bruce Wayne' }
+  ```Ruby
+  batman = { name: 'Bruce Wayne' }
 
-   # 悪い例 - デフォルト値が使われると、先に評価してしまいます
-   # だから、もし複数回呼ばれると、プログラムが遅くなります
-   batman.fetch(:powers, get_batman_powers) # get_batman_powers は高価な呼び出しです
+  # 悪い例 - デフォルト値が使われると、先に評価してしまいます
+  # だから、もし複数回呼ばれると、プログラムが遅くなります
+  batman.fetch(:powers, get_batman_powers) # get_batman_powers は高価な呼び出しです
 
-   # 良い例 - ブロックは後から評価されます。だから、KeyErrorが評価の引き金になります
-   batman.fetch(:powers) { get_batman_powers }
-   ```
+  # 良い例 - ブロックは後から評価されます。だから、KeyErrorが評価の引き金になります
+  batman.fetch(:powers) { get_batman_powers }
+  ```
 
 * Ruby 1.9現在ではハッシュは順序付けられるということを信頼しましょう。
 * コレクションを走査している時に変更を加えてわいけません。
@@ -2255,74 +2255,74 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
 
 * 文字列連結の代わりに文字列挿入を好みます。
 
-    ```Ruby
-    # 悪い例
-    email_with_name = user.name + ' <' + user.email + '>'
+  ```Ruby
+  # 悪い例
+  email_with_name = user.name + ' <' + user.email + '>'
 
-    # 良い例
-    email_with_name = "#{user.name} <#{user.email}>"
-    ```
+  # 良い例
+  email_with_name = "#{user.name} <#{user.email}>"
+  ```
 
 * 文字列挿入時にはスペースを入れることを検討しましょう。
   文字列から分かれたコードがより明確になります。
 
-    ```Ruby
-    "#{ user.last_name }, #{ user.first_name }"
-    ```
+  ```Ruby
+  "#{ user.last_name }, #{ user.first_name }"
+  ```
 
 * 文字列挿入の必要がないときや、`\t`や`\n`｀’｀等の特別な文字がない場合は、
   シングルクォーテーションが好まれます。
 
-    ```Ruby
-    # 悪い例
-    name = "Bozhidar"
+  ```Ruby
+  # 悪い例
+  name = "Bozhidar"
 
-    # 良い例
-    name = 'Bozhidar'
-    ```
+  # 良い例
+  name = 'Bozhidar'
+  ```
 
 * 文字リテラル構文`?x`を用いてはいけません。
   Ruby 1.9からは基本的には冗長です -
   `?x`は`'x'`(１文字の文字列)に変換されます
 
-    ```Ruby
-    # 悪い例
-    char = ?c
+  ```Ruby
+  # 悪い例
+  char = ?c
 
-    # 良い例
-    char = 'c'
-    ```
+  # 良い例
+  char = 'c'
+  ```
 
 * 文字列の中の挿入されるインスタンス変数やグローバル変数の周りの
   `{}`は省略してはいけません。
 
-    ```Ruby
-    class Person
-      attr_reader :first_name, :last_name
+  ```Ruby
+  class Person
+    attr_reader :first_name, :last_name
 
-      def initialize(first_name, last_name)
-        @first_name = first_name
-        @last_name = last_name
-      end
-
-      # 悪い例 - 有効ですが不格好です
-      def to_s
-        "#@first_name #@last_name"
-      end
-
-      # 良い例
-      def to_s
-        "#{@first_name} #{@last_name}"
-      end
+    def initialize(first_name, last_name)
+      @first_name = first_name
+      @last_name = last_name
     end
 
-    $global = 0
-    # 悪い例
-    puts "$global = #$global"
+    # 悪い例 - 有効ですが不格好です
+    def to_s
+      "#@first_name #@last_name"
+    end
 
     # 良い例
-    puts "$global = #{$global}"
-    ```
+    def to_s
+      "#{@first_name} #{@last_name}"
+    end
+  end
+
+  $global = 0
+  # 悪い例
+  puts "$global = #$global"
+
+  # 良い例
+  puts "$global = #{$global}"
+  ```
 
 * 大きなデータの塊を作る必要があるときは、`String#+`の使用は避けましょう。
   代わりに、`String#<<`を使いましょう。
@@ -2330,29 +2330,29 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   `String#+`よりも常に速いです、
   `String#+`はたくさんの新しいオブジェクトを作ってしまします。
 
-    ```Ruby
-    # 良く、そして速い例
-    html = ''
-    html << '<h1>Page title</h1>'
+  ```Ruby
+  # 良く、そして速い例
+  html = ''
+  html << '<h1>Page title</h1>'
 
-    paragraphs.each do |paragraph|
-      html << "<p>#{paragraph}</p>"
-    end
-    ```
+  paragraphs.each do |paragraph|
+    html << "<p>#{paragraph}</p>"
+  end
+  ```
 
 * 複数行のヒアドキュメントを用いるときは、
   先頭のスペースも保持してしまうということを頭に入れておかなければなりません。
   過剰なスペースを取り除くためのマージンを採用するのを実用的です。
 
-    ```Ruby
-    code = <<-END.gsub(/^\s+\|/, '')
-      |def test
-      |  some_method
-      |  other_method
-      |end
-    END
-    #=> "def test\n  some_method\n  other_method\nend\n"
-    ```
+  ```Ruby
+  code = <<-END.gsub(/^\s+\|/, '')
+    |def test
+    |  some_method
+    |  other_method
+    |end
+  END
+  #=> "def test\n  some_method\n  other_method\nend\n"
+  ```
 
 ## 正規表現
 
@@ -2364,50 +2364,50 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   正規表現を使ってはいけません: `string['text']`を使いましょう。
 * 単純化のため、文字列の添字に直接正規表現を渡しましょう。
 
-    ```Ruby
-    match = string[/regexp/]             # get content of matched regexp
-    first_group = string[/text(grp)/, 1] # get content of captured group
-    string[/text (grp)/, 1] = 'replace'  # string => 'text replace'
-    ```
+  ```Ruby
+  match = string[/regexp/]             # get content of matched regexp
+  first_group = string[/text(grp)/, 1] # get content of captured group
+  string[/text (grp)/, 1] = 'replace'  # string => 'text replace'
+  ```
 
 * 捕捉した結果を使う必要のないとき、捕捉しないグループを用いましょう。
 
-    ```Ruby
-    /(first|second)/   # 悪い例
-    /(?:first|second)/ # 良い例
-    ```
+  ```Ruby
+  /(first|second)/   # 悪い例
+  /(?:first|second)/ # 良い例
+  ```
 
 * 最後に正規表現にマッチした値を示すPerlレガシーの暗号的な変数を用いてはいけません
   (`$1`、`$2`など)。
   代わりに`Regexp.last_match[n]`を用いましょう。
 
-    ```Ruby
-    /(regexp)/ =~ string
-    ...
+  ```Ruby
+  /(regexp)/ =~ string
+  ...
 
-    # 悪い例
-    process $1
+  # 悪い例
+  process $1
 
-    # 良い例
-    process Regexp.last_match[1]
-    ```
+  # 良い例
+  process Regexp.last_match[1]
+  ```
 
 
 * どの値が入っているか追うのが困難になるので、
   順序付けられたグループを使うのは避けましょう。
   代わりに名付けられたグループを使いましょう。
 
-    ```Ruby
-    # 悪い例
-    /(regexp)/ =~ string
-    ...
-    process Regexp.last_match[1]
+  ```Ruby
+  # 悪い例
+  /(regexp)/ =~ string
+  ...
+  process Regexp.last_match[1]
 
-    # 良い例
-    /(?<meaningful_var>regexp)/ =~ string
-    ...
-    process meaningful_var
-    ```
+  # 良い例
+  /(?<meaningful_var>regexp)/ =~ string
+  ...
+  process meaningful_var
+  ```
 
 * 文字クラスの中では、特別な意味を持つ文字が少ないので注意が必要です:
   `^`、`-`、`\`、`]`のみが特別な意味を持つので、
@@ -2419,26 +2419,26 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   `\A`、`\z`を使いましょう
   (`\n?\z`と等価である`\Z`と混同しないようにしましょう)。
 
-    ```Ruby
-    string = "some injection\nusername"
-    string[/^username$/]   # matches
-    string[/\Ausername\z/] # don't match
-    ```
+  ```Ruby
+  string = "some injection\nusername"
+  string[/^username$/]   # matches
+  string[/\Ausername\z/] # don't match
+  ```
 
 * 複雑な正規表現には`x`識別子を用いましょう。
   これを用いることで、より読みやすくなり、
   便利なコメントを使えるようになります。
   スペースが無視されることに注意しましょう。
 
-    ```Ruby
-    regexp = %r{
-      start         # some text
-      \s            # white space char
-      (group)       # first group
-      (?:alt1|alt2) # some alternation
-      end
-    }x
-    ```
+  ```Ruby
+  regexp = %r{
+    start         # some text
+    \s            # white space char
+    (group)       # first group
+    (?:alt1|alt2) # some alternation
+    end
+  }x
+  ```
 
 * `sub`/`gsub`での複雑な置換は、ブロックやハッシュを用いることで実現できます。
 
@@ -2448,22 +2448,22 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   `%()`(`%Q()`の短縮形)を使いましょう。
   複数行の時はヒアドキュメントを好みます。
 
-    ```Ruby
-    # 悪い例 (挿入の必要がありません)
-    %(<div class="text">Some text</div>)
-    # should be '<div class="text">Some text</div>'
+  ```Ruby
+  # 悪い例 (挿入の必要がありません)
+  %(<div class="text">Some text</div>)
+  # should be '<div class="text">Some text</div>'
 
-    # 悪い例 (ダブルクォートがありません)
-    %(This is #{quality} style)
-    # should be "This is #{quality} style"
+  # 悪い例 (ダブルクォートがありません)
+  %(This is #{quality} style)
+  # should be "This is #{quality} style"
 
-    # 悪い例 (複数行です)
-    %(<div>\n<span class="big">#{exclamation}</span>\n</div>)
-    # should be a heredoc.
+  # 悪い例 (複数行です)
+  %(<div>\n<span class="big">#{exclamation}</span>\n</div>)
+  # should be a heredoc.
 
-    # 良い例 (挿入が必要、ダブルクォートがある、そして１行です)
-    %(<tr><td class="name">#{name}</td>)
-    ```
+  # 良い例 (挿入が必要、ダブルクォートがある、そして１行です)
+  %(<tr><td class="name">#{name}</td>)
+  ```
 
 * 文字列に`'`と`"`双方が含まれない限り、
   `%q`の使用は避けましょう。
@@ -2471,43 +2471,43 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   通常の文字列リテラルのほうがより読みやすく、
   推奨されるべきです。
 
-    ```Ruby
-    # 悪い例
-    name = %q(Bruce Wayne)
-    time = %q(8 o'clock)
-    question = %q("What did you say?")
+  ```Ruby
+  # 悪い例
+  name = %q(Bruce Wayne)
+  time = %q(8 o'clock)
+  question = %q("What did you say?")
 
-    # 良い例
-    name = 'Bruce Wayne'
-    time = "8 o'clock"
-    question = '"What did you say?"'
-    ```
+  # 良い例
+  name = 'Bruce Wayne'
+  time = "8 o'clock"
+  question = '"What did you say?"'
+  ```
 
 * '/'が１つ *より多い* 正規表現に限り、`%r`を使いましょう。
 
-    ```Ruby
-    # 悪い例
-    %r(\s+)
+  ```Ruby
+  # 悪い例
+  %r(\s+)
 
-    # こちらも悪い例
-    %r(^/(.*)$)
-    # should be /^\/(.*)$/
+  # こちらも悪い例
+  %r(^/(.*)$)
+  # should be /^\/(.*)$/
 
-    # 良い例
-    %r(^/blog/2011/(.*)$)
-    ```
+  # 良い例
+  %r(^/blog/2011/(.*)$)
+  ```
 
 * 呼び出すコマンドにバッククォートが含まれる(かなり起こりえないが)ことがない限り、
   `%x`の使用は避けましょう。
 
-    ```Ruby
-    # 悪い例
-    date = %x(date)
+  ```Ruby
+  # 悪い例
+  date = %x(date)
 
-    # 良い例
-    date = `date`
-    echo = %x(echo `date`)
-    ```
+  # 良い例
+  date = `date`
+  echo = %x(echo `date`)
+  ```
 
 * `%s`の使用は避けましょう。
   Rubyコミュニティは、スペース含むシンボルをを作る時は
@@ -2518,15 +2518,15 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   正規表現の内容によっては、より使われる機会の少ない`{`のほうが
   良い選択となることがあるかもしれません。
 
-    ```Ruby
-    # 悪い例
-    %w[one two three]
-    %q{"Test's king!", John said.}
+  ```Ruby
+  # 悪い例
+  %w[one two three]
+  %q{"Test's king!", John said.}
 
-    # 良い例
-    %w(one two three)
-    %q("Test's king!", John said.)
-    ```
+  # 良い例
+  %w(one two three)
+  %q("Test's king!", John said.)
+  ```
 
 ## メタプログラミング
 
@@ -2538,32 +2538,32 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
 * ブロック渡しの`class_eval`のほうが、文字列挿入型よりも好ましいです。
   - 文字列挿入型を使う時は、バックとレースが働くように、常に`__FILE__`と`__LINE__`を渡しましょう:
 
-    ```ruby
-    class_eval 'def use_relative_model_naming?; true; end', __FILE__, __LINE__
-    ```
+  ```ruby
+  class_eval 'def use_relative_model_naming?; true; end', __FILE__, __LINE__
+  ```
 
   - `define_method`の方が、`class_eval{ def ... }`よりも好まれます。
 
 * 文字列挿入型の`class_eval`(または他の`eval`)を用いる時は、
   挿入されたときのコードをコメントに追加しましょう(Railsでは活用されています)。
 
-    ```ruby
-    # from activesupport/lib/active_support/core_ext/string/output_safety.rb
-    UNSAFE_STRING_METHODS.each do |unsafe_method|
-      if 'String'.respond_to?(unsafe_method)
-        class_eval <<-EOT, __FILE__, __LINE__ + 1
-          def #{unsafe_method}(*args, &block)       # def capitalize(*args, &block)
-            to_str.#{unsafe_method}(*args, &block)  #   to_str.capitalize(*args, &block)
-          end                                       # end
+  ```ruby
+  # from activesupport/lib/active_support/core_ext/string/output_safety.rb
+  UNSAFE_STRING_METHODS.each do |unsafe_method|
+    if 'String'.respond_to?(unsafe_method)
+      class_eval <<-EOT, __FILE__, __LINE__ + 1
+        def #{unsafe_method}(*args, &block)       # def capitalize(*args, &block)
+          to_str.#{unsafe_method}(*args, &block)  #   to_str.capitalize(*args, &block)
+        end                                       # end
 
-          def #{unsafe_method}!(*args)              # def capitalize!(*args)
-            @dirty = true                           #   @dirty = true
-            super                                   #   super
-          end                                       # end
-        EOT
-      end
+        def #{unsafe_method}!(*args)              # def capitalize!(*args)
+          @dirty = true                           #   @dirty = true
+          super                                   #   super
+        end                                       # end
+      EOT
     end
-    ```
+  end
+  ```
 
 * `method_missing`を用いたメタプログラミングは避けましょう。
   何故なら、バックとレースが面倒になり、
@@ -2578,27 +2578,27 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   - 最後に`super`を呼び出しましょう
   - アサートする、特別でないメソッドに移譲しましょう:
 
-    ```ruby
-    # 悪い例
-    def method_missing?(meth, *args, &block)
-      if /^find_by_(?<prop>.*)/ =~ meth
-        # ... lots of code to do a find_by
-      else
-        super
-      end
+  ```ruby
+  # 悪い例
+  def method_missing?(meth, *args, &block)
+    if /^find_by_(?<prop>.*)/ =~ meth
+      # ... lots of code to do a find_by
+    else
+      super
     end
+  end
 
-    # 良い例
-    def method_missing?(meth, *args, &block)
-      if /^find_by_(?<prop>.*)/ =~ meth
-        find_by(prop, *args, &block)
-      else
-        super
-      end
+  # 良い例
+  def method_missing?(meth, *args, &block)
+    if /^find_by_(?<prop>.*)/ =~ meth
+      find_by(prop, *args, &block)
+    else
+      super
     end
+  end
 
-    # それでも最も良い選択は、発見できる全てのアトリビュートにdefine_methodすることです
-    ```
+  # それでも最も良い選択は、発見できる全てのアトリビュートにdefine_methodすることです
+  ```
 
 ## 雑則
 
@@ -2612,19 +2612,19 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   Kernelに定義し、privateに設定しましょう。
 * グローバル変数の代わりに、モジュールのインスタンス変数を使用しましょう。
 
-    ```Ruby
-    # 悪い例
-    $foo_bar = 1
+  ```Ruby
+  # 悪い例
+  $foo_bar = 1
 
-    # 良い例
-    module Foo
-      class << self
-        attr_accessor :bar
-      end
+  # 良い例
+  module Foo
+    class << self
+      attr_accessor :bar
     end
+  end
 
-    Foo.bar = 1
-    ```
+  Foo.bar = 1
+  ```
 
 * `alias_method`が動く時は、`alias`は避けましょう。
 * 複雑なコマンドラインオプションをパースするために`OptionParser`を使いましょう。
