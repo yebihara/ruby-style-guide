@@ -742,7 +742,7 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   # 制御構文
   document.saved? or document.save!
 
-  # good
+  # 良い例
   # boolean式
   if some_condition && some_other_condition
     do_something
@@ -1287,14 +1287,14 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   変数を使っていないという警告を抑えることでしょう。
 
   ```Ruby
-  # bad
+  # 悪い例
   result = hash.map { |k, v| v + 1 }
 
   def something(x)
     unused_var, used_var = something_else(x)
   end
 
-  # good
+  # 良い例
   result = hash.map { |_, v| v + 1 }
 
   def something(x)
