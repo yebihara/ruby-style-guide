@@ -72,9 +72,10 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
 * [中国語(繁体)](https://github.com/JuanitoFatas/ruby-style-guide/blob/master/README-zhTW.md)
 * [フランス語](https://github.com/porecreat/ruby-style-guide/blob/master/README-frFR.md)
 * [日本語](https://github.com/fortissimo1997/ruby-style-guide/blob/japanese/README.ja.md)
+* [ポルトガル語](https://github.com/rubensmabueno/ruby-style-guide/blob/master/README-PT-BR.md)
+* [ロシア語](https://github.com/arbox/ruby-style-guide/blob/master/README-ruRU.md)
 * [スペイン語](https://github.com/alemohamad/ruby-style-guide/blob/master/README-esLA.md)
 * [ベトナム語](https://github.com/scrum2b/ruby-style-guide/blob/master/README-viVN.md)
-* [ポルトガル語](https://github.com/rubensmabueno/ruby-style-guide/blob/master/README-PT-BR.md)
 
 ## 目次
 
@@ -2295,20 +2296,20 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   ```Ruby
   # 悪い例
   begin
-    # some code
+    # 処理
   rescue Exception => e
-    # some handling
+    # エラー処理
   rescue StandardError => e
-    # some handling
+    # 決して到達しないエラー処理
   end
 
   # 良い例
   begin
-    # some code
+    # 処理
   rescue StandardError => e
-    # some handling
+    # エラー処理
   rescue Exception => e
-    # some handling
+    # エラー処理
   end
   ```
 
