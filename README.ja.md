@@ -101,8 +101,13 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
 > 「彼ら自身の」を除けば、おそらく正しいのだが、、、
 > -- Jerry Coffin (on indentation)
 
-* ソースファイルのエンコーディングには`UTF-8`を用いましょう。
-* インデントには **スペース** 2つ(別名ソフトタブ)。 ハードタブを用いてはいけません。
+* <a name="utf-8"></a>
+  ソースファイルのエンコーディングには`UTF-8`を用いましょう。
+<sup>[[link](#utf-8)]</sup)
+
+* <a name="spaces-indentation"></a>
+  インデントには **スペース** 2つ(別名ソフトタブ)。 ハードタブを用いてはいけません。
+<sup>[[link](#spaces-indentation)]</sup>
 
   ```Ruby
   # 悪い例 - 4つのスペース
@@ -116,17 +121,22 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   end
   ```
 
-* Unix-styleの改行にしましょう。
+* <a name="crlf"></a>
+  Unix-styleの改行にしましょう。
 (*BSD/Solaris/Linux/OS X ユーザーはデフォルトで設定されています。
   Windows ユーザーは特に注意が必要です。)
+<sup>[[link](#crlf)]</sup>
+
   * もしGitを使っていれば、プロジェクトにWindowsの改行が紛れ込まないように、以下の設定を追加したほうがよいかもしれません:
 
     ```bash
     $ git config --global core.autocrlf true
     ```
 
-* 命令文や式の区切りに`;`を用いてはいけません。
+* <a name="no-semicolon"></a>
+  命令文や式の区切りに`;`を用いてはいけません。
   当然、１行につき式１つにしましょう。
+<sup>[[link](#no-semicolon)]</sup>
 
   ```Ruby
   # 悪い例
@@ -143,7 +153,9 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   puts 'foo', 'bar' # 特にputsでは適用されます。
   ```
 
-* 本文のないクラスは１行のフォーマットが好まれます。
+* <a name="single-line-classes"></a>
+  本文のないクラスは１行のフォーマットが好まれます。
+<sup>[[link](#single-line-classes)]</sup>
 
   ```Ruby
   # 悪い例
@@ -157,10 +169,12 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   FooError = Class.new(StandardError)
   ```
 
-* １行のメソッドは避けましょう。
+* <a name="no-single-line-methods"></a>
+  １行のメソッドは避けましょう。
   いくらか使われているところもありますが、
   それらの定義構文の仕様が望ましくないとさせるいくつかの特殊性があります。
   ともかく - １行メソッドには多くとも式１つまでにすべきです。
+<sup>[[link](#no-single-line-methods)]</sup>
 
   ```Ruby
   # 悪い例
@@ -188,9 +202,11 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   def no_op; end
   ```
 
-* 演算子の前後、コンマ、コロン、セミコロンの後ろに、`{`の前後、`}`の前にはスペースを入れましょう。
+* <a name="spaces-operators"></a>
+  演算子の前後、コンマ、コロン、セミコロンの後ろに、`{`の前後、`}`の前にはスペースを入れましょう。
   スペースはRubyのインタープリタには(ほとんどの場合)重要ではありませんが、
   スペースの適切な使用は、読みやすいコードを容易に書くための鍵です。
+<sup>[[link](#spaces-operators)]</sup>
 
   ```Ruby
   sum = 1 + 2
@@ -240,14 +256,18 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   一方２つ目は、(間違いなく)少し読みやすいです。
   ハッシュと同じように - 片方を採用すれば、常に同じ方を採用しましょう。
 
-* `(`、 `[`の後と、`]`、 `)`の前にはスペースは入れません。
+* <a name="no-spaces-braces"></a>
+  `(`、 `[`の後と、`]`、 `)`の前にはスペースは入れません。
+<sup>[[link](#no-spaces-braces)]</sup>
 
   ```Ruby
   some(arg).other
   [1, 2, 3].size
   ```
 
-* `!`の後にはスペースは入れません。
+* <a name="no-space-bang"></a>
+  `!`の後にはスペースは入れません。
+<sup>[[link](#no-space-bang)]</sup>
 
   ```Ruby
   # 悪い例
@@ -257,10 +277,12 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   !something
   ```
 
-* `when`は`case`と同じ深さに揃えましょう。
+* <a name="indent-when-to-case"></a>
+  `when`は`case`と同じ深さに揃えましょう。
   多くの人が同意できないのを知っていますが、
   このスタイルは"The Ruby Programming Language"、"Programming Ruby"
   双方で確立されたものなのです。
+<sup>[[link](#indent-when-to-case)]</sup>
 
   ```Ruby
   # 悪い例
@@ -288,8 +310,10 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   end
   ```
 
-* 条件式を変数に代入するときは、
+* <a name="indent-conditional-assignment"></a>
+  条件式を変数に代入するときは、
   その式の通常のアラインメントを維持しましょう。
+<sup>[[link](#indent-conditional-assignment)]</sup>
 
   ```Ruby
   # 悪い例 - かなり複雑です
@@ -343,8 +367,10 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
     end
   ```
 
-* 定義式の間には空行をいれ、
+* <a name="empty-lines-between-methods"></a>
+  定義式の間には空行をいれ、
   メソッド内の論理的段落ごとに分割しましょう。
+<sup>[[link](#empty-lines-between-methods)]</sup>
 
   ```Ruby
   def some_method
@@ -360,8 +386,10 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   end
   ```
 
-* メソッド呼び出しの最後の引数の後ろのコンマは避けましょう。
+* <a name="no-trailing-params-comma"></a>
+  メソッド呼び出しの最後の引数の後ろのコンマは避けましょう。
   引数が複数行にわかれていない時は、特に避けましょう。
+<sup>[[link](#no-trailing-params-comma)]</sup>
 
   ```Ruby
   # 悪い例 - 簡単に引数を移動・追加・削除できますが、それでもお奨めできません。
@@ -378,8 +406,10 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   some_method(size, count, color)
   ```
 
-* メソッドの引数に初期値を割り当てるとき、
+* <a name="spaces-around-equals"></a>
+  メソッドの引数に初期値を割り当てるとき、
   `=`演算子の周りにはスペースを入れましょう。
+<sup>[[link](#spaces-around-equals)]</sup>
 
   ```Ruby
   # 悪い例
@@ -397,8 +427,10 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   ２つ目の方が、実用的により優れています
   (そして、ほぼ間違いなく少し読みやすいです)。
 
-* 不要な`\`を用いた行の継続は避けましょう。
+* <a name="no-trailing-backslash"></a>
+  不要な`\`を用いた行の継続は避けましょう。
   実際、文字列連結以外での行の継続は避けましょう。
+<sup>[[link](#no-trailing-backslash)]</sup>
 
   ```Ruby
   # 悪い例
@@ -413,10 +445,12 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
                 ' and second part of the long string'
   ```
 
-* 一貫した複数行のメソッドチェーンのスタイルを採用しましょう。
+* <a name="consistent-multi-line-chains"></a>
+  一貫した複数行のメソッドチェーンのスタイルを採用しましょう。
   Rubyコミュニティには2つの有名なスタイル - 先頭に`.`を付けるもの (Option A)、
   末尾に`.`を付けるもの (Option B) - があり、
   どちらも良いと考えられています。
+<sup>[[link](#consistent-multi-line-chains)]</sup>
 
   * **(Option A)** メソッドチェーンを次の行へつなげる時は、
     `.`は次の行に置きましょう。
@@ -447,9 +481,11 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   双方のスタイルのメリットに関する議論は[こちら](https://github.com/bbatsov/ruby-style-guide/pull/176)
   で見ることができます。
 
-* メソッド呼び出しが複数行に及ぶときは、引数は揃えましょう。
+* <a name="no-double-indent"></a>
+  メソッド呼び出しが複数行に及ぶときは、引数は揃えましょう。
   １行の長さの制約のために、引数を揃えるのに適していない時は、
   最初の引数以降をインデント１つ分で揃えるスタイルも許容できます。
+<sup>[[link](#no-double-indent)]</sup>
 
   ```Ruby
   # 初期値 (１行がとても長いです)
@@ -485,7 +521,9 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   end
   ```
 
-* 複数行に及ぶ配列は、要素を揃えましょう。
+* <a name="align-multiline-arrays"></a>
+  複数行に及ぶ配列は、要素を揃えましょう。
+<sup>[[link](#align-multiline-arrays)]</sup>
 
   ```Ruby
   # 悪い例 - インデント１つです
@@ -504,7 +542,9 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
      "Baked beans", "Spam", "Spam", "Spam", "Spam", "Spam"]
   ```
 
-* 可読性のため、大きな数値にはアンダースコアをつけましょう。
+* <a name="underscores-in-numerics"></a>
+  可読性のため、大きな数値にはアンダースコアをつけましょう。
+<sup>[[link](#underscores-in-numerics)]</sup>
 
   ```Ruby
   # 悪い例 - 0はいくつありますか？
@@ -514,16 +554,28 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   num = 1_000_000
   ```
 
-* APIのドキュメントのため、RDocの規約に従いましょう。
+* <a name="rdoc-conventions"></a>
+  APIのドキュメントのため、RDocの規約に従いましょう。
   コメント行と`def`の間に空行を入れてはいけません。
+<sup>[[link](#rdoc-conventions)]</sup>
 
-* １行は80字までにしましょう。
+* <a name="80-character-limits"></a>
+  １行は80字までにしましょう。
+<sup>[[link](#80-character-limits)]</sup>
 
-* 行末のスペースは避けましょう。
+* <a name="no-trailing-whitespace"></a>
+  行末のスペースは避けましょう。
+<sup>[[link](#no-trailing-whitespace)]</sup>
 
-* ブロックコメントは使ってはいけません。
+* <a name="newline-eof"></a>
+  ファイルの終端には改行を入れましょう。
+<sup>[[link](#newline-eof)]</sup>
+
+* <a name="no-block-comments"></a>
+  ブロックコメントは使ってはいけません。
   前にスペースが入ると機能しませんし、
   通常のコメントと違い、簡単に見分けが付きません。
+<sup>[[link](#no-block-comments)]</sup>
 
   ```Ruby
   # 悪い例
@@ -539,9 +591,11 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
 
 ## 構文
 
-* `::`は、定数(クラスやモジュールも含みます)や
+* <a name="double-colons"></a>
+  `::`は、定数(クラスやモジュールも含みます)や
   コンストラクタ(例えば`Array()`や`Nokogiri::HTML()`)を参照するときにのみ使いましょう。
   通常のメソッド呼び出しでは`::`の使用は避けましょう。
+<sup>[[link](#double-colons)]</sup>
 
   ```Ruby
   # 悪い例
@@ -555,8 +609,10 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   SomeModule::SomeClass()
   ```
 
-* 引数があるとき、`def`は`()`と共に使いましょう。
+* <a name="method-parens"></a>
+  引数があるとき、`def`は`()`と共に使いましょう。
   引数がない場合は`()`は除きましょう。
+<sup>[[link](#method-parens)]</sup>
 
    ```Ruby
    # 悪い例
@@ -580,11 +636,13 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
    end
    ```
 
-* あなたが使ってはならない理由を正確に知っていなければ、決して`for`を使ってはいけません。
+* <a name="no-for-loops"></a>
+  あなたが使ってはならない理由を正確に知っていなければ、決して`for`を使ってはいけません。
   代わりにイテレータが使われるべきです。
   `for`は`each`の観点で実装されています(だから、あなた方は遠回りでも使っています)が、
   `for`は(`each`と違い)新しいスコープを導入せず、
   そのブロック内で定義された変数は、ブロックの外からも見えるようになってしまいます。
+<sup>[[link](#no-for-loops)]</sup>
 
   ```Ruby
   arr = [1, 2, 3]
@@ -595,16 +653,18 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   end
 
   # elemはルーブの外からも参照できることに注意しましょう
-  elem #=> 3
+  elem # => 3
 
   # 良い例
   arr.each { |elem| puts elem }
 
   # elemはeachブロックの外からは参照できません
-  elem #=> NameError: undefined local variable or method `elem'
+  elem # => NameError: undefined local variable or method `elem'
   ```
 
-* `then`は複数行にまたがる`if/unless`では使ってはいけません。
+* <a name="no-then"></a>
+  `then`は複数行にまたがる`if/unless`では使ってはいけません。
+<sup>[[link](#no-then)]</sup>
 
   ```Ruby
   # 悪い例
@@ -618,7 +678,9 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   end
   ```
 
-* 複数行にまたがる`if/unless`では、条件式は常に`if/unless`と同じ行に置きましょう。
+* <a name="same-line-condition"></a>
+  複数行にまたがる`if/unless`では、条件式は常に`if/unless`と同じ行に置きましょう。
+<sup>[[link](#same-line-condition)]</sup>
 
   ```Ruby
   # 悪い例
@@ -635,8 +697,10 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   end
   ```
 
-* `if/then/else/end`構文よりも三項演算子(`?:`)を好みます。
+* <a name="ternary-operator"></a>
+  `if/then/else/end`構文よりも三項演算子(`?:`)を好みます。
   そちらの方がより明快で簡潔です。
+<sup>[[link](#ternary-operator)]</sup>
 
   ```Ruby
   # 悪い例
@@ -646,9 +710,11 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   result = some_condition ? something : something_else
   ```
 
-* 三項演算子は１つの式につき１つまでにしましょう。
+* <a name="no-nested-ternary"></a>
+  三項演算子は１つの式につき１つまでにしましょう。
   つまり、三項演算子はネストしてはいけません。
   このケースでは`if/else`の方がよいです。
+<sup>[[link](#no-nested-ternary)]</sup>
 
   ```Ruby
   # 悪い例
@@ -662,8 +728,10 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   end
   ```
 
-* `if x: ...`は使ってはいけません - Ruby 1.9現在は廃止されました。
+* <a name="no-1.8-if-syntax"></a>
+  `if x: ...`は使ってはいけません - Ruby 1.9現在は廃止されました。
   代わりに三項演算子を使いましょう。
+<sup>[[link](#no-1.8-if-syntax)]</sup>
 
   ```Ruby
   # 悪い例
@@ -673,9 +741,13 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   result = some_condition ? something : something_else
   ```
 
-* `if x; ...`を使ってはいけません。代わりに三項演算子を使いましょう。
+* <a name="no-semicolon-ifs"></a>
+  `if x; ...`を使ってはいけません。代わりに三項演算子を使いましょう。
+<sup>[[link](#no-semicolon-ifs)]</sup>
 
-* 結果を返す`if`や`case`式の値を活用しましょう。
+* <a name="use-if-case-returns"></a>
+  結果を返す`if`や`case`式の値を活用しましょう。
+<sup>[[link](#use-if-case-returns)]</sup>
 
   ```Ruby
   # 悪い例
@@ -694,12 +766,18 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
     end
   ```
 
-* １行の`case`文では`when x then ...`を使いましょう。
+* <a name="one-line-cases"></a>
+  １行の`case`文では`when x then ...`を使いましょう。
   代わりの表現である`when x: ...`は、Ruby 1.9で廃止されました。
+<sup>[[link](#one-line-cases)]</sup>
 
-* `when x; ...`を使ってはいけません。前のルールを見てください。
+* <a name="no-when-semicolons"></a>
+  `when x; ...`を使ってはいけません。前のルールを見てください。
+<sup>[[link](#no-when-semicolons)]</sup>
 
-* `not`の代わりに`!`を使いましょう。
+* <a name="bang-not-not"></a>
+  `not`の代わりに`!`を使いましょう。
+<sup>[[link](#bang-not-not)]</sup>
 
   ```Ruby
   # 悪い例 - 評価順のため、()が必要になります
@@ -709,7 +787,9 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   x = !something
   ```
 
-* `!!`は避けましょう。
+* <a name="no-bang-bang"></a>
+  `!!`は避けましょう。
+<sup>[[link](#no-bang-bang)]</sup>
 
   ```Ruby
   # 悪い例
@@ -730,8 +810,10 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   end
   ```
 
-* `and`と`or`の使用は禁止です。それらにその価値はありません。
+* <a name="no-and-or-or"></a>
+  `and`と`or`の使用は禁止です。それらにその価値はありません。
    常に、代わりに`&&`と`||`を使いましょう。
+<sup>[[link](#no-and-or-or)]</sup>
 
   ```Ruby
   # 悪い例
@@ -753,10 +835,14 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   document.saved? || document.save!
   ```
 
-* 複数行にまたがる三項演算子`?:`は避けましょう; 代わりに`if/unless`を使いましょう。
+* <a name="no-multiline-ternary"></a>
+  複数行にまたがる三項演算子`?:`は避けましょう; 代わりに`if/unless`を使いましょう。
+<sup>[[link](#no-multiline-ternary)]</sup>
 
-* 本文が１行のときは、`if/unless`修飾子を利用するのが好まれます。
+* <a name="if-as-a-modifier"></a>
+  本文が１行のときは、`if/unless`修飾子を利用するのが好まれます。
   他の良い代替案としては`&&/||`を使った制御構文があります。
+<sup>[[link](#if-as-a-modifier)]</sup>
 
   ```Ruby
   # 悪い例
@@ -771,7 +857,9 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   some_condition && do_something
   ```
 
-* 重要な複数行のブロックに`if/unless`修飾子を用いるのは避けましょう。
+* <a name="no-multiline-if-modifiers"></a>
+  重要な複数行のブロックに`if/unless`修飾子を用いるのは避けましょう。
+<sup>[[link](#no-multiline-if-modifiers)]</sup>
 
   ```Ruby
   # 悪い例
@@ -787,7 +875,9 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   end
   ```
 
-* 否定形のときは`if`より`unless`が好まれます。(もしくは`||`構文を使いましょう)。
+* <a name="unless-for-negatives"></a>
+  否定形のときは`if`より`unless`が好まれます。(もしくは`||`構文を使いましょう)。
+<sup>[[link](#unless-for-negatives)]</sup>
 
   ```Ruby
   # 悪い例
@@ -803,8 +893,10 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   some_condition || do_something
   ```
 
-* `unless`を`else`付きで使ってはいけません。
+* <a name="no-else-with-unless"></a>
+  `unless`を`else`付きで使ってはいけません。
   肯定条件を先にして書き換えましょう。
+<sup>[[link](#no-else-with-unless)]</sup>
 
   ```Ruby
   # 悪い例
@@ -822,7 +914,9 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   end
   ```
 
-* `if/unless/while/until`構文では`()`の使用は避けましょう.
+* <a name="no-parens-if"></a>
+  `if/unless/while/until`構文では`()`の使用は避けましょう.
+<sup>[[link](#no-parens-if)]</sup>
 
   ```Ruby
   # 悪い例
@@ -836,7 +930,9 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   end
   ```
 
-* 複数行の`while/until`では、`while/until condition do`を使ってはいけません。
+* <a name="no-multiline-while-do"></a>
+  複数行の`while/until`では、`while/until condition do`を使ってはいけません。
+<sup>[[link](#no-multiline-while-do)]</sup>
 
   ```Ruby
   # 悪い例
@@ -858,7 +954,9 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   end
   ```
 
-* 本文が１行のときは、`while/until`修飾子を利用しましょう。
+* <a name="while-as-a-modifier"></a>
+  本文が１行のときは、`while/until`修飾子を利用しましょう。
+<sup>[[link](#while-as-a-modifier)]</sup>
 
   ```Ruby
   # 悪い例
@@ -870,7 +968,9 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   do_something while some_condition
   ```
 
-* 否定形のときは、`while`よりも`until`の方が好まれます。
+* <a name="until-for-negatives"></a>
+  否定形のときは、`while`よりも`until`の方が好まれます。
+<sup>[[link](#until-for-negatives)]</sup>
 
   ```Ruby
   # 悪い例
@@ -880,7 +980,9 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   do_something until some_condition
   ```
 
-* 無限ループが必要な時は、`while/until`の代わりに`Kernel#loop`を用いましょう。
+* <a name="infinite-loop"></a>
+  無限ループが必要な時は、`while/until`の代わりに`Kernel#loop`を用いましょう。
+<sup>[[link](#infinite-loop)]</sup>
 
   ```Ruby
   # 悪い例
@@ -897,7 +999,9 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   end
   ```
 
-* 後判定ループの場合、`begin/end/until`や`begin/end/while`より、`break`付きの`Kernel#loop`が好まれます。
+* <a name="loop-with-break"></a>
+  後判定ループの場合、`begin/end/until`や`begin/end/while`より、`break`付きの`Kernel#loop`が好まれます。
+<sup>[[link](#loop-with-break)]</sup>
 
   ```Ruby
   # 悪い例
@@ -914,11 +1018,13 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   end
   ```
 
-* 内部DSL(例えばRake,Rails,RSpecなど)、
+* <a name="no-dsl-parens"></a>
+  内部DSL(例えばRake,Rails,RSpecなど)、
   Ruby内で"キーワード"となるステータスを持ったメソッド(例えば`attr_reader` や`puts`など)や
   アトリビュートにアクセスするメソッドでは、
   引数の周りの`()`を省略しましょう。
   それ以外のメソッドでは、メソッド呼び出しの時に`()`を付けましょう。
+<sup>[[link](#no-dsl-parens)]</sup>
 
   ```Ruby
   class Person
@@ -938,7 +1044,9 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   bowling.score.should == 0
   ```
 
-* 暗黙のオプションハッシュの外側の`{}`は省略しましょう。
+* <a name="no-braces-opts-hash"></a>
+  暗黙のオプションハッシュの外側の`{}`は省略しましょう。
+<sup>[[link](#no-braces-opts-hash)]</sup>
 
   ```Ruby
   # 悪い例
@@ -948,7 +1056,9 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   user.set(name: 'John', age: 45, permissions: { read: true })
   ```
 
-* 内部DSLの一部として使われるメソッドの引数では、外側の`()`、`{}`は省略しましょう
+* <a name="no-dsl-decorating"></a>
+  内部DSLの一部として使われるメソッドの引数では、外側の`()`、`{}`は省略しましょう
+<sup>[[link](#no-dsl-decorating)]</sup>
 
   ```Ruby
   class Person < ActiveRecord::Base
@@ -960,7 +1070,9 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   end
   ```
 
-* 引数のないメソッド呼び出しの`()`は省略しましょう。
+* <a name="no-args-no-parens"></a>
+  引数のないメソッド呼び出しの`()`は省略しましょう。
+<sup>[[link](#no-args-no-parens)]</sup>
 
   ```Ruby
   # 悪い例
@@ -976,12 +1088,14 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   'test'.upcase
   ```
 
-* １行のブロックでは`do...end`より`{...}`の方が好まれます。
+* <a name="single-line-blocks"></a>
+  １行のブロックでは`do...end`より`{...}`の方が好まれます。
   複数行のブロックでは`{...}`は避けましょう
   (複数行のメソッドチェーンは常に醜いです)。
   "制御構文"や"メソッド定義"では常に`do...end`を使いましょう
   (例えばRakefilesや特定のDSLなど)
   メソッドチェーンでの`do...end`は避けましょう。
+<sup>[[link](#single-line-blocks)]</sup>
 
   ```Ruby
   names = ['Bozhidar', 'Steve', 'Sarah']
@@ -1007,9 +1121,11 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   自問してみてほしい - このコードは本当に読みやすいだろうか？
   また、このブロックの本文は素早く展開できるだろうか？
 
-* 単に他のブロックに引数を渡すだけのブロックリテラルを避けるため、
+* <a name="block-argument"></a>
+  単に他のブロックに引数を渡すだけのブロックリテラルを避けるため、
   ブロック引数を明示することを検討しましょう。
   ただしブロックが`Proc`に変換されることでのパフォーマンスに気をつけましょう。
+<sup>[[link](#block-argument)]</sup>
 
   ```Ruby
   require 'tempfile'
@@ -1033,7 +1149,9 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   end
   ```
 
-* 制御構文上不要な`return`は避けましょう。
+* <a name="no-explicit-return"></a>
+  制御構文上不要な`return`は避けましょう。
+<sup>[[link](#no-explicit-return)]</sup>
 
   ```Ruby
   # 悪い例
@@ -1047,7 +1165,9 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   end
   ```
 
-* 不要な`self`は避けましょう (自身のアトリビュートへの書き込みでのみ必要です)。
+* <a name="no-self-unless-required"></a>
+  不要な`self`は避けましょう (自身のアトリビュートへの書き込みでのみ必要です)。
+<sup>[[link](#no-self-unless-required)]</sup>
 
   ```Ruby
   # 悪い例
@@ -1069,8 +1189,10 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   end
   ```
 
-* 当然の帰結として、ローカル変数でメソッドを隠すのは、
+* <a name="no-shadowing"></a>
+  当然の帰結として、ローカル変数でメソッドを隠すのは、
   それらが等価なものでない限り避けましょう。
+<sup>[[link](#no-shadowing)]</sup>
 
   ```Ruby
   class Foo
@@ -1098,8 +1220,10 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   end
   ```
 
-* 代入部分を`()`で囲まずに、`=`の返り値を条件式に用いてはいけません。
+* <a name="safe-assignment-in-condition"></a>
+  代入部分を`()`で囲まずに、`=`の返り値を条件式に用いてはいけません。
   これは、Rubyistの中では *条件式内での安全な代入* としてとても有名です。
+<sup>[[link](#safe-assignment-in-condition)]</sup>
 
   ```Ruby
   # 悪い例 (+ 警告が出ます)
@@ -1122,7 +1246,9 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   end
   ```
 
-* 利用できるときには省略された自己代入演算子を用いましょう。
+* <a name="self-assignment"></a>
+  利用できるときには省略された自己代入演算子を用いましょう。
+<sup>[[link](#self-assignment)]</sup>
 
   ```Ruby
   # 悪い例
@@ -1142,15 +1268,19 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   x &&= y
   ```
 
-* 変数の初期化には、`||=`を自由に使いましょう。
+* <a name="double-pipe-for-uninit"></a>
+  変数の初期化には、`||=`を自由に使いましょう。
+<sup>[[link](#double-pipe-for-uninit)]</sup>
 
   ```Ruby
   # nameがnilかfalseでなければ、Bozhidarで初期化します
   name ||= 'Bozhidar'
   ```
 
-* boolean変数には`||=`を用いてはいけません
+* <a name="no-double-pipes-for-bools"></a>
+  boolean変数には`||=`を用いてはいけません
   (現在の値が`false`であったときに何が起こるか考えてみましょう)。
+<sup>[[link](#no-double-pipes-for-bools)]</sup>
 
   ```Ruby
   # 悪い例 - たとえenabledがfalseでもtrueが入ります
@@ -1160,9 +1290,11 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   enabled = true if enabled.nil?
   ```
 
-* 値が入っているかわからない変数の前処理のは`&&=`を用いましょう。
+* <a name="double-amper-preprocess"></a>
+  値が入っているかわからない変数の前処理のは`&&=`を用いましょう。
   `&&=`を使えば変数が存在するときのみ値を変更するので、
   存在確認に用いている不要な`if`を除去できます。
+<sup>[[link](#double-amper-preprocess)]</sup>
 
   ```Ruby
   # 悪い例
@@ -1183,9 +1315,11 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   something &&= something.downcase
   ```
 
-* 等価演算子`===`の露骨な使用は避けましょう。
+* <a name="no-case-equality"></a>
+  等価演算子`===`の露骨な使用は避けましょう。
   その名が示す通り、`case`の条件判定で用いられており、
   その外で用いられると混乱のもとになります。
+<sup>[[link](#no-case-equality)]</sup>
 
   ```Ruby
   # 悪い例
@@ -1199,10 +1333,12 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   some_string =~ /something/
   ```
 
-* Perlスタイルの(`$:`や`$;`などのような)特別な変数の使用は避けましょう。
+* <a name="no-cryptic-perlisms"></a>
+  Perlスタイルの(`$:`や`$;`などのような)特別な変数の使用は避けましょう。
   それらは極めて不可解で、
   １行のスクリプト以外でそれらが使われるとやる気が削がれます。
   `English`ライブラリから提供される人にやさしいエイリアスを用いましょう。
+<sup>[[link](#no-cryptic-perlisms)]</sup>
 
   ```Ruby
   # 悪い例
@@ -1213,7 +1349,9 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   $LOAD_PATH.unshift File.dirname(__FILE__)
   ```
 
-* メソッド名と引数の始まりの`(`の間にスペースを入れてはいけません。
+* <a name="parens-no-spaces"></a>
+  メソッド名と引数の始まりの`(`の間にスペースを入れてはいけません。
+<sup>[[link](#parens-no-spaces)]</sup>
 
   ```Ruby
   # 悪い例
@@ -1223,16 +1361,22 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   f(3 + 2) + 1
   ```
 
-* メソッドの最初の引数が`(`で始まるならば、
+* <a name="parens-as-args"></a>
+  メソッドの最初の引数が`(`で始まるならば、
   常にメソッド呼び出しに`()`を用いましょう。
   例えば次のように書きます
 `f((3 + 2) + 1)`。
+<sup>[[link](#parens-as-args)]</sup>
 
-* Rubyインタープリタを走らせるときは、常に`-w`オプションを付けましょう。
+* <a name="always-warn-at-runtime"></a>
+  Rubyインタープリタを走らせるときは、常に`-w`オプションを付けましょう。
   これまでのルールのどれかを忘れてしまった時に警告を出してくれます！
+<sup>[[link](#always-warn-at-runtime)]</sup>
 
-* １行の本文を持つラムダには新しいリテラルを持ちましょう。
+* <a name="lambda-multi-line"></a>
+  １行の本文を持つラムダには新しいリテラルを持ちましょう。
   `lambda`は複数行にまたがるときに使いましょう。
+<sup>[[link](#lambda-multi-line)]</sup>
 
   ```Ruby
   # 悪い例
@@ -1255,7 +1399,9 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   end
   ```
 
-* `Proc.new`より`proc`を好みます。
+* <a name="proc"></a>
+  `Proc.new`より`proc`を好みます。
+<sup>[[link](#proc)]</sup>
 
   ```Ruby
   # 悪い例
@@ -1265,7 +1411,9 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   p = proc { |n| puts n }
   ```
 
-* ラムダやprocの呼び出しには`proc[]`や`proc.()`より`proc.call()`を好みます。
+* <a name="proc-call"></a>
+  ラムダやprocの呼び出しには`proc[]`や`proc.()`より`proc.call()`を好みます。
+<sup>[[link](#proc-call)]</sup>
 
   ```Ruby
   # 悪い例 - 列挙型のアクセスに似ているように見えます
@@ -1281,11 +1429,13 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   l.call(1)
   ```
 
-* 使わないブロック引数やローカル変数の先頭には`_`を付けましょう。
+* <a name="underscore-unused-vars"></a>
+  使わないブロック引数やローカル変数の先頭には`_`を付けましょう。
   単に`_`を用いるのも許容されます
   (少し説明不足ではありますが)。
   この慣習はRubyインタープリタやRubocopのようなツールには認識されており、
   変数を使っていないという警告を抑えることでしょう。
+<sup>[[link](#underscore-unused-vars)]</sup>
 
   ```Ruby
   # 悪い例
@@ -1303,17 +1453,23 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   end
   ```
 
-* `STDOUT/STDERR/STDIN`の代わりに`$stdout/$stderr/$stdin`を用いましょう。
+* <a name="global-stdout"></a>
+  `STDOUT/STDERR/STDIN`の代わりに`$stdout/$stderr/$stdin`を用いましょう。
   `STDOUT/STDERR/STDIN`は定数であり、
   Rubyでの定数は、実際は再割当てできますが(他のストリームへのリダイレクトも可能)、
   もし再割当てするとインタープリタからの警告が出るでしょう。
+<sup>[[link](#global-stdout)]</sup>
 
-* `$stderr.puts`の代わりに`warn`を用いましょう。
+* <a name="warn"></a>
+  `$stderr.puts`の代わりに`warn`を用いましょう。
   簡潔さや明快さはさておき、
   `warn`は必要であれば警告を抑制することができます
   (警告レベルを`-W0`を用いて0に設定することによって実現できます)。
+<sup>[[link](#warn)]</sup>
 
-* 不可解な`String#%`メソッドより`sprintf`や`format`を好みます。
+* <a name="sprintf"></a>
+  不可解な`String#%`メソッドより`sprintf`や`format`を好みます。
+<sup>[[link](#sprintf)]</sup>
 
   ```Ruby
   # 悪い例
@@ -1336,7 +1492,9 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   # => '20 10'
   ```
 
-* 不可解な`Array#*`メソッドよりも`Array#join`を好みます。
+* <a name="array-join"></a>
+  不可解な`Array#*`メソッドよりも`Array#join`を好みます。
+<sup>[[link](#array-join)]</sup>
 
   ```Ruby
   # 悪い例
@@ -1348,8 +1506,10 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   # => 'one, two, three'
   ```
 
-* 引数が配列かどうかわからないが、それを配列として扱って処理したいとき、
+* <a name="splat-arrays"></a>
+  引数が配列かどうかわからないが、それを配列として扱って処理したいとき、
   配列のチェックを明示するより、`[*var]`や`Array()`を代わりに使いましょう。
+<sup>[[link](#splat-arrays)]</sup>
 
   ```Ruby
   # 悪い例
@@ -1363,8 +1523,10 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   Array(paths).each { |path| do_something(path) }
   ```
 
-* 複雑な比較ロジックの代わりに、
+* <a name="ranges-or-between"></a>
+  複雑な比較ロジックの代わりに、
   可能な限り`Range`や`Comparable#between?`を用いましょう。
+<sup>[[link](#ranges-or-between)]</sup>
 
   ```Ruby
   # 悪い例
@@ -1377,8 +1539,10 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   do_something if x.between?(1000, 2000)
   ```
 
-* `==`を明示した比較よりも判定メソッドを用いましょう。
+* <a name="predicate-methods"></a>
+  `==`を明示した比較よりも判定メソッドを用いましょう。
   数値の比較はOKです。
+<sup>[[link](#predicate-methods)]</sup>
 
   ```Ruby
   # 悪い例
@@ -1408,7 +1572,9 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   end
   ```
 
-* ブーリアン値を扱わない限り、露骨な`nil`でないかの検査は避けましょう。
+* <a name="no-non-nil-checks"></a>
+  ブーリアン値を扱わない限り、露骨な`nil`でないかの検査は避けましょう。
+<sup>[[link](#no-non-nil-checks)]</sup>
 
   ```Ruby
   # 悪い例
@@ -1424,9 +1590,13 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   end
   ```
 
-* `BEGIN`ブロックの使用は避けましょう。
+* <a name="no-BEGIN-blocks"></a>
+  `BEGIN`ブロックの使用は避けましょう。
+<sup>[[link](#no-BEGIN-blocks)]</sup>
 
-* `END`ブロックを使ってはいけません。代わりに`Kernel#at_exit`を使いましょう。
+* <a name="no-END-blocks"></a>
+  `END`ブロックを使ってはいけません。代わりに`Kernel#at_exit`を使いましょう。
+<sup>[[link](#no-END-blocks)]</sup>
 
   ```ruby
   # 悪い例
@@ -1438,9 +1608,14 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   at_exit { puts 'Goodbye!' }
   ```
 
-* フリップフロップの使用は避けましょう。
+* <a name="no-flip-flops"></a>
+  フリップフロップの使用は避けましょう。
+<sup>[[link](#no-flip-flops)]</sup>
 
-* 制御構文で条件式のネストは避けましょう。
+* <a name="no-nested-conditionals"></a>
+  制御構文で条件式のネストは避けましょう。
+<sup>[[link](#no-nested-conditionals)]</sup>
+
   不正なデータをアサートするにはガード節を好みます。
   ガード節は、可能な限り関数から出ていくために、
   関数の先頭付近で宣言される条件式です。
@@ -1488,7 +1663,9 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
 > プログラミングでただひとつ難しいことは、キャッシュの無効化と命名である。 <br/>
 > -- Phil Karlton
 
-* 識別子は英語で名づけましょう。
+* <a name="english-identifiers"></a>
+  識別子は英語で名づけましょう。
+<sup>[[link](#english-identifiers)]</sup>
 
   ```Ruby
   # 悪い例 - 識別子がnon-asciiな文字列です
@@ -1501,7 +1678,9 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   salary = 1_000
   ```
 
-* シンボル、メソッド、変数には`snake_case`を用いましょう。
+* <a name="snake-case-symbols-methods-vars"></a>
+  シンボル、メソッド、変数には`snake_case`を用いましょう。
+<sup>[[link](#snake-case-symbols-methods-vars)]</sup>
 
   ```Ruby
   # 悪い例
@@ -1527,7 +1706,9 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   end
   ```
 
-* クラスやモジュールには`CamelCase`を用いましょう。(HTTP, RFC, XMLのような頭字語は大文字を保ちましょう)。
+* <a name="camelcase-classes"></a>
+  クラスやモジュールには`CamelCase`を用いましょう。(HTTP, RFC, XMLのような頭字語は大文字を保ちましょう)。
+<sup>[[link](#camelcase-classes)]</sup>
 
   ```Ruby
   # 悪い例
@@ -1553,11 +1734,23 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   end
   ```
 
-* ファイル名には`sname_case`を用いましょう。例えば`hello_world.rb`のように。
+* <a name="snake-case-files"></a>
+  ファイル名には`sname_case`を用いましょう。例えば`hello_world.rb`のように。
+<sup>[[link](#snake-case-files)]</sup>
 
-* ディレクトリ名には`sname_case`を用いましょう。例えば`lib/hello_world/hello_world.rb`のように。
+* <a name="snake-case-dirs"></a>
+  ディレクトリ名には`sname_case`を用いましょう。例えば`lib/hello_world/hello_world.rb`のように。
+<sup>[[link](#snake-case-dirs)]</sup>
 
-* 他の定数は`SCREAMING_SNAKE_CASE`を用いましょう。
+
+* <a name="one-class-per-file"></a>
+  １つの`class/module`につき、ちょうど１つのファイルを持つことを目指しましょう。
+  ファイル名は`CamlCase`を`snake_case`に置き換えた`class/module`名を用いて命名しましょう。
+<sup>[[link](#one-class-per-file)]</sup>
+
+* <a name="screaming-snake-case"></a>
+  他の定数は`SCREAMING_SNAKE_CASE`を用いましょう。
+<sup>[[link](#screaming-snake-case)]</sup>
 
   ```Ruby
   # 悪い例
@@ -1567,15 +1760,19 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   SOME_CONST = 5
   ```
 
-* 条件判定メソッド(boolean値が返る)には`?`を末尾に付けましょう
+* <a name="bool-methods-qmark"></a>
+  条件判定メソッド(boolean値が返る)には`?`を末尾に付けましょう
   (すなわり`Array#empty?`のように)。
   メソッドがboolean値を返さなければ、末尾に`?`を付けてはいけません。
+<sup>[[link](#bool-methods-qmark)]</sup>
 
-* *危険* な可能性のあるメソッド
+* <a name="dangerous-method-bang"></a>
+  *危険* な可能性のあるメソッド
   (すなわち`self`のアトリビュートに変更が加えられるものや、
   `exit!`(`exit`と違ってファイナライザが走らない)のようなもの)
   は、 *危険* であることを示すため、
   末尾に`!`を付けましょう。
+<sup>[[link](#dangerous-method-bang)]</sup>
 
   ```Ruby
   # 悪い例 - '安全'なメソッドです
@@ -1600,7 +1797,9 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   end
   ```
 
-* 可能な限り、危険なメソッドの観点から安全なメソッドを定義しましょう。
+* <a name="safe-because-unsafe"></a>
+  可能な限り、危険なメソッドの観点から安全なメソッドを定義しましょう。
+<sup>[[link](#safe-because-unsafe)]</sup>
 
   ```Ruby
   class Array
@@ -1620,11 +1819,15 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   end
   ```
 
-* 短いブロックと共に`reduce`を使うとき、引数は`|a, e|`と名づけましょう。
+* <a name="reduce-blocks"></a>
+  短いブロックと共に`reduce`を使うとき、引数は`|a, e|`と名づけましょう。
   (accumulator, element).
+<sup>[[link](#reduce-blocks)]</sup>
 
-* 二項演算子を定義するとき、引数は`other`を用いましょう
+* <a name="other-arg"></a>
+  二項演算子を定義するとき、引数は`other`を用いましょう
   (`<<`と`[]`は意味が違ってくるので、このルールの例外です)。
+<sup>[[link](#other-arg)]</sup>
 
   ```Ruby
   def +(other)
@@ -1632,7 +1835,8 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   end
   ```
 
-* `collect`より`map`、`detect`より`find`、`find_all`より`select`
+* <a name="map-fine-select-reduce-size"></a>
+  `collect`より`map`、`detect`より`find`、`find_all`より`select`
   `inject`より`reduce`、`length`より`size`を好みます。
   これは厳しい要件ではありません;
   もしエイリアスを用いるほうが可読性が上がるのであれば、
@@ -1641,10 +1845,13 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   他の言語ではあまり一般的ではありません。
   `find_all`よりも`select`が推奨される理由は、
   `reject`と共に用いた時、その名前が極めて自己説明的だからです。
+<sup>[[link](#map-fine-select-reduce-size)]</sup>
 
-* `size`の代わりに`count`を用いてはいけません。
+* <a name="count-vs-size"></a>
+  `size`の代わりに`count`を用いてはいけません。
   `Array`以外の`Enumerable`オブジェクトでは、
   サイズを求めるためにコレクション全てをイテレートしてしまいます。
+<sup>[[link](#count-vs-size)]</sup>
 
   ```Ruby
   # 悪い例
@@ -1654,11 +1861,13 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   some_hash.size
   ```
 
-* `map`と`flatten`の組み合わせの代わりに、`flat_map`を用いましょう。
+* <a name="flat-map"></a>
+  `map`と`flatten`の組み合わせの代わりに、`flat_map`を用いましょう。
   これは深さが２以上の配列には適用できません。
   すなわち、`users.first.songs == ['a', ['b','c']]`のときは、
   `flat_map`より`map + flatten`を用いましょう。
   `flatten`は配列を全て平坦にするのに対し、`flat_map`は配列を１次元だけ平坦にします。
+<sup>[[link](#flat-map)]</sup>
 
   ```Ruby
   # 悪い例
@@ -1668,8 +1877,10 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   all_songs = users.flat_map(&:songs).uniq
   ```
 
-* `reverse.each`の代わりに`reverse_each`を用いましょう。
+* <a name="reverse-each"></a>
+  `reverse.each`の代わりに`reverse_each`を用いましょう。
   `reverse_each`は新しい配列を作らないので、それが利点です。
+<sup>[[link](#reverse-each)]</sup>
 
   ```Ruby
   # 悪い例
@@ -1687,41 +1898,61 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
 > コードを改善してドキュメントをより明快にしましょう。
 > -- Steve McConnell
 
-* コードそのものがドキュメントになるような説明的なコードを書いて、このセクションの残りのパートは無視しましょう。本当に！
+* <a name="no-comments"></a>
+  コードそのものがドキュメントになるような説明的なコードを書いて、このセクションの残りのパートは無視しましょう。本当に！
+<sup>[[link](#no-comments)]</sup>
 
-* コメントは英語で書きましょう。
+* <a name="english-comments"></a>
+  コメントは英語で書きましょう。
+<sup>[[link](#english-comments)]</sup>
 
-* 最初の`#`とコメントの間にスペースを１つ入れましょう。
+* <a name="hash-space"></a>
+  最初の`#`とコメントの間にスペースを１つ入れましょう。
+<sup>[[link](#hash-space)]</sup>
 
-* １語より長いコメントを活用し、句読点を使いましょう。
+* <a name="english-syntax"></a>
+  １語より長いコメントを活用し、句読点を使いましょう。
   ピリオドの後に[one space](http://en.wikipedia.org/wiki/Sentence_spacing)を使いましょう。
+<sup>[[link](#english-syntax)]</sup>
 
-* 余計なコメントは避けましょう。
+* <a name="no-superfluous-comments"></a>
+  余計なコメントは避けましょう。
+<sup>[[link](#no-superfluous-comments)]</sup>
 
   ```Ruby
   # 悪い例
   counter += 1 # Increments counter by one.
   ```
 
-* コメントは最新に保ちましょう。
+* <a name="comment-upkeep"></a>
+  コメントは最新に保ちましょう。
   古くなったコメントは、コメントがないより悪いです。
+<sup>[[link](#comment-upkeep)]</sup>
 
 > 良いコードは良いジョークのようだ - なんの説明もいらない。<br/>
 > -- Russ Olsen
 
-* 悪いコードを説明するコメントは避けましょう。
+* <a name="refactor-dont-comment"></a>
+  悪いコードを説明するコメントは避けましょう。
   自己説明的なコードへのリファクタリングを行いましょう
   (やるかやらないか - "やってみる"はなしだ。 --Yoda)。
+<sup>[[link](#refactor-dont-comment)]</sup>
 
 ### 注釈
 
-* 注釈は、通常関連するコードのすぐ上に書きましょう。
+* <a name="annotate-above"></a>
+  注釈は、通常関連するコードのすぐ上に書きましょう。
+<sup>[[link](#annotate-above)]</sup>
 
-* 注釈のキーワードの後ろは`: `を続けましょう。
+* <a name="annotate-keywords"></a>
+  注釈のキーワードの後ろは`: `を続けましょう。
   その後ろに問題点を書きましょう。
+<sup>[[link](#annotate-keywords)]</sup>
 
-* もし問題点の記述に複数行かかる場合は、
+* <a name="indent-annotations"></a>
+  もし問題点の記述に複数行かかる場合は、
   後続の行は`#`の後ろにスペース２つでインデントしましょう。
+<sup>[[link](#indent-annotations)]</sup>
 
   ```Ruby
   def bar
@@ -1731,9 +1962,11 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   end
   ```
 
-* もし問題が明らかで、記述が冗長な場合は、
+* <a name="rare-eol-annotations"></a>
+  もし問題が明らかで、記述が冗長な場合は、
   問題のある行の末尾に、本文なしの注釈だけ付けましょう。
   この用法は例外であり、ルールではありません。
+<sup>[[link](#rare-eol-annotations)]</sup>
 
     ```Ruby
     def bar
@@ -1741,23 +1974,37 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
     end
     ```
 
-* あとで追加されるべき、今はない機能や関数を書き留めるには`TODO`を使いましょう。
+* <a name="todo"></a>
+  あとで追加されるべき、今はない機能や関数を書き留めるには`TODO`を使いましょう。
+<sup>[[link](#todo)]</sup>
 
-* 直す必要がある壊れたコードを書き留めるには`FIXME`を使いましょう。
+* <a name="fixme"></a>
+  直す必要がある壊れたコードを書き留めるには`FIXME`を使いましょう。
+<sup>[[link](#fixme)]</sup>
 
-* パフォーマンスに問題を及ぼすような、遅い、または非効率なコードを書き留めるには`OPTIMIZE`を使いましょう。
+* <a name="optimize"></a>
+  パフォーマンスに問題を及ぼすような、遅い、または非効率なコードを書き留めるには`OPTIMIZE`を使いましょう。
+<sup>[[link](#optimize)]</sup>
 
-* 疑わしくリファクタリングで除去すべきコードの匂いを書き留めるには`HACK`を使いましょう。
+* <a name="hack"></a>
+  疑わしくリファクタリングで除去すべきコードの匂いを書き留めるには`HACK`を使いましょう。
+<sup>[[link](#hack)]</sup>
 
-* 意図したとおりに動くか確認する必要がある箇所を書き留めるには`REVIEW`を使いましょう。
+* <a name="review"></a>
+  意図したとおりに動くか確認する必要がある箇所を書き留めるには`REVIEW`を使いましょう。
   例: `REVIEW: Are we sure this is how the client does X currently?`
+<sup>[[link](#review)]</sup>
 
-* 適切に感じるのであれば、他の独自のキーワードを用いても構いませんが、
+* <a name="document-annotations"></a>
+  適切に感じるのであれば、他の独自のキーワードを用いても構いませんが、
   それらのキーワードは`README`やそれに類するものに書いておきましょう。
+<sup>[[link](#document-annotations)]</sup>
 
 ## クラス
 
-* クラス定義は置いて一貫性のある構造にしましょう。
+* <a name="consistent-classes"></a>
+  クラス定義は置いて一貫性のある構造にしましょう。
+<sup>[[link](#consistent-classes)]</sup>
 
   ```Ruby
   class Person
@@ -1795,9 +2042,11 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   end
   ```
 
-* 複数行のクラスの中に複数行のクラスをネストさせてはいけません。
+* <a name="file-classes"></a>
+  複数行のクラスの中に複数行のクラスをネストさせてはいけません。
   そのようにネストされたクラスは、それが含まれるクラス名のフォルダの中に
   それぞれのクラスのファイルを置くように努めましょう。
+<sup>[[link](#file-classes)]</sup>
 
   ```Ruby
   # 悪い例
@@ -1837,8 +2086,10 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   end
   ```
 
-* クラスメソッドしかないクラスはモジュールであることが好まれます。
+* <a name="modules-vs-classes"></a>
+  クラスメソッドしかないクラスはモジュールであることが好まれます。
   クラスはインスタンスを生成することにのみ意味があります。
+<sup>[[link](#modules-vs-classes)]</sup>
 
   ```Ruby
   # 悪い例
@@ -1864,8 +2115,10 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   end
   ```
 
-* モジュールのインスタンスメソッドをクラスメソッドにしたいときは、
+* <a name="module-function"></a>
+  モジュールのインスタンスメソッドをクラスメソッドにしたいときは、
   `extend self`よりも`module_function`が好まれます。
+<sup>[[link](#module-function)]</sup>
 
   ```Ruby
   # 悪い例
@@ -1895,15 +2148,21 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   end
   ```
 
-* クラス階層の設計を行うときは、
+* <a name="liskov"></a>
+  クラス階層の設計を行うときは、
   [リスコフの置換原則](http://ja.wikipedia.org/wiki/%E3%83%AA%E3%82%B9%E3%82%B3%E3%83%95%E3%81%AE%E7%BD%AE%E6%8F%9B%E5%8E%9F%E5%89%87).
   に従いましょう。
+<sup>[[link](#liskov)]</sup>
 
-* あなたのクラスを可能な限り
+* <a name="solid-design"></a>
+  あなたのクラスを可能な限り
   [SOLID](http://en.wikipedia.org/wiki/SOLID_(object-oriented_design\))
   に保ちましょう。
+<sup>[[link](#solid-design)]</sup>
 
-* クラスの領分を説明するため、常に`to_s`メソッドを提供しましょう。
+* <a name="define-to-s"></a>
+  クラスの領分を説明するため、常に`to_s`メソッドを提供しましょう。
+<sup>[[link](#define-to-s)]</sup>
 
   ```Ruby
   class Person
@@ -1920,7 +2179,9 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   end
   ```
 
-* 単純なアクセサやミューテータの定義には、`attr`群を用いましょう。
+* <a name="attr_family"></a>
+  単純なアクセサやミューテータの定義には、`attr`群を用いましょう。
+<sup>[[link](#attr_family)]</sup>
 
   ```Ruby
   # 悪い例
@@ -1950,7 +2211,9 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   end
   ```
 
-* `attr`の使用は避けましょう。代わりに`attr_reader`や`attr_accessor`を使いましょう。
+* <a name="attr"></a>
+  `attr`の使用は避けましょう。代わりに`attr_reader`や`attr_accessor`を使いましょう。
+<sup>[[link](#attr)]</sup>
 
   ```Ruby
   # 悪い例 - １つのアクセサしか作れません(1.9で廃止されました)
@@ -1962,8 +2225,10 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   attr_reader :one, :two, :three
   ```
 
-* `Struct.new`の使用を考えましょう、
+* <a name="struct-new"></a>
+  `Struct.new`の使用を考えましょう、
   それは、単純なアクセサ、コンストラクタや比較演算子を定義してくれます。
+<sup>[[link](#struct-new)]</sup>
 
   ```Ruby
   # 良い例
@@ -1981,12 +2246,16 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   end
   ````
 
-* `Struct.new`を拡張してはいけません - それは既に新しいクラスです。
+* <a name="no-extend-struct-new"></a>
+  `Struct.new`を拡張してはいけません - それは既に新しいクラスです。
   それは余分なクラスレベルをもたらし、
   複数回`require`された時に、奇妙なエラーの原因にもなります。
+<sup>[[link](#no-extend-struct-new)]</sup>
 
-* あるクラスのインスタンス生成する追加の方法を提供したいときは、
+* <a name="factory-methods"></a>
+  あるクラスのインスタンス生成する追加の方法を提供したいときは、
   ファクトリメソッドの追加を検討しましょう。
+<sup>[[link](#factory-methods)]</sup>
 
   ```Ruby
   class Person
@@ -1996,7 +2265,9 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   end
   ```
 
-* 継承より[ダック・タイピング](http://ja.wikipedia.org/wiki/%E3%83%80%E3%83%83%E3%82%AF%E3%83%BB%E3%82%BF%E3%82%A4%E3%83%94%E3%83%B3%E3%82%B0)が好まれます。
+* <a name="duck-typing"></a>
+  継承より[ダック・タイピング](http://ja.wikipedia.org/wiki/%E3%83%80%E3%83%83%E3%82%AF%E3%83%BB%E3%82%BF%E3%82%A4%E3%83%94%E3%83%B3%E3%82%B0)が好まれます。
+<sup>[[link](#duck-typing)]</sup>
 
   ```Ruby
   # 悪い例
@@ -2034,7 +2305,9 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   end
   ```
 
-* 継承での振る舞いが"扱いづらい"ので、クラス変数(`@@`)の使用は避けましょう。
+* <a name="no-class-vars"></a>
+  継承での振る舞いが"扱いづらい"ので、クラス変数(`@@`)の使用は避けましょう。
+<sup>[[link](#no-class-vars)]</sup>
 
   ```Ruby
   class Parent
@@ -2056,12 +2329,17 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   実際にクラス変数を１つ共有してみましょう。
   クラスインスタンス変数はクラス変数より好まれます。
 
-* 意図した使い方に沿って、可視性(`private`、`protected`)を設定しましょう。
+* <a name="visibility"></a>
+  意図した使い方に沿って、可視性(`private`、`protected`)を設定しましょう。
   全てを`public`(デフォルトの設定)のままにしないようにしましょう。
   結局私達は今 *Ruby* を書いているのだから。 *Python* ではなく。
-* `public`、`protected`、`private`は、適用するメソッド定義と同じインデントにしましょう。
+<sup>[[link](#visibility)]</sup>
+
+* <a name="indent-public-private-protected"></a>
+  `public`、`protected`、`private`は、適用するメソッド定義と同じインデントにしましょう。
   可視性を定義する識別子以降のメソッドに適用されることを強調するため、
   識別子の上下に空行を入れましょう。
+<sup>[[link](#indent-public-private-protected)]</sup>
 
   ```Ruby
   class SomeClass
@@ -2081,8 +2359,10 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   end
   ```
 
-* シングルトンメソッドを定義するときは`def self.method`を用いましょう。
+* <a name="def-self-singletons"></a>
+  シングルトンメソッドを定義するときは`def self.method`を用いましょう。
   クラス名を繰り返さないので、簡単にリファクタリングできるようになります。
+<sup>[[link](#def-self-singletons)]</sup>
 
   ```Ruby
   class TestClass
@@ -2112,9 +2392,11 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
 
 ## 例外
 
-* 例外発生には`fail`を用いましょう。
+* <a name="fail-method"></a>
+  例外発生には`fail`を用いましょう。
   `raise`は例外をキャッチして、再度発生させるときにのみ使いましょう
   (何故なら、ここでは落ちるのではなく、明示的に目的を持って例外を発生させているからです)。
+<sup>[[link](#fail-method)]</sup>
 
   ```Ruby
   begin
@@ -2124,7 +2406,9 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   end
   ```
 
-* ２引数の`fail/raise`では、`RuntimeError`を明示しないようにしましょう。
+* <a name="no-explicit-runtimeerror"></a>
+  ２引数の`fail/raise`では、`RuntimeError`を明示しないようにしましょう。
+<sup>[[link](#no-explicit-runtimeerror)]</sup>
 
   ```Ruby
   # 悪い例
@@ -2134,8 +2418,10 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   fail 'message'
   ```
 
-* 例外インスタンスの代わりに、
+* <a name="exception-class-messages"></a>
+  例外インスタンスの代わりに、
   例外クラスとメッセージが分かれている`fail/raise`が好まれます。
+<sup>[[link](#exception-class-messages)]</sup>
 
   ```Ruby
   # 悪い例
@@ -2147,11 +2433,13 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   # `fail SomeException, 'message', backtrace`の用法と一貫性があります
   ```
 
-* `ensure`ブロックから`return`してはいけません。
+* <a name="no-return-ensure"></a>
+  `ensure`ブロックから`return`してはいけません。
   もし`ensure`から明示的に値を返したい場合は、
   `return`はどの例外発生よりも前に書いておき、
   例外など発生していなかったかのように値を返しましょう。
   事実上、例外は静かに捨てられます。
+<sup>[[link](#no-return-ensure)]</sup>
 
   ```Ruby
   def foo
@@ -2163,7 +2451,9 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   end
   ```
 
-* 可能な場所では、 *暗黙のbeginブロック* を用いましょう。
+* <a name="begin-implicit"></a>
+  可能な場所では、 *暗黙のbeginブロック* を用いましょう。
+<sup>[[link](#begin-implicit)]</sup>
 
   ```Ruby
   # 悪い例
@@ -2183,8 +2473,10 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   end
   ```
 
-* *不確実性のあるメソッド*(Avdi Grimmによって作られた言葉です)
+* <a name="contingency-methods"></a>
+  *不確実性のあるメソッド*(Avdi Grimmによって作られた言葉です)
   を用いて`begin`の蔓延を和らげましょう。
+<sup>[[link](#contingency-methods)]</sup>
 
   ```Ruby
   # 悪い例
@@ -2212,7 +2504,9 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   with_io_error_handling { something_else_that_might_fail }
   ```
 
-* 例外をもみ消してはいけません。
+* <a name="dont-hide-exceptions"></a>
+  例外をもみ消してはいけません。
+<sup>[[link](#dont-hide-exceptions)]</sup>
 
   ```Ruby
   # 悪い例
@@ -2226,7 +2520,9 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   do_something rescue nil
   ```
 
-* `rescue`を修飾子として利用するのは避けましょう。
+* <a name="no-rescue-modifiers"></a>
+  `rescue`を修飾子として利用するのは避けましょう。
+<sup>[[link](#no-rescue-modifiers)]</sup>
 
   ```Ruby
   # 悪い例 - StandardErrorとそれを継承した全てのクラスをキャッチしてしまします
@@ -2241,7 +2537,9 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   ```
 
 
-* 制御フローに例外を使っては行けません。
+* <a name="no-exceptional-flows"></a>
+  制御フローに例外を使っては行けません。
+<sup>[[link](#no-exceptional-flows)]</sup>
 
   ```Ruby
   # 悪い例
@@ -2259,8 +2557,10 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   end
   ```
 
-* `Exception`を`rescue`するのは避けましょう。
+* <a name="no-blind-rescues"></a>
+  `Exception`を`rescue`するのは避けましょう。
   これは`exit`のシグナルも捕捉するため、`kill -9`が必要になります。
+<sup>[[link](#no-blind-rescues)]</sup>
 
   ```Ruby
   # 悪い例
@@ -2290,8 +2590,10 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
 
   ```
 
-* より詳細な例外を`rescue`チェーンの上に配置しましょう。
+* <a name="exception-ordering"></a>
+  より詳細な例外を`rescue`チェーンの上に配置しましょう。
   そうでなければ、決して`rescue`されません。
+<sup>[[link](#exception-ordering)]</sup>
 
   ```Ruby
   # 悪い例
@@ -2313,7 +2615,9 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   end
   ```
 
-* 外部リソースの含まれるプログラムでは、`ensure`で開放しましょう
+* <a name="file-close"></a>
+  外部リソースの含まれるプログラムでは、`ensure`で開放しましょう
+<sup>[[link](#file-close)]</sup>
 
   ```Ruby
   f = File.open('testfile')
@@ -2326,12 +2630,16 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   end
   ```
 
-* 新しい例外クラスを導入するより、基本ライブラリの例外クラスを用いることが好まれます。
+* <a name="standard-exceptions"></a>
+  新しい例外クラスを導入するより、基本ライブラリの例外クラスを用いることが好まれます。
+<sup>[[link](#standard-exceptions)]</sup>
 
 ## Collections
 
-* 配列やハッシュのリテラルの方が好まれます。
+* <a name="literal-array-hash"></a>
+  配列やハッシュのリテラルの方が好まれます。
   (コンストラクタに引数を渡す場合を除けば、ということですが)
+<sup>[[link](#literal-array-hash)]</sup>
 
   ```Ruby
   # 悪い例
@@ -2343,9 +2651,11 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   hash = {}
   ```
 
-* (空文字列や、文字列内にスペースが入っていない)文字列の配列構文は、
+* <a name="percent-w"></a>
+  (空文字列や、文字列内にスペースが入っていない)文字列の配列構文は、
   `%w`リテラルの方が好まれます。
   このルールは要素が２つ以上の配列に適用されます。
+<sup>[[link](#percent-w)]</sup>
 
   ```Ruby
   # 悪い例
@@ -2355,9 +2665,11 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   STATES = %w(draft open closed)
   ```
 
-* シンボルの配列が必要なときは`%i`が好まれます
+* <a name="percent-i"></a>
+  シンボルの配列が必要なときは`%i`が好まれます
   (Ruby 1.9との互換性の維持が必要で無ければ)。
   このルールは要素が２つ以上の配列に適用されます。
+<sup>[[link](#percent-i)]</sup>
 
   ```Ruby
   # 悪い例
@@ -2367,8 +2679,10 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   STATES = %i(draft open closed)
   ```
 
-* `Array`や`Hash`リテラルの最後の要素の後ろの`,`は避けましょう。
+* <a name="no-trailing-array-commas"></a>
+  `Array`や`Hash`リテラルの最後の要素の後ろの`,`は避けましょう。
   複数行にわかれていない時は特に避けましょう。
+<sup>[[link](#no-trailing-array-commas)]</sup>
 
   ```Ruby
   # 悪い例 - 簡単に要素を移動・追加・削除できますが、それでも好まれません。
@@ -2385,21 +2699,29 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   VALUES = [1001, 2020, 3333]
   ```
 
-* 配列に大きな隙間を作るのは避けましょう。
+* <a name="no-gappy-arrays"></a>
+  配列に大きな隙間を作るのは避けましょう。
+<sup>[[link](#no-gappy-arrays)]</sup>
 
   ```Ruby
   arr = []
   arr[100] = 1 # now you have an array with lots of nils
   ```
 
-* 配列の最初や最後にアクセスしたいときは、
+* <a name="first-and-last"></a>
+  配列の最初や最後にアクセスしたいときは、
   `[0]`や`[-1]`より`first`や`last`が好まれます。
+<sup>[[link](#first-and-last)]</sup>
 
-* 要素が一意のものを扱うときは、`Array`の代わりに`Set`を用いましょう。
+* <a name="set-vs-array"></a>
+  要素が一意のものを扱うときは、`Array`の代わりに`Set`を用いましょう。
   `Set`は重複がない要素が順序を持たないように実装されています。
   これは`Array`の直感的な内部操作と、`Hash`の要素発見の速さが合わさっています。
+<sup>[[link](#set-vs-array)]</sup>
 
-* ハッシュのキーには文字列よりシンボルが好まれます。
+* <a name="symbols-as-keys"></a>
+  ハッシュのキーには文字列よりシンボルが好まれます。
+<sup>[[link](#symbols-as-keys)]</sup>
 
   ```Ruby
   # 悪い例
@@ -2409,9 +2731,13 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   hash = { one: 1, two: 2, three: 3 }
   ```
 
-* 変更のできるオブジェクトをハッシュのキーに使うのは避けましょう。
+* <a name="no-mutable-keys"></a>
+  変更のできるオブジェクトをハッシュのキーに使うのは避けましょう。
+<sup>[[link](#no-mutable-keys)]</sup>
 
-* ハッシュのキーがシンボルの時は、Ruby 1.9のハッシュリテラル記法を用いましょう。
+* <a name="hash-literals"></a>
+  ハッシュのキーがシンボルの時は、Ruby 1.9のハッシュリテラル記法を用いましょう。
+<sup>[[link](#hash-literals)]</sup>
 
   ```Ruby
   # 悪い例
@@ -2421,8 +2747,10 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   hash = { one: 1, two: 2, three: 3 }
   ```
 
-* Ruby 1.9のハッシュ記法とハッシュロケットを同じハッシュリテラル内で混在させてはいけません。
+* <a name="no-mixed-hash-syntaces"></a>
+  Ruby 1.9のハッシュ記法とハッシュロケットを同じハッシュリテラル内で混在させてはいけません。
   シンボルでないキーがある場合は、ハッシュロケット記法を続けなければなりません。
+<sup>[[link](#no-mixed-hash-syntaces)]</sup>
 
   ```Ruby
   # 悪い例
@@ -2432,10 +2760,12 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   { :a => 1, 'b' => 2 }
   ```
 
-* `Hash#has_key?`より`Hash#key?`を、
+* <a name="hash-key"></a>
+  `Hash#has_key?`より`Hash#key?`を、
   `Hash#has_value?`より`Hash#value?`を用いましょう。
     [ここ](http://blade.nagaokaut.ac.jp/cgi-bin/scat.rb/ruby/ruby-core/43765)
   でMatzが述べているように、長い記法は廃止が検討されています。
+<sup>[[link](#hash-key)]</sup>
 
   ```Ruby
   # 悪い例
@@ -2447,7 +2777,9 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   hash.value?(value)
   ```
 
-* 存在すべきキーを扱う時は、`Hash#fetch`を用いましょう。
+* <a name="hash-fetch"></a>
+  存在すべきキーを扱う時は、`Hash#fetch`を用いましょう。
+<sup>[[link](#hash-fetch)]</sup>
 
   ```Ruby
   heroes = { batman: 'Bruce Wayne', superman: 'Clark Kent' }
@@ -2459,8 +2791,10 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   heroes.fetch(:supermann)
   ```
 
-* 独自のロジックを用いないようにするため、
+* <a name="hash-fetch-defaults"></a>
+  独自のロジックを用いないようにするため、
   `Hash#fetch`経由でデフォルト値を導入しましょう。
+<sup>[[link](#hash-fetch-defaults)]</sup>
 
   ```Ruby
   batman = { name: 'Bruce Wayne', is_evil: false }
@@ -2472,7 +2806,9 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   batman.fetch(:is_evil, true) # => false
   ```
 
-* `Hash#fetch`では、デフォルト値の代わりにブロックを用いることが好まれます。
+* <a name="use-hash-blocks"></a>
+  `Hash#fetch`では、デフォルト値の代わりにブロックを用いることが好まれます。
+<sup>[[link](#use-hash-blocks)]</sup>
 
   ```Ruby
   batman = { name: 'Bruce Wayne' }
@@ -2485,7 +2821,9 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   batman.fetch(:powers) { get_batman_powers }
   ```
 
-* ハッシュから連続して複数の値が必要になる時は、`Hash#values_at`を用いましょう。
+* <a name="hash-values-at"></a>
+  ハッシュから連続して複数の値が必要になる時は、`Hash#values_at`を用いましょう。
+<sup>[[link](#hash-values-at)]</sup>
 
   ```Ruby
   # 悪い例
@@ -2496,13 +2834,19 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   email, username = data.values_at('email', 'nickname')
   ```
 
-* Ruby 1.9現在ではハッシュは順序付けられるということを信頼しましょう。
+* <a name="ordered-hashes"></a>
+  Ruby 1.9現在ではハッシュは順序付けられるということを信頼しましょう。
+<sup>[[link](#ordered-hashes)]</sup>
 
-* コレクションを走査している時に変更を加えてわいけません。
+* <a name="no-modifying-collections"></a>
+  コレクションを走査している時に変更を加えてわいけません。
+<sup>[[link](#no-modifying-collections)]</sup>
 
 ## 文字列
 
-* 文字列連結の代わりに文字列挿入や文字列整形を好みます。
+* <a name="string-interpolation"></a>
+  文字列連結の代わりに文字列挿入や文字列整形を好みます。
+<sup>[[link](#string-interpolation)]</sup>
 
   ```Ruby
   # 悪い例
@@ -2515,17 +2859,21 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   email_with_name = format('%s <%s>', user.name, user.email)
   ```
 
-* 文字列挿入時にはスペースを入れることを検討しましょう。
+* <a name="pad-string-interpolation"></a>
+  文字列挿入時にはスペースを入れることを検討しましょう。
   文字列から分かれたコードがより明確になります。
+<sup>[[link](#pad-string-interpolation)]</sup>
 
   ```Ruby
   "#{ user.last_name }, #{ user.first_name }"
   ```
 
-* 一貫した文字列リテラルの引用記号のスタイルを採用しましょう。
+* <a name="consistent-string-literals"></a>
+  一貫した文字列リテラルの引用記号のスタイルを採用しましょう。
   Rubyコミュニティには2つの有名なスタイル - デフォルトでシングルクォートを用いるもの (Option A)、
   ダブルクォートを用いるもの (Option B) - があり、
   どちらも良いと考えられています。
+<sup>[[link](#consistent-string-literals)]</sup>
 
   * **(Option A)** 文字列挿入の必要がないときや、`\t`や`\n`｀’｀等の特別な文字がない場合は、
     シングルクォーテーションが好まれます。
@@ -2554,9 +2902,11 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   しかしながら、このガイド内の文字列リテラル表記は、
   １つ目のスタイルを採用しています。
 
-* 文字リテラル構文`?x`を用いてはいけません。
+* <a name="no-character-literals"></a>
+  文字リテラル構文`?x`を用いてはいけません。
   Ruby 1.9からは基本的には冗長です -
   `?x`は`'x'`(１文字の文字列)に変換されます
+<sup>[[link](#no-character-literals)]</sup>
 
   ```Ruby
   # 悪い例
@@ -2566,8 +2916,10 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   char = 'c'
   ```
 
-* 文字列の中の挿入されるインスタンス変数やグローバル変数の周りの
+* <a name="curlies-interpolate"></a>
+  文字列の中の挿入されるインスタンス変数やグローバル変数の周りの
   `{}`は省略してはいけません。
+<sup>[[link](#curlies-interpolate)]</sup>
 
   ```Ruby
   class Person
@@ -2597,8 +2949,10 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   puts "$global = #{$global}"
   ```
 
-* 文字列に挿入するときに`Object#to_s`を使ってはいけません。
+* <a name="no-to-s"></a>
+  文字列に挿入するときに`Object#to_s`を使ってはいけません。
   自動的に呼び出されます。
+<sup>[[link](#no-to-s)]</sup>
 
   ```Ruby
   # 悪い例
@@ -2608,11 +2962,13 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   message = "This is the #{result}."
   ```
 
-* 大きなデータの塊を作る必要があるときは、`String#+`の使用は避けましょう。
+* <a name="concat-strings"></a>
+  大きなデータの塊を作る必要があるときは、`String#+`の使用は避けましょう。
   代わりに、`String#<<`を使いましょう。
   連結`String#<<`は、文字列インスタンスを直接書き換えるため、
   `String#+`よりも常に速いです、
   `String#+`はたくさんの新しいオブジェクトを作ってしまします。
+<sup>[[link](#concat-strings)]</sup>
 
   ```Ruby
   # 良く、そして速い例
@@ -2624,9 +2980,11 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   end
   ```
 
-* 複数行のヒアドキュメントを用いるときは、
+* <a name="heredocs"></a>
+  複数行のヒアドキュメントを用いるときは、
   先頭のスペースも保持してしまうということを頭に入れておかなければなりません。
   過剰なスペースを取り除くためのマージンを採用するのを実用的です。
+<sup>[[link](#heredocs)]</sup>
 
   ```Ruby
   code = <<-END.gsub(/^\s+\|/, '')
@@ -2635,7 +2993,7 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
     |  other_method
     |end
   END
-  #=> "def test\n  some_method\n  other_method\nend\n"
+  # => "def test\n  some_method\n  other_method\nend\n"
   ```
 
 ## 正規表現
@@ -2644,10 +3002,14 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
 > そこには２つの問題があります。<br/>
 > -- Jamie Zawinski
 
-* 単にプレーンテキストを文字列中から探すだけの時は、
+* <a name="no-regexp-for-plaintext"></a>
+  単にプレーンテキストを文字列中から探すだけの時は、
   正規表現を使ってはいけません: `string['text']`を使いましょう。
+<sup>[[link](#no-regexp-for-plaintext)]</sup>
 
-* 単純化のため、文字列の添字に直接正規表現を渡しましょう。
+* <a name="regexp-string-index"></a>
+  単純化のため、文字列の添字に直接正規表現を渡しましょう。
+<sup>[[link](#regexp-string-index)]</sup>
 
   ```Ruby
   match = string[/regexp/]             # get content of matched regexp
@@ -2655,16 +3017,20 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   string[/text (grp)/, 1] = 'replace'  # string => 'text replace'
   ```
 
-* 捕捉した結果を使う必要のないとき、捕捉しないグループを用いましょう。
+* <a name="non-capturing-regexp"></a>
+  捕捉した結果を使う必要のないとき、捕捉しないグループを用いましょう。
+<sup>[[link](#non-capturing-regexp)]</sup>
 
   ```Ruby
   /(first|second)/   # 悪い例
   /(?:first|second)/ # 良い例
   ```
 
-* 最後に正規表現にマッチした値を示すPerlレガシーの暗号的な変数を用いてはいけません
+* <a name="no-perl-regexp-last-matchers"></a>
+  最後に正規表現にマッチした値を示すPerlレガシーの暗号的な変数を用いてはいけません
   (`$1`、`$2`など)。
   代わりに`Regexp.last_match[n]`を用いましょう。
+<sup>[[link](#no-perl-regexp-last-matchers)]</sup>
 
   ```Ruby
   /(regexp)/ =~ string
@@ -2678,9 +3044,11 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   ```
 
 
-* どの値が入っているか追うのが困難になるので、
+* <a name="no-numbered-regexes"></a>
+  どの値が入っているか追うのが困難になるので、
   順序付けられたグループを使うのは避けましょう。
   代わりに名付けられたグループを使いましょう。
+<sup>[[link](#no-numbered-regexes)]</sup>
 
   ```Ruby
   # 悪い例
@@ -2694,15 +3062,19 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   process meaningful_var
   ```
 
-* 文字クラスの中では、特別な意味を持つ文字が少ないので注意が必要です:
+* <a name="limit-escapes"></a>
+  文字クラスの中では、特別な意味を持つ文字が少ないので注意が必要です:
   `^`、`-`、`\`、`]`のみが特別な意味を持つので、
   `.`を`[]`の中でエスケープしてはいけません。
+<sup>[[link](#limit-escapes)]</sup>
 
-* `^`や`$`は、文字列の先頭や末尾ではなく、
+* <a name="caret-and-dollar-regexp"></a>
+  `^`や`$`は、文字列の先頭や末尾ではなく、
   行頭や行末にマッチするので注意が必要です。
   もし文字列全体の先頭末尾にマッチさせたいときは、
   `\A`、`\z`を使いましょう
   (`\n?\z`と等価である`\Z`と混同しないようにしましょう)。
+<sup>[[link](#caret-and-dollar-regexp)]</sup>
 
   ```Ruby
   string = "some injection\nusername"
@@ -2710,10 +3082,12 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   string[/\Ausername\z/] # don't match
   ```
 
-* 複雑な正規表現には`x`識別子を用いましょう。
+* <a name="comment-regexes"></a>
+  複雑な正規表現には`x`識別子を用いましょう。
   これを用いることで、より読みやすくなり、
   便利なコメントを使えるようになります。
   スペースが無視されることに注意しましょう。
+<sup>[[link](#comment-regexes)]</sup>
 
   ```Ruby
   regexp = /
@@ -2725,13 +3099,17 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   /x
   ```
 
-* `sub`/`gsub`での複雑な置換は、ブロックやハッシュを用いることで実現できます。
+* <a name="gsub-blocks"></a>
+  `sub`/`gsub`での複雑な置換は、ブロックやハッシュを用いることで実現できます。
+<sup>[[link](#gsub-blocks)]</sup>
 
 ## パーセントリテラル
 
-* 挿入と`"`双方が入る１行の文字列には、
+* <a name="percent-q-shorthand"></a>
+  挿入と`"`双方が入る１行の文字列には、
   `%()`(`%Q()`の短縮形)を使いましょう。
   複数行の時はヒアドキュメントを好みます。
+<sup>[[link](#percent-q-shorthand)]</sup>
 
   ```Ruby
   # 悪い例 (挿入の必要がありません)
@@ -2750,11 +3128,13 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   %(<tr><td class="name">#{name}</td>)
   ```
 
-* 文字列に`'`と`"`双方が含まれない限り、
+* <a name="percent-q"></a>
+  文字列に`'`と`"`双方が含まれない限り、
   `%q`の使用は避けましょう。
   たくさんの文字列をエスケープしなくてもよいときは、
   通常の文字列リテラルのほうがより読みやすく、
   推奨されるべきです。
+<sup>[[link](#percent-q)]</sup>
 
   ```Ruby
   # 悪い例
@@ -2768,7 +3148,9 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   question = '"What did you say?"'
   ```
 
-* '/'が１つ *より多い* 正規表現に限り、`%r`を使いましょう。
+* <a name="percent-r"></a>
+  '/'が１つ *より多い* 正規表現に限り、`%r`を使いましょう。
+<sup>[[link](#percent-r)]</sup>
 
   ```Ruby
   # 悪い例
@@ -2782,8 +3164,10 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   %r(^/blog/2011/(.*)$)
   ```
 
-* 呼び出すコマンドにバッククォートが含まれる(かなり起こりえないが)ことがない限り、
+* <a name="percent-x"></a>
+  呼び出すコマンドにバッククォートが含まれる(かなり起こりえないが)ことがない限り、
   `%x`の使用は避けましょう。
+<sup>[[link](#percent-x)]</sup>
 
   ```Ruby
   # 悪い例
@@ -2794,14 +3178,18 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   echo = %x(echo `date`)
   ```
 
-* `%s`の使用は避けましょう。
+* <a name="percent-s"></a>
+  `%s`の使用は避けましょう。
   Rubyコミュニティは、スペース含むシンボルをを作る時は
   `:"文字列"`がよいと決めたようです。
+<sup>[[link](#percent-s)]</sup>
 
-* パーセントリテラルの区切り文字は、`%r`を除いて`()`が好まれます。
+* <a name="percent-literal-braces"></a>
+  パーセントリテラルの区切り文字は、`%r`を除いて`()`が好まれます。
   正規表現の中では、`()`は色々なシーンで使われるので、
   正規表現の内容によっては、より使われる機会の少ない`{`のほうが
   良い選択となることがあるかもしれません。
+<sup>[[link](#percent-literal-braces)]</sup>
 
   ```Ruby
   # 悪い例
@@ -2815,13 +3203,19 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
 
 ## メタプログラミング
 
-* 不要なメタプログラミングは避けましょう。Avoid needless metaprogramming.
+* <a name="no-metaprogramming-masturbation"></a>
+  不要なメタプログラミングは避けましょう。Avoid needless metaprogramming.
+<sup>[[link](#no-metaprogramming-masturbation)]</sup>
 
-* ライブラリに書かれているコアなクラスを汚すのはやめましょう
+* <a name="no-monkey-patching"></a>
+  ライブラリに書かれているコアなクラスを汚すのはやめましょう
   (モンキーパッチを当ててはいけません)。
+<sup>[[link](#no-monkey-patching)]</sup>
 
-* ブロック渡しの`class_eval`のほうが、文字列挿入型よりも好ましいです。
+* <a name="block-class-eval"></a>
+  ブロック渡しの`class_eval`のほうが、文字列挿入型よりも好ましいです。
   - 文字列挿入型を使う時は、バックトレースが働くように、常に`__FILE__`と`__LINE__`を渡しましょう:
+<sup>[[link](#block-class-eval)]</sup>
 
   ```ruby
   class_eval 'def use_relative_model_naming?; true; end', __FILE__, __LINE__
@@ -2829,8 +3223,10 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
 
   - `define_method`の方が、`class_eval{ def ... }`よりも好まれます。
 
-* 文字列挿入型の`class_eval`(または他の`eval`)を用いる時は、
+* <a name="eval-comment-docs"></a>
+  文字列挿入型の`class_eval`(または他の`eval`)を用いる時は、
   挿入されたときのコードをコメントに追加しましょう(Railsでは活用されています)。
+<sup>[[link](#eval-comment-docs)]</sup>
 
   ```ruby
   # from activesupport/lib/active_support/core_ext/string/output_safety.rb
@@ -2850,13 +3246,15 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   end
   ```
 
-* `method_missing`を用いたメタプログラミングは避けましょう。
+* <a name="no-method-missing"></a>
+  `method_missing`を用いたメタプログラミングは避けましょう。
   何故なら、バックトレースが面倒になり、
   `#methods`のリストの中に出てこず、
   ミススペルしたメソッド呼び出しも無言で動いてしまいます、
   例えば`nukes.launch_state = false`のようにです。
   代わりに、移譲、プロキシ、または`define_method`を使いましょう。
   もし`method_missing`を使わなければならない時は:
+<sup>[[link](#no-method-missing)]</sup>
 
   - [`respond_to_missing?`](http://blog.marc-andre.ca/2010/11/methodmissing-politely.html)も実装されているか確かめましょう
   - 既知の接頭辞、`find_by_*`のようなものを捕捉しましょう -- 可能な限りアサートさせましょう
@@ -2887,20 +3285,32 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
 
 ## 雑則
 
-* `ruby -w`で安全なコードを書きましょう。
+* <a name="always-warn"></a>
+  `ruby -w`で安全なコードを書きましょう。
+<sup>[[link](#always-warn)]</sup>
 
-* オプショナルな変数としてのハッシュの使用を避けましょう。やりすぎてはいませんか？(オブジェクトの初期化はこのルールの例外です)
+* <a name="no-optional-hash-params"></a>
+  オプショナルな変数としてのハッシュの使用を避けましょう。やりすぎてはいませんか？(オブジェクトの初期化はこのルールの例外です)
+<sup>[[link](#no-optional-hash-params)]</sup>
 
-* コードのある行が10行を超えるメソッドは避けましょう。
+* <a name="short-methods"></a>
+  コードのある行が10行を超えるメソッドは避けましょう。
   理想を言えば、多くのメソッドは5行以内がよいです。
   空行は行数には含めません。
+<sup>[[link](#short-methods)]</sup>
 
-* ３つや４つ以上引数を設定するのは避けましょう。
+* <a name="too-many-params"></a>
+  ３つや４つ以上引数を設定するのは避けましょう。
+<sup>[[link](#too-many-params)]</sup>
 
-* もし本当に"global"なメソッドが必要な場合は、
+* <a name="private-global-methods"></a>
+  もし本当に"global"なメソッドが必要な場合は、
   Kernelに定義し、privateに設定しましょう。
+<sup>[[link](#private-global-methods)]</sup>
 
-* グローバル変数の代わりに、モジュールのインスタンス変数を使用しましょう。
+* <a name="instance-vars"></a>
+  グローバル変数の代わりに、モジュールのインスタンス変数を使用しましょう。
+<sup>[[link](#instance-vars)]</sup>
 
   ```Ruby
   # 悪い例
@@ -2916,22 +3326,38 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   Foo.bar = 1
   ```
 
-* `alias_method`が動く時は、`alias`は避けましょう。
+* <a name="alias-method"></a>
+  `alias_method`が動く時は、`alias`は避けましょう。
+<sup>[[link](#alias-method)]</sup>
 
-* 複雑なコマンドラインオプションをパースするために`OptionParser`を使いましょう。
+* <a name="optionparser"></a>
+  複雑なコマンドラインオプションをパースするために`OptionParser`を使いましょう。
   また、些細なオプションには`ruby -s`を使いましょう。
+<sup>[[link](#optionparser)]</sup>
 
-* 現在のシステム時間を読み出すには、`Time.new`よりも`Time.now`を使いましょう。
+* <a name="time-now"></a>
+  現在のシステム時間を読み出すには、`Time.new`よりも`Time.now`を使いましょう。
+<sup>[[link](#time-now)]</sup>
 
-* それで問題ない時は、破壊的処理を避け関数型の手法でコードを書きましょう。
+* <a name="functional-code"></a>
+  それで問題ない時は、破壊的処理を避け関数型の手法でコードを書きましょう。
+<sup>[[link](#functional-code)]</sup>
 
-* それがメソッドの目的でない限り、引数に破壊的変更をするのはやめましょう。
+* <a name="no-arg-mutations"></a>
+  それがメソッドの目的でない限り、引数に破壊的変更をするのはやめましょう。
+<sup>[[link](#no-arg-mutations)]</sup>
 
-* ３段階を超えるネストは避けましょう。
+* <a name="three-is-the-number-thou-shalt-count"></a>
+  ３段階を超えるネストは避けましょう。
+<sup>[[link](#three-is-the-number-thou-shalt-count)]</sup>
 
-* 一貫性を保ちましょう。理想を言えば、このガイドラインに沿いましょう。
+* <a name="be-consistent"></a>
+  一貫性を保ちましょう。理想を言えば、このガイドラインに沿いましょう。
+<sup>[[link](#be-consistent)]</sup>
 
-* 常識を用いましょう。
+* <a name="common-sense"></a>
+  常識を用いましょう。
+<sup>[[link](#common-sense)]</sup>
 
 ## ツール
 
