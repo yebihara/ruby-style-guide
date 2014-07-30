@@ -1735,11 +1735,11 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   ```
 
 * <a name="snake-case-files"></a>
-  ファイル名には`sname_case`を用いましょう。例えば`hello_world.rb`のように。
+  ファイル名には`snake_case`を用いましょう。例えば`hello_world.rb`のように。
 <sup>[[link](#snake-case-files)]</sup>
 
 * <a name="snake-case-dirs"></a>
-  ディレクトリ名には`sname_case`を用いましょう。例えば`lib/hello_world/hello_world.rb`のように。
+  ディレクトリ名には`snake_case`を用いましょう。例えば`lib/hello_world/hello_world.rb`のように。
 <sup>[[link](#snake-case-dirs)]</sup>
 
 
@@ -2156,7 +2156,7 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
 
 * <a name="solid-design"></a>
   あなたのクラスを可能な限り
-  [SOLID](http://en.wikipedia.org/wiki/SOLID_(object-oriented_design\))
+  [SOLID](http://en.wikipedia.org/wiki/SOLID_(object-oriented_design))
   に保ちましょう。
 <sup>[[link](#solid-design)]</sup>
 
@@ -2525,7 +2525,7 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
 <sup>[[link](#no-rescue-modifiers)]</sup>
 
   ```Ruby
-  # 悪い例 - StandardErrorとそれを継承した全てのクラスをキャッチしてしまします
+  # 悪い例 - StandardErrorとそれを継承した全てのクラスをキャッチしてしまいます
   read_file rescue handle_error($!)
 
   # 良い例 - Errno::ENOENTとそれを継承したクラスのみをキャッチします
@@ -2967,7 +2967,7 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   代わりに、`String#<<`を使いましょう。
   連結`String#<<`は、文字列インスタンスを直接書き換えるため、
   `String#+`よりも常に速いです、
-  `String#+`はたくさんの新しいオブジェクトを作ってしまします。
+  `String#+`はたくさんの新しいオブジェクトを作ってしまいます。
 <sup>[[link](#concat-strings)]</sup>
 
   ```Ruby
