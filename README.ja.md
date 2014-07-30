@@ -1735,11 +1735,11 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   ```
 
 * <a name="snake-case-files"></a>
-  ファイル名には`sname_case`を用いましょう。例えば`hello_world.rb`のように。
+  ファイル名には`snake_case`を用いましょう。例えば`hello_world.rb`のように。
 <sup>[[link](#snake-case-files)]</sup>
 
 * <a name="snake-case-dirs"></a>
-  ディレクトリ名には`sname_case`を用いましょう。例えば`lib/hello_world/hello_world.rb`のように。
+  ディレクトリ名には`snake_case`を用いましょう。例えば`lib/hello_world/hello_world.rb`のように。
 <sup>[[link](#snake-case-dirs)]</sup>
 
 
