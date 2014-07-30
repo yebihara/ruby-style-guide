@@ -2156,7 +2156,7 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
 
 * <a name="solid-design"></a>
   あなたのクラスを可能な限り
-  [SOLID](http://en.wikipedia.org/wiki/SOLID_(object-oriented_design\))
+  [SOLID](http://en.wikipedia.org/wiki/SOLID_(object-oriented_design))
   に保ちましょう。
 <sup>[[link](#solid-design)]</sup>
 
