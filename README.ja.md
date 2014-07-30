@@ -2525,7 +2525,7 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
 <sup>[[link](#no-rescue-modifiers)]</sup>
 
   ```Ruby
-  # 悪い例 - StandardErrorとそれを継承した全てのクラスをキャッチしてしまします
+  # 悪い例 - StandardErrorとそれを継承した全てのクラスをキャッチしてしまいます
   read_file rescue handle_error($!)
 
   # 良い例 - Errno::ENOENTとそれを継承したクラスのみをキャッチします
