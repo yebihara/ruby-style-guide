@@ -76,6 +76,7 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
 * [ロシア語](https://github.com/arbox/ruby-style-guide/blob/master/README-ruRU.md)
 * [スペイン語](https://github.com/alemohamad/ruby-style-guide/blob/master/README-esLA.md)
 * [ベトナム語](https://github.com/scrum2b/ruby-style-guide/blob/master/README-viVN.md)
+* [韓国語](https://github.com/dalzony/ruby-style-guide/blob/master/README-koKO.md)
 
 ## 目次
 
@@ -1303,7 +1304,7 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   end
 
   # 悪い例
-  something = something ? nil : something.downcase
+  something = something ? something.downcase : nil
 
   # ok
   something = something.downcase if something
@@ -2626,7 +2627,7 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   rescue
     # .. handle error
   ensure
-    f.close unless f.nil?
+    f.close if f
   end
   ```
 
