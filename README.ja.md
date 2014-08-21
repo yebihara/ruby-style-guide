@@ -278,6 +278,20 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   !something
   ```
 
+* <a name="no-space-inside-range-literals"></a>
+  範囲リテラルの内側にスペースは不要です。
+<sup>[[link](#no-space-inside-range-literals)]</sup>
+
+    ```Ruby
+    # 悪い例
+    1 .. 3
+    'a' ... 'z'
+
+    # 良い例
+    1..3
+    'a'..'z'
+    ```
+
 * <a name="indent-when-to-case"></a>
   `when`は`case`と同じ深さに揃えましょう。
   多くの人が同意できないのを知っていますが、
