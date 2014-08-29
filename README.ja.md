@@ -1777,7 +1777,7 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
 
 * <a name="bool-methods-qmark"></a>
   条件判定メソッド(boolean値が返る)には`?`を末尾に付けましょう
-  (すなわり`Array#empty?`のように)。
+  (すなわち`Array#empty?`のように)。
   メソッドがboolean値を返さなければ、末尾に`?`を付けてはいけません。
 <sup>[[link](#bool-methods-qmark)]</sup>
 
