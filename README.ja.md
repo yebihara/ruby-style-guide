@@ -2854,7 +2854,7 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
 <sup>[[link](#ordered-hashes)]</sup>
 
 * <a name="no-modifying-collections"></a>
-  コレクションを走査している時に変更を加えてわいけません。
+  コレクションを走査している時に変更を加えてはいけません。
 <sup>[[link](#no-modifying-collections)]</sup>
 
 ## 文字列
