@@ -5,7 +5,7 @@
 
 Rubyディベロッパーとして、私は常にあることに悩まされてきました -
 Pythonディベロッパーは偉大なプログラミングスタイルガイド
-([PEP-8](http://www.python.org/dev/peps/pep-0008/))
+([PEP-8][])
 を持っていますが、
 我々には公式のコーディングスタイルやベストプラクティスを
 一切持ち合わせていません。
@@ -30,7 +30,7 @@ Rubyのための慣習、語法、スタイル規定は、
 
 ところで、もしあなたがRailsが好きであれば、
 こちらの補足も確認してみてください。
-[Ruby on Rails 3 & 4 Style Guide](https://github.com/bbatsov/rails-style-guide).
+[Ruby on Rails Style Guide][rails-style-guide].
 
 # The Ruby Style Guide
 
@@ -47,8 +47,8 @@ Rubyのための慣習、語法、スタイル規定は、
 私はこれら全てのルールをどこからともなく考えついたわけではありません -
 これらのほとんどは、私のプロフェッショナルソフトウェアエンジニアとしての
 豊富な経験と、Rubyコミュニティのメンバーからの意見や提案、
-また、["Programming Ruby 1.9"](http://pragprog.com/book/ruby4/programming-ruby-1-9-2-0)や、
-["The Ruby Programming Language"](http://www.amazon.com/Ruby-Programming-Language-David-Flanagan/dp/0596516177)のような、
+また、["Programming Ruby 1.9"][pickaxe]や、
+["The Ruby Programming Language"][trpl]のような、
 様々な高度で評価の高いRubyプログラミングリソースに基づいています。
 
 特定のスタイルに関して、Rubyコミュニティ内での明らかな意見の一致を得ていない箇所もいくつかあります
@@ -56,14 +56,18 @@ Rubyのための慣習、語法、スタイル規定は、
 そのようなシナリオでは、どの有名なスタイルも許容されるので、
 どれを選んで、一貫して用いるかはあなた次第です。
 
-このガイドはまだ未完成です - いくつかのルールはサンプルがなく、
-いくつかのルールは説明が不十分です。
-やがてこれらの課題は対応されます - 今後これらを記憶にとどめておきます。
+このスタイルガイドは、追加の慣習を定めたり、
+Ruby自身の変化によって過去に定めたルールが時代遅れになるとともに進化してきました。
+
+多くのプロジェクトは、それ自身のコーディングスタイルガイドを持っています
+(しばしばこのガイドを基に生成されています)。
+結果としてルールの衝突が発生した場合は、
+そのプロジェクトにおいては、プロジェクト固有のガイドを優先します。
 
 PDFやHTMLのコピーはこのガイドを使って作成できます
-[Transmuter](https://github.com/TechnoGate/transmuter)。
+[Transmuter][]。
 
-[RuboCop](https://github.com/bbatsov/rubocop)は、
+[RuboCop][]は、
 このスタイルガイドに基づいたコード分析器です。
 
 以下の言語の翻訳が利用可能です:
@@ -72,11 +76,11 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
 * [中国語(繁体)](https://github.com/JuanitoFatas/ruby-style-guide/blob/master/README-zhTW.md)
 * [フランス語](https://github.com/porecreat/ruby-style-guide/blob/master/README-frFR.md)
 * [日本語](https://github.com/fortissimo1997/ruby-style-guide/blob/japanese/README.ja.md)
+* [韓国語](https://github.com/dalzony/ruby-style-guide/blob/master/README-koKO.md)
 * [ポルトガル語](https://github.com/rubensmabueno/ruby-style-guide/blob/master/README-PT-BR.md)
 * [ロシア語](https://github.com/arbox/ruby-style-guide/blob/master/README-ruRU.md)
 * [スペイン語](https://github.com/alemohamad/ruby-style-guide/blob/master/README-esLA.md)
 * [ベトナム語](https://github.com/scrum2b/ruby-style-guide/blob/master/README-viVN.md)
-* [韓国語](https://github.com/dalzony/ruby-style-guide/blob/master/README-koKO.md)
 
 ## 目次
 
@@ -743,22 +747,17 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   end
   ```
 
-* <a name="no-1.8-if-syntax"></a>
-  `if x: ...`は使ってはいけません - Ruby 1.9現在は廃止されました。
-  代わりに三項演算子を使いましょう。
-<sup>[[link](#no-1.8-if-syntax)]</sup>
+* <a name="no-semicolon-ifs"></a>
+  `if x; ...`を使ってはいけません。代わりに三項演算子を使いましょう。
+<sup>[[link](#no-semicolon-ifs)]</sup>
 
   ```Ruby
   # 悪い例
-  result = if some_condition: something else something_else end
+  result = if some_condition; something else something_else end
 
   # 良い例
   result = some_condition ? something : something_else
   ```
-
-* <a name="no-semicolon-ifs"></a>
-  `if x; ...`を使ってはいけません。代わりに三項演算子を使いましょう。
-<sup>[[link](#no-semicolon-ifs)]</sup>
 
 * <a name="use-if-case-returns"></a>
   結果を返す`if`や`case`式の値を活用しましょう。
@@ -849,6 +848,8 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   # 制御構文
   document.saved? || document.save!
   ```
+
+  留意しなければならないのは、このルールには例外([条件式中の安全な代入](#safe-assignment-in-condition))があるということです。
 
 * <a name="no-multiline-ternary"></a>
   複数行にまたがる三項演算子`?:`は避けましょう; 代わりに`if/unless`を使いましょう。
@@ -1348,6 +1349,20 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   some_string =~ /something/
   ```
 
+* <a name="eql"></a>
+  Do not use `eql?` when using `==` will do. The stricter comparison semantics
+  provided by `eql?` are rarely needed in practice.
+<sup>[[link](#eql)]</sup>
+
+  ```Ruby
+  # 悪い例 - eql? は 文字列に対する == と同じです
+  "ruby".eql? some_str
+
+  # good
+  "ruby" == some_str
+  1.0.eql? == x # eql? はFixnumとFloatの1を識別したいのであれば意味があります
+  ```
+
 * <a name="no-cryptic-perlisms"></a>
   Perlスタイルの(`$:`や`$;`などのような)特別な変数の使用は避けましょう。
   それらは極めて不可解で、
@@ -1672,6 +1687,60 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
     puts item
   end
   ```
+* <a name="map-fine-select-reduce-size"></a>
+  `collect`より`map`、`detect`より`find`、`find_all`より`select`
+  `inject`より`reduce`、`length`より`size`を好みます。
+  これは厳しい要件ではありません;
+  もしエイリアスを用いるほうが可読性が上がるのであれば、
+  使うのもOKです。
+  それらの同韻のメソッドはSmalltalkから継承されており、
+  他の言語ではあまり一般的ではありません。
+  `find_all`よりも`select`が推奨される理由は、
+  `reject`と共に用いた時、その名前が極めて自己説明的だからです。
+<sup>[[link](#map-fine-select-reduce-size)]</sup>
+
+* <a name="count-vs-size"></a>
+  `size`の代わりに`count`を用いてはいけません。
+  `Array`以外の`Enumerable`オブジェクトでは、
+  サイズを求めるためにコレクション全てをイテレートしてしまいます。
+<sup>[[link](#count-vs-size)]</sup>
+
+  ```Ruby
+  # 悪い例
+  some_hash.count
+
+  # 良い例
+  some_hash.size
+  ```
+
+* <a name="flat-map"></a>
+  `map`と`flatten`の組み合わせの代わりに、`flat_map`を用いましょう。
+  これは深さが２以上の配列には適用できません。
+  すなわち、`users.first.songs == ['a', ['b','c']]`のときは、
+  `flat_map`より`map + flatten`を用いましょう。
+  `flatten`は配列を全て平坦にするのに対し、`flat_map`は配列を１次元だけ平坦にします。
+<sup>[[link](#flat-map)]</sup>
+
+  ```Ruby
+  # 悪い例
+  all_songs = users.map(&:songs).flatten.uniq
+
+  # 良い例
+  all_songs = users.flat_map(&:songs).uniq
+  ```
+
+* <a name="reverse-each"></a>
+  `reverse.each`の代わりに`reverse_each`を用いましょう。
+  `reverse_each`は新しい配列を作らないので、それが利点です。
+<sup>[[link](#reverse-each)]</sup>
+
+  ```Ruby
+  # 悪い例
+  array.reverse.each { ... }
+
+  # 良い例
+  array.reverse_each { ... }
+  ```
 
 ## 命名規則
 
@@ -1848,61 +1917,6 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   def +(other)
     # body omitted
   end
-  ```
-
-* <a name="map-fine-select-reduce-size"></a>
-  `collect`より`map`、`detect`より`find`、`find_all`より`select`
-  `inject`より`reduce`、`length`より`size`を好みます。
-  これは厳しい要件ではありません;
-  もしエイリアスを用いるほうが可読性が上がるのであれば、
-  使うのもOKです。
-  それらの同韻のメソッドはSmalltalkから継承されており、
-  他の言語ではあまり一般的ではありません。
-  `find_all`よりも`select`が推奨される理由は、
-  `reject`と共に用いた時、その名前が極めて自己説明的だからです。
-<sup>[[link](#map-fine-select-reduce-size)]</sup>
-
-* <a name="count-vs-size"></a>
-  `size`の代わりに`count`を用いてはいけません。
-  `Array`以外の`Enumerable`オブジェクトでは、
-  サイズを求めるためにコレクション全てをイテレートしてしまいます。
-<sup>[[link](#count-vs-size)]</sup>
-
-  ```Ruby
-  # 悪い例
-  some_hash.count
-
-  # 良い例
-  some_hash.size
-  ```
-
-* <a name="flat-map"></a>
-  `map`と`flatten`の組み合わせの代わりに、`flat_map`を用いましょう。
-  これは深さが２以上の配列には適用できません。
-  すなわち、`users.first.songs == ['a', ['b','c']]`のときは、
-  `flat_map`より`map + flatten`を用いましょう。
-  `flatten`は配列を全て平坦にするのに対し、`flat_map`は配列を１次元だけ平坦にします。
-<sup>[[link](#flat-map)]</sup>
-
-  ```Ruby
-  # 悪い例
-  all_songs = users.map(&:songs).flatten.uniq
-
-  # 良い例
-  all_songs = users.flat_map(&:songs).uniq
-  ```
-
-* <a name="reverse-each"></a>
-  `reverse.each`の代わりに`reverse_each`を用いましょう。
-  `reverse_each`は新しい配列を作らないので、それが利点です。
-<sup>[[link](#reverse-each)]</sup>
-
-  ```Ruby
-  # 悪い例
-  array.reverse.each { ... }
-
-  # 良い例
-  array.reverse_each { ... }
   ```
 
 ## コメント
@@ -2118,7 +2132,7 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   end
 
   # 良い例
-  module SomeClass
+  module SomeModule
     module_function
 
     def some_method
@@ -3298,6 +3312,10 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   # それでも最も良い選択は、発見できる全てのアトリビュートにdefine_methodすることです
   ```
 
+* <a name="prefer-public-send"></a>
+  `private`/`protected`制約を避けないように、`send`よりも`public_send`を好みます。
+<sup>[[link](#prefer-public-send)]</sup>
+
 ## 雑則
 
 * <a name="always-warn"></a>
@@ -3380,7 +3398,7 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
 
 ### RuboCop
 
-[RuboCop](https://github.com/bbatsov/rubocop)は、このガイドに基づいた
+[RuboCop][]は、このガイドに基づいた
 Rubyコードスタイルチェッカーです。
 Rubocopはすでにこのガイドの重要な部分をカバーしており、
 MRI 1.9, MRI 2.0 双方をサポートし、Emacs向けのよいプラグインがあります。
@@ -3391,6 +3409,11 @@ MRI 1.9, MRI 2.0 双方をサポートし、Emacs向けのよいプラグイン�
 [部分的に基づいています](http://confluence.jetbrains.com/display/RUBYDEV/RubyMine+Inspections)。
 
 # Contributing
+
+このガイドはまだ未完成です - いくつかのルールはサンプルがなく、 いくつかのルールは説明が不十分です。
+そのようなルールの改善はRubyコミュニティを助ける素晴らしい(そしてシンプルな)手段です!
+
+やがてこれらの課題は対応されます - 今後これらを記憶にとどめておきます。
 
 このガイドに書いてあることには変更不能なものはありません。
 Rubyのコードスタイルに興味のある全ての人と共に取り組むことが私の望みなので、
@@ -3423,3 +3446,10 @@ Rubyのコードスタイルに興味のある全ての人と共に取り組む�
 
 ありがとう<br/>
 [Bozhidar](https://twitter.com/bbatsov)
+
+[PEP-8]: http://www.python.org/dev/peps/pep-0008/
+[rails-style-guide]: https://github.com/bbatsov/rails-style-guide
+[pickaxe]: http://pragprog.com/book/ruby4/programming-ruby-1-9-2-0
+[trpl]: http://www.amazon.com/Ruby-Programming-Language-David-Flanagan/dp/0596516177
+[transmuter]: https://github.com/TechnoGate/transmuter
+[RuboCop]: https://github.com/bbatsov/rubocop
