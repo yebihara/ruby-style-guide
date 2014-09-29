@@ -1360,7 +1360,7 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
 
   # good
   "ruby" == some_str
-  1.0.eql? == x # eql? はFixnumとFloatの1を識別したいのであれば意味があります
+  1.0.eql? x # eql? はFixnumとFloatの1を識別したいのであれば意味があります
   ```
 
 * <a name="no-cryptic-perlisms"></a>
