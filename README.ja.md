@@ -3009,6 +3009,23 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   end
   ```
 
+* <a name="dont-abuse-gsub"></a>
+利用するケースにより特化した速い代替手段がある場合、`String#gsub`は使わないようにしましょう。
+<sup>[[link](#dont-abuse-gsub)]</sup>
+
+  ```Ruby
+  url = 'http://example.com'
+  str = 'lisp-case-rules'
+
+  # 悪い例
+  url.gsub("http://", "https://")
+  url.gsub("-", "_")
+
+  # 良い例
+  url.sub("http://", "https://")
+  str.tr("-", "_")
+  ```
+
 * <a name="heredocs"></a>
   複数行のヒアドキュメントを用いるときは、
   先頭のスペースも保持してしまうということを頭に入れておかなければなりません。
