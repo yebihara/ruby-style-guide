@@ -75,6 +75,7 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
 * [中国語(簡体)](https://github.com/JuanitoFatas/ruby-style-guide/blob/master/README-zhCN.md)
 * [中国語(繁体)](https://github.com/JuanitoFatas/ruby-style-guide/blob/master/README-zhTW.md)
 * [フランス語](https://github.com/porecreat/ruby-style-guide/blob/master/README-frFR.md)
+* [ドイツ語](https://github.com/arbox/ruby-style-guide/blob/master/README-deDE.md)
 * [日本語](https://github.com/fortissimo1997/ruby-style-guide/blob/japanese/README.ja.md)
 * [韓国語](https://github.com/dalzony/ruby-style-guide/blob/master/README-koKO.md)
 * [ポルトガル語](https://github.com/rubensmabueno/ruby-style-guide/blob/master/README-PT-BR.md)
@@ -293,7 +294,7 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
 
     # 良い例
     1..3
-    'a'..'z'
+    'a'...'z'
     ```
 
 * <a name="indent-when-to-case"></a>
@@ -636,22 +637,22 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
    ```Ruby
    # 悪い例
    def some_method()
-     # body omitted
+     # 本文省略
    end
 
    # 良い例
    def some_method
-     # body omitted
+     # 本文省略
    end
 
    # 悪い例
-   def some_method_with_arguments arg1, arg2
-     # body omitted
+   def some_method_with_parameters param1, param2
+     # 本文省略
    end
 
    # 良い例
-   def some_method_with_arguments(arg1, arg2)
-     # body omitted
+   def some_method_with_parameters(param1, param2)
+     # 本文省略
    end
    ```
 
@@ -2419,6 +2420,69 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   end
   ```
 
+* <a name="alias-method-lexically"></a>
+  文脈上`self`が静的に決定されるような`class`のレキシカルスコープ内でメソッドのエイリアスを与える時は`alias`を好みます。
+  そうすれば実行時やどのサブクラスないでも、それを明示的に行わない限り
+  あなたのエイリアスが変更されないことをユーザーに伝えることが出来ます。
+<sup>[[link](#alias-method-lexically)]</sup>
+
+  ```Ruby
+  class Westerner
+    def first_name
+      @names.first
+    end
+
+    alias given_name first_name
+  end
+  ```
+
+  `alias`は`def`のと同じく予約語なので、シンボルや文字列よりもベアワードが好まれます。
+  言い換えると、`alias :foo :bar`ではなく、`alias foo bar`と書きましょう。
+
+  また、Rubyがエイリアスや継承をどのように扱うか注意しましょう。
+  `alias`はそれが定義された地点で解決されたメソッドを参照します。
+  動的には解決されません。
+
+  ```Ruby
+  class Fugitive < Westerner
+    def first_name
+      'Nobody'
+    end
+  end
+  ```
+
+  この例では、`Fugitive#given_name`は、`Fugitive#first_name`ではなく、オリジナルの`Westerner#first_name`を呼び出します。
+  `Fugitive#given_name`もオーバーライドしたい時は、継承したクラスでも
+  再定義しなければなりません。
+
+  ```Ruby
+  class Fugitive < Westerner
+    def first_name
+      'Nobody'
+    end
+
+    alias given_name first_name
+  end
+  ```
+
+* <a name="alias-method"></a>
+  モジュールやクラス、実行時のシングルトンクラス等、
+  `alias`の挙動が予期できないレキシカルスコープでは、
+  エイリアス定義には常に`alias_method`を用いましょう。
+<sup>[[link](#alias-method)]</sup>
+
+  ```Ruby
+  module Mononymous
+    def self.included(other)
+      other.class_eval { alias_method :full_name, :given_name }
+    end
+  end
+
+  class Sting < Westerner
+    include Mononymous
+  end
+  ```
+
 ## 例外
 
 * <a name="fail-method"></a>
@@ -2472,11 +2536,9 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
 
   ```Ruby
   def foo
-    begin
-      fail
-    ensure
-      return 'very bad idea'
-    end
+    fail
+  ensure
+    return 'very bad idea'
   end
   ```
 
@@ -2857,7 +2919,7 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   ```Ruby
   # 悪い例
   email = data['email']
-  nickname = data['nickname']
+  username = data['nickname']
 
   # 良い例
   email, username = data.values_at('email', 'nickname')
@@ -3279,11 +3341,11 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   UNSAFE_STRING_METHODS.each do |unsafe_method|
     if 'String'.respond_to?(unsafe_method)
       class_eval <<-EOT, __FILE__, __LINE__ + 1
-        def #{unsafe_method}(*args, &block)       # def capitalize(*args, &block)
-          to_str.#{unsafe_method}(*args, &block)  #   to_str.capitalize(*args, &block)
+        def #{unsafe_method}(*params, &block)       # def capitalize(*params, &block)
+          to_str.#{unsafe_method}(*params, &block)  #   to_str.capitalize(*params, &block)
         end                                       # end
 
-        def #{unsafe_method}!(*args)              # def capitalize!(*args)
+        def #{unsafe_method}!(*params)              # def capitalize!(*params)
           @dirty = true                           #   @dirty = true
           super                                   #   super
         end                                       # end
@@ -3309,7 +3371,7 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
 
   ```ruby
   # 悪い例
-  def method_missing?(meth, *args, &block)
+  def method_missing?(meth, *params, &block)
     if /^find_by_(?<prop>.*)/ =~ meth
       # ... lots of code to do a find_by
     else
@@ -3376,10 +3438,6 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   Foo.bar = 1
   ```
 
-* <a name="alias-method"></a>
-  `alias_method`が動く時は、`alias`は避けましょう。
-<sup>[[link](#alias-method)]</sup>
-
 * <a name="optionparser"></a>
   複雑なコマンドラインオプションをパースするために`OptionParser`を使いましょう。
   また、些細なオプションには`ruby -s`を使いましょう。
@@ -3393,9 +3451,9 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   それで問題ない時は、破壊的処理を避け関数型の手法でコードを書きましょう。
 <sup>[[link](#functional-code)]</sup>
 
-* <a name="no-arg-mutations"></a>
+* <a name="no-param-mutations"></a>
   それがメソッドの目的でない限り、引数に破壊的変更をするのはやめましょう。
-<sup>[[link](#no-arg-mutations)]</sup>
+<sup>[[link](#no-param-mutations)]</sup>
 
 * <a name="three-is-the-number-thou-shalt-count"></a>
   ３段階を超えるネストは避けましょう。
