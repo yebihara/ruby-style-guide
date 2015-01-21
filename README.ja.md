@@ -77,7 +77,7 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
 * [フランス語](https://github.com/porecreat/ruby-style-guide/blob/master/README-frFR.md)
 * [ドイツ語](https://github.com/arbox/ruby-style-guide/blob/master/README-deDE.md)
 * [日本語](https://github.com/fortissimo1997/ruby-style-guide/blob/japanese/README.ja.md)
-* [韓国語](https://github.com/dalzony/ruby-style-guide/blob/master/README-koKO.md)
+* [韓国語](https://github.com/dalzony/ruby-style-guide/blob/master/README-koKR.md)
 * [ポルトガル語](https://github.com/rubensmabueno/ruby-style-guide/blob/master/README-PT-BR.md)
 * [ロシア語](https://github.com/arbox/ruby-style-guide/blob/master/README-ruRU.md)
 * [スペイン語](https://github.com/alemohamad/ruby-style-guide/blob/master/README-esLA.md)
@@ -1688,7 +1688,7 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
     puts item
   end
   ```
-* <a name="map-fine-select-reduce-size"></a>
+* <a name="map-find-select-reduce-size"></a>
   `collect`より`map`、`detect`より`find`、`find_all`より`select`
   `inject`より`reduce`、`length`より`size`を好みます。
   これは厳しい要件ではありません;
@@ -1698,7 +1698,7 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   他の言語ではあまり一般的ではありません。
   `find_all`よりも`select`が推奨される理由は、
   `reject`と共に用いた時、その名前が極めて自己説明的だからです。
-<sup>[[link](#map-fine-select-reduce-size)]</sup>
+<sup>[[link](#map-find-select-reduce-size)]</sup>
 
 * <a name="count-vs-size"></a>
   `size`の代わりに`count`を用いてはいけません。
@@ -2277,10 +2277,19 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   ````
 
 * <a name="no-extend-struct-new"></a>
-  `Struct.new`を拡張してはいけません - それは既に新しいクラスです。
+  `Struct.new`で初期化されたインスタンスを拡張してはいけません。
   それは余分なクラスレベルをもたらし、
   複数回`require`された時に、奇妙なエラーの原因にもなります。
 <sup>[[link](#no-extend-struct-new)]</sup>
+
+  ```Ruby
+  # 悪い例
+  class Person < Struct.new(:first_name, :last_name)
+  end
+
+  # 良い例
+  Person = Struct.new(:first_name, :last_name)
+  ````
 
 * <a name="factory-methods"></a>
   あるクラスのインスタンス生成する追加の方法を提供したいときは、
