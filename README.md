@@ -71,7 +71,7 @@ Translations of the guide are available in the following languages:
 * [French](https://github.com/porecreat/ruby-style-guide/blob/master/README-frFR.md)
 * [German](https://github.com/arbox/ruby-style-guide/blob/master/README-deDE.md)
 * [Japanese](https://github.com/fortissimo1997/ruby-style-guide/blob/japanese/README.ja.md)
-* [Korean](https://github.com/dalzony/ruby-style-guide/blob/master/README-koKO.md)
+* [Korean](https://github.com/dalzony/ruby-style-guide/blob/master/README-koKR.md)
 * [Portuguese](https://github.com/rubensmabueno/ruby-style-guide/blob/master/README-PT-BR.md)
 * [Russian](https://github.com/arbox/ruby-style-guide/blob/master/README-ruRU.md)
 * [Spanish](https://github.com/alemohamad/ruby-style-guide/blob/master/README-esLA.md)
@@ -1705,7 +1705,7 @@ condition](#safe-assignment-in-condition).
   end
   ```
 
-* <a name="map-fine-select-reduce-size"></a>
+* <a name="map-find-select-reduce-size"></a>
   Prefer `map` over `collect`, `find` over `detect`, `select` over `find_all`,
   `reduce` over `inject` and `size` over `length`. This is not a hard
   requirement; if the use of the alias enhances readability, it's ok to use it.
@@ -1713,7 +1713,7 @@ condition](#safe-assignment-in-condition).
   programming languages. The reason the use of `select` is encouraged over
   `find_all` is that it goes together nicely with `reject` and its name is
   pretty self-explanatory.
-<sup>[[link](#map-fine-select-reduce-size)]</sup>
+<sup>[[link](#map-find-select-reduce-size)]</sup>
 
 * <a name="count-vs-size"></a>
   Don't use `count` as a substitute for `size`. For `Enumerable` objects other
@@ -2301,10 +2301,19 @@ condition](#safe-assignment-in-condition).
   ````
 
 * <a name="no-extend-struct-new"></a>
-  Don't extend a `Struct.new` - it already is a new class. Extending it
-  introduces a superfluous class level and may also introduce weird errors if
-  the file is required multiple times.
+  Don't extend an instance initialized by `Struct.new`. Extending it introduces
+  a superfluous class level and may also introduce weird errors if the file is
+  required multiple times.
 <sup>[[link](#no-extend-struct-new)]</sup>
+
+  ```Ruby
+  # bad
+  class Person < Struct.new(:first_name, :last_name)
+  end
+
+  # good
+  Person = Struct.new(:first_name, :last_name)
+  ````
 
 * <a name="factory-methods"></a>
   Consider adding factory methods to provide additional sensible ways to
