@@ -1981,7 +1981,8 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
 
 * <a name="indent-annotations"></a>
   もし問題点の記述に複数行かかる場合は、
-  後続の行は`#`の後ろにスペース２つでインデントしましょう。
+  後続の行は`#`の後ろにスペース３つでインデントしましょう。
+  (通常の１つに加え、インデント目的に２つ)
 <sup>[[link](#indent-annotations)]</sup>
 
   ```Ruby
@@ -2715,9 +2716,9 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   end
   ```
 
-* <a name="file-close"></a>
+* <a name="release-resources"></a>
   外部リソースの含まれるプログラムでは、`ensure`で開放しましょう
-<sup>[[link](#file-close)]</sup>
+<sup>[[link](#release-resources)]</sup>
 
   ```Ruby
   f = File.open('testfile')
@@ -2727,6 +2728,22 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
     # .. handle error
   ensure
     f.close if f
+  end
+  ```
+
+* <a name="auto-release-resources"></a>
+  自動的にリソースを開放してくれる昨日を含むメソッドを利用可能な時は、そちらを使いましょう。
+<sup>[[link](#auto-release-resources)]</sup>
+
+  ```Ruby
+  # 悪い例 - 明示的にファイルディスクリプタを閉じる必要が有ります
+  f = File.open('testfile')
+    # ...
+  f.close
+
+  # 良い例 - ファイルディスクリプタは自動的に閉じられます
+  File.open('testfile') do |f|
+    # ...
   end
   ```
 
@@ -2942,6 +2959,42 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   コレクションを走査している時に変更を加えてはいけません。
 <sup>[[link](#no-modifying-collections)]</sup>
 
+* <a name="accessing-elements-directly"></a>
+  コレクションにアクセスするとき、`[n]`の代替のリーダーメソッドが提供されている場合に
+  直接`[n]`経由でアクセスすることは避けましょう。
+  `nil`に対して`[]`を呼ぶことを避けることが出来ます。
+<sup>[[link](#accessing-elements-directly)]</sup>
+
+  ```Ruby
+  # 悪い例
+  Regexp.last_match[1]
+
+  # 良い例
+  Regexp.last_match(1)
+  ```
+
+* <a name="provide-alternate-accessor-to-collections"></a>
+  コレクションに対するアクセサを提供するとき、
+  コレクション内の要素にアクセスする前に、
+  `nil`でアクセスするのを防ぐための代替のアクセス方法を提供しましょう。
+<sup>[[link](#provide-alternate-accessor-to-collections)]</sup>
+
+  ```Ruby
+  # 悪い例
+  def awesome_things
+    @awesome_things
+  end
+
+  # 良い例
+  def awesome_things(index = nil)
+    if index && @awesome_things
+      @awesome_things[index]
+    else
+      @awesome_things
+    end
+  end
+  ```
+
 ## 文字列
 
 * <a name="string-interpolation"></a>
@@ -3146,7 +3199,7 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
 * <a name="no-perl-regexp-last-matchers"></a>
   最後に正規表現にマッチした値を示すPerlレガシーの暗号的な変数を用いてはいけません
   (`$1`、`$2`など)。
-  代わりに`Regexp.last_match[n]`を用いましょう。
+  代わりに`Regexp.last_match(n)`を用いましょう。
 <sup>[[link](#no-perl-regexp-last-matchers)]</sup>
 
   ```Ruby
@@ -3157,7 +3210,7 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   process $1
 
   # 良い例
-  process Regexp.last_match[1]
+  process Regexp.last_match(1)
   ```
 
 
@@ -3171,7 +3224,7 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   # 悪い例
   /(regexp)/ =~ string
   ...
-  process Regexp.last_match[1]
+  process Regexp.last_match(1)
 
   # 良い例
   /(?<meaningful_var>regexp)/ =~ string
@@ -3266,18 +3319,15 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   ```
 
 * <a name="percent-r"></a>
-  '/'が１つ *より多い* 正規表現に限り、`%r`を使いましょう。
+  '/'が１つ *以上の* 正規表現に限り、`%r`を使いましょう。
 <sup>[[link](#percent-r)]</sup>
 
   ```Ruby
   # 悪い例
   %r(\s+)
 
-  # こちらも悪い例
-  %r(^/(.*)$)
-  # should be /^\/(.*)$/
-
   # 良い例
+  %r(^/(.*)$)
   %r(^/blog/2011/(.*)$)
   ```
 
@@ -3320,9 +3370,9 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
 
 ## メタプログラミング
 
-* <a name="no-metaprogramming-masturbation"></a>
-  不要なメタプログラミングは避けましょう。Avoid needless metaprogramming.
-<sup>[[link](#no-metaprogramming-masturbation)]</sup>
+* <a name="no-needless-metaprogramming"></a>
+  不要なメタプログラミングは避けましょう。
+<sup>[[link](#no-needless-metaprogramming)]</sup>
 
 * <a name="no-monkey-patching"></a>
   ライブラリに書かれているコアなクラスを汚すのはやめましょう
