@@ -2766,7 +2766,7 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   ```
 
 * <a name="auto-release-resources"></a>
-  自動的にリソースを開放してくれる昨日を含むメソッドを利用可能な時は、そちらを使いましょう。
+  自動的にリソースを開放してくれる機能を含むメソッドを利用可能な時は、そちらを使いましょう。
 <sup>[[link](#auto-release-resources)]</sup>
 
   ```Ruby
@@ -2950,7 +2950,7 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   ```Ruby
   batman = { name: 'Bruce Wayne', is_evil: false }
 
-  # 悪い例 - falseと判定される値が入っていた場合、望んだとお降りに動かないかもしれません
+  # 悪い例 - falseと判定される値が入っていた場合、望んだとおりに動かないかもしれません
   batman[:is_evil] || true # => true
 
   # 良い例 - falseと判定される値が入っていても正しく動きます
