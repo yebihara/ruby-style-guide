@@ -1,6 +1,6 @@
 # 序
 
-> ロールモデルが重要なのだ。 <br/>
+> ロールモデルが重要なのだ。 <br>
 > -- アレックス・マーフィー巡査 / ロボコップ
 
 Rubyディベロッパーとして、私は常にあることに悩まされてきました -
@@ -1105,6 +1105,18 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   'test'.upcase
   ```
 
+* <a name="single-action-blocks"></a>
+  ブロック内で呼び出されるメソッドがただ１つである場合、簡略化されたproc呼び出しを用いましょう。
+<sup>[[link](#single-action-blocks)]</sup>
+
+  ```Ruby
+  # 悪い例
+  names.map { |name| name.upcase }
+
+  # 良い例
+  names.map(&:upcase)
+  ```
+
 * <a name="single-line-blocks"></a>
   １行のブロックでは`do...end`より`{...}`の方が好まれます。
   複数行のブロックでは`{...}`は避けましょう
@@ -1115,7 +1127,7 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
 <sup>[[link](#single-line-blocks)]</sup>
 
   ```Ruby
-  names = ['Bozhidar', 'Steve', 'Sarah']
+  names = %w(Bozhidar Steve Sarah)
 
   # 悪い例
   names.each do |name|
@@ -1131,7 +1143,7 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   end.map { |name| name.upcase }
 
   # 良い例
-  names.select { |name| name.start_with?('S') }.map { |name| name.upcase }
+  names.select { |name| name.start_with?('S') }.map(&:upcase)
   ```
 
   `{...}`を用いた複数行のメソッドチェーンをOKと主張する人もいるかもしれないが、
@@ -1403,6 +1415,38 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   Rubyインタープリタを走らせるときは、常に`-w`オプションを付けましょう。
   これまでのルールのどれかを忘れてしまった時に警告を出してくれます！
 <sup>[[link](#always-warn-at-runtime)]</sup>
+
+* <a name="no-nested-methods"></a>
+  ネストしたメソッド定義は行ってはいけません - 代わりにラムダを用いましょう。
+  ネストしたメソッド定義は確かに外側のメソッドと同じスコープでメソッドを生成します(例えば`class`のように)。
+  そのうえ、"ネストしたメソッド"は、そのメソッドを含んでいるメソッドがが呼び出されるたびに再定義されるでしょう。
+<sup>[[link](#no-nested-methods)]</sup>
+
+  ```Ruby
+  # 悪い例
+  def foo(x)
+    def bar(y)
+      # 本文略
+    end
+
+    bar(x)
+  end
+
+  # 良い例 - 前の例と同じですが、foo呼び出し時にのbar再定義が一切おこりません
+  def bar(y)
+    # 本文略
+  end
+
+  def foo(x)
+    bar(x)
+  end
+
+  # こちらも良い例
+  def foo(x)
+    bar = ->(y) { ... }
+    bar.call(x)
+  end
+  ```
 
 * <a name="lambda-multi-line"></a>
   １行の本文を持つラムダには新しいリテラルを持ちましょう。
@@ -1731,8 +1775,8 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   ```
 
 * <a name="reverse-each"></a>
-  `reverse.each`の代わりに`reverse_each`を用いましょう。
-  `reverse_each`は新しい配列を作らないので、それが利点です。
+  `reverse.each`の代わりに`reverse_each`を用いましょう。何故なら、`include Enumerable`なclassはそのために実装を最適化して提供しているであろうからです。
+  classが特別な実装を提供していない最悪のケースでも、`Enumerable`を継承している一般的な実装であれば、`reverse.each`を用いた場合と最低でも同じ実行効率となるでしょう。
 <sup>[[link](#reverse-each)]</sup>
 
   ```Ruby
@@ -1745,7 +1789,7 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
 
 ## 命名規則
 
-> プログラミングでただひとつ難しいことは、キャッシュの無効化と命名である。 <br/>
+> プログラミングでただひとつ難しいことは、キャッシュの無効化と命名である。 <br>
 > -- Phil Karlton
 
 * <a name="english-identifiers"></a>
@@ -1959,7 +2003,7 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   古くなったコメントは、コメントがないより悪いです。
 <sup>[[link](#comment-upkeep)]</sup>
 
-> 良いコードは良いジョークのようだ - なんの説明もいらない。<br/>
+> 良いコードは良いジョークのようだ - なんの説明もいらない。<br>
 > -- Russ Olsen
 
 * <a name="refactor-dont-comment"></a>
@@ -2056,7 +2100,11 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
     def self.some_method
     end
 
-    # public instance methods が続きます
+    # initializeはclass methodsと他のinstance methodsの間に来ます
+    def initialize
+    end
+
+    # 他のpublic instance methods が続きます
     def some_method
     end
 
@@ -2924,7 +2972,7 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   ```
 
 * <a name="use-hash-blocks"></a>
-  `Hash#fetch`では、デフォルト値の代わりにブロックを用いることが好まれます。
+  デフォルト値として評価されるコードに副作用があったり高価であるとき、`Hash#fetch`では、デフォルト値の代わりにブロックを用いることが好まれます。
 <sup>[[link](#use-hash-blocks)]</sup>
 
   ```Ruby
@@ -3050,9 +3098,7 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
     name = "Bozhidar"
     ```
 
-  Rubyコミュニティの中では、ほぼ間違いなく
-  ２つ目のスタイルの方が有名です。
-  しかしながら、このガイド内の文字列リテラル表記は、
+  このガイド内の文字列リテラル表記は、
   １つ目のスタイルを採用しています。
 
 * <a name="no-character-literals"></a>
@@ -3169,7 +3215,7 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
 ## 正規表現
 
 > 問題に突き当たった時、"そうだ、正規表現を使おう"と考えます。
-> そこには２つの問題があります。<br/>
+> そこには２つの問題があります。<br>
 > -- Jamie Zawinski
 
 * <a name="no-regexp-for-plaintext"></a>
@@ -3324,11 +3370,11 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
 
   ```Ruby
   # 悪い例
-  %r(\s+)
+  %r{\s+}
 
   # 良い例
-  %r(^/(.*)$)
-  %r(^/blog/2011/(.*)$)
+  %r{^/(.*)$}
+  %r{^/blog/2011/(.*)$}
   ```
 
 * <a name="percent-x"></a>
@@ -3578,7 +3624,7 @@ Rubyのコードスタイルに興味のある全ての人と共に取り組む�
 全てのコメント、提案、オプションがこのガイドを少しだけでも良くしていきます。
 そして、考えうるベストのガイドが欲しいですよね？
 
-ありがとう<br/>
+ありがとう<br>
 [Bozhidar](https://twitter.com/bbatsov)
 
 [PEP-8]: http://www.python.org/dev/peps/pep-0008/
