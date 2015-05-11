@@ -1,6 +1,6 @@
 # Prelude
 
-> Role models are important. <br/>
+> Role models are important. <br>
 > -- Officer Alex J. Murphy / RoboCop
 
 One thing has always bothered me as a Ruby developer - Python developers have a
@@ -98,7 +98,7 @@ Translations of the guide are available in the following languages:
 
 > Nearly everybody is convinced that every style but their own is
 > ugly and unreadable. Leave out the "but their own" and they're
-> probably right... <br/>
+> probably right... <br>
 > -- Jerry Coffin (on indentation)
 
 * <a name="utf-8"></a>
@@ -1106,6 +1106,18 @@ condition](#safe-assignment-in-condition).
   'test'.upcase
   ```
 
+* <a name="single-action-blocks"></a>
+  Use the proc invocation shorthand when the invoked method is the only operation of a block.
+<sup>[[link](#single-action-blocks)]</sup>
+
+  ```Ruby
+  # bad
+  names.map { |name| name.upcase }
+
+  # good
+  names.map(&:upcase)
+  ```
+
 * <a name="single-line-blocks"></a>
   Prefer `{...}` over `do...end` for single-line blocks.  Avoid using `{...}`
   for multi-line blocks (multiline chaining is always ugly). Always use
@@ -1114,7 +1126,7 @@ condition](#safe-assignment-in-condition).
 <sup>[[link](#single-line-blocks)]</sup>
 
   ```Ruby
-  names = ['Bozhidar', 'Steve', 'Sarah']
+  names = %w(Bozhidar Steve Sarah)
 
   # bad
   names.each do |name|
@@ -1130,7 +1142,7 @@ condition](#safe-assignment-in-condition).
   end.map { |name| name.upcase }
 
   # good
-  names.select { |name| name.start_with?('S') }.map { |name| name.upcase }
+  names.select { |name| name.start_with?('S') }.map(&:upcase)
   ```
 
   Some will argue that multiline chaining would look OK with the use of {...},
@@ -1408,6 +1420,39 @@ condition](#safe-assignment-in-condition).
   Always run the Ruby interpreter with the `-w` option so it will warn you if
   you forget either of the rules above!
 <sup>[[link](#always-warn-at-runtime)]</sup>
+
+* <a name="no-nested-methods"></a>
+  Do not use nested method definitions, use lambda instead.
+  Nested method definitions actually produce methods in the same scope
+  (e.g. class) as the outer method. Furthermore, the "nested method" will be
+  redefined every time the method containing its definition is invoked.
+<sup>[[link](#no-nested-methods)]</sup>
+
+  ```Ruby
+  # bad
+  def foo(x)
+    def bar(y)
+      # body omitted
+    end
+    
+    bar(x)
+  end
+
+  # good - the same as the previous, but no bar redefinition on every foo call
+  def bar(y)
+    # body omitted
+  end
+  
+  def foo(x)
+    bar(x)
+  end
+
+  # also good
+  def foo(x)
+    bar = ->(y) { ... }
+    bar.call(x)
+  end
+  ```
 
 * <a name="lambda-multi-line"></a>
   Use the new lambda literal syntax for single line body blocks. Use the
@@ -1745,8 +1790,11 @@ condition](#safe-assignment-in-condition).
   ```
 
 * <a name="reverse-each"></a>
-  Use `reverse_each` instead of `reverse.each`. `reverse_each` doesn't do a
-  new array allocation and that's a good thing.
+  Prefer `reverse_each` to `reverse.each` because some classes that `include
+  Enumerable` will provide an efficient implementation. Even in the worst case
+  where a class does not provide a specialized implementation, the general
+  implementation inherited from `Enumerable` will be at least as efficient as
+  using `reverse.each`.
 <sup>[[link](#reverse-each)]</sup>
 
   ```Ruby
@@ -1760,7 +1808,7 @@ condition](#safe-assignment-in-condition).
 ## Naming
 
 > The only real difficulties in programming are cache invalidation and
-> naming things. <br/>
+> naming things. <br>
 > -- Phil Karlton
 
 * <a name="english-identifiers"></a>
@@ -1941,7 +1989,7 @@ condition](#safe-assignment-in-condition).
 > Good code is its own best documentation. As you're about to add a
 > comment, ask yourself, "How can I improve the code so that this
 > comment isn't needed?" Improve the code and then document it to make
-> it even clearer. <br/>
+> it even clearer. <br>
 > -- Steve McConnell
 
 * <a name="no-comments"></a>
@@ -1976,7 +2024,7 @@ condition](#safe-assignment-in-condition).
   comment at all.
 <sup>[[link](#comment-upkeep)]</sup>
 
-> Good code is like a good joke - it needs no explanation. <br/>
+> Good code is like a good joke - it needs no explanation. <br>
 > -- Russ Olsen
 
 * <a name="refactor-dont-comment"></a>
@@ -2080,7 +2128,11 @@ condition](#safe-assignment-in-condition).
     def self.some_method
     end
 
-    # followed by public instance methods
+    # initialization goes between class methods and other instance methods
+    def initialize
+    end
+
+    # followed by other public instance methods
     def some_method
     end
 
@@ -2956,7 +3008,7 @@ resource cleanup when possible.
   ```
 
 * <a name="use-hash-blocks"></a>
-  Prefer the use of the block instead of the default value in `Hash#fetch`.
+  Prefer the use of the block instead of the default value in `Hash#fetch` if the code that has to be evaluated may have side effects or be expensive.
 <sup>[[link](#use-hash-blocks)]</sup>
 
   ```Ruby
@@ -3084,9 +3136,7 @@ resource cleanup when possible.
     name = "Bozhidar"
     ```
 
-  The second style is arguably a bit more popular in the Ruby
-  community. The string literals in this guide, however, are
-  aligned with the first style.
+  The string literals in this guide are aligned with the first style.
 
 * <a name="no-character-literals"></a>
   Don't use the character literal syntax `?x`. Since Ruby 1.9 it's basically
@@ -3201,7 +3251,7 @@ resource cleanup when possible.
 ## Regular Expressions
 
 > Some people, when confronted with a problem, think
-> "I know, I'll use regular expressions." Now they have two problems.<br/>
+> "I know, I'll use regular expressions." Now they have two problems.<br>
 > -- Jamie Zawinski
 
 * <a name="no-regexp-for-plaintext"></a>
@@ -3347,11 +3397,11 @@ resource cleanup when possible.
 
   ```Ruby
   # bad
-  %r(\s+)
+  %r{\s+}
 
   # good
-  %r(^/(.*)$)
-  %r(^/blog/2011/(.*)$)
+  %r{^/(.*)$}
+  %r{^/blog/2011/(.*)$}
   ```
 
 * <a name="percent-x"></a>
@@ -3605,7 +3655,7 @@ your friends and colleagues. Every comment, suggestion or opinion we
 get makes the guide just a little bit better. And we want to have the
 best possible guide, don't we?
 
-Cheers,<br/>
+Cheers,<br>
 [Bozhidar](https://twitter.com/bbatsov)
 
 [PEP-8]: http://www.python.org/dev/peps/pep-0008/
