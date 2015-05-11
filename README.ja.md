@@ -248,20 +248,6 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   ２つ目の構文は、ブロックとハッシュを視覚的に差別化できるという点で有利です。
   どちらでも片方を採用すれば、常に同じ構文を採用しましょう。
 
-  文字列に埋め込む構文も、２つのスタイルが許容できます:
-
-  ```Ruby
-  # 良い例 - スペースを入れない
-  "string#{expr}"
-
-  # 良い例 - ほぼ間違いなくにこちらのほうが読みやすい
-  "string#{ expr }"
-  ```
-
-  １つ目の式は、他の式よりも非常に人気があり、一般的にこちらを使うように進められる書き方です。
-  一方２つ目は、(間違いなく)少し読みやすいです。
-  ハッシュと同じように - 片方を採用すれば、常に同じ方を採用しましょう。
-
 * <a name="no-spaces-braces"></a>
   `(`、 `[`の後と、`]`、 `)`の前にはスペースは入れません。
 <sup>[[link](#no-spaces-braces)]</sup>
@@ -3060,13 +3046,16 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   email_with_name = format('%s <%s>', user.name, user.email)
   ```
 
-* <a name="pad-string-interpolation"></a>
-  文字列挿入時にはスペースを入れることを検討しましょう。
-  文字列から分かれたコードがより明確になります。
-<sup>[[link](#pad-string-interpolation)]</sup>
+* <a name="string-interpolation"></a>
+  文字列挿入時には、`{}`の内部にスペースを入れるべきではありません。
+<sup>[[link](#string-interpolation)]</sup>
 
   ```Ruby
-  "#{ user.last_name }, #{ user.first_name }"
+  # 悪い例
+  "From: #{ user.first_name }, #{ user.last_name }"
+
+  # 良い例
+  "From: #{user.first_name}, #{user.last_name}"
   ```
 
 * <a name="consistent-string-literals"></a>
