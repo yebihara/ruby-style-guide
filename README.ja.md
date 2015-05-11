@@ -3178,7 +3178,7 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
 
   # 悪い例
   url.gsub("http://", "https://")
-  url.gsub("-", "_")
+  str.gsub("-", "_")
 
   # 良い例
   url.sub("http://", "https://")
