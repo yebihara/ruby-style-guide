@@ -1288,7 +1288,13 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
 <sup>[[link](#double-pipe-for-uninit)]</sup>
 
   ```Ruby
-  # nameがnilかfalseでなければ、Bozhidarで初期化します
+  # 悪い例
+  name = name ? name : 'Bozhidar'
+
+  # 悪い例
+  name = 'Bozhidar' unless name
+
+  # 良い例 - nameがnilかfalseの場合のみ、Bozhidarで初期化します
   name ||= 'Bozhidar'
   ```
 
