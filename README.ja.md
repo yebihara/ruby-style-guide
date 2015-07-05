@@ -759,7 +759,7 @@ PDFやHTMLのコピーはこのガイドを使って作成できます
   end
 
   # 良い例
-  retuls =
+  result =
     if condition
       x
     else
