@@ -182,13 +182,13 @@ Rubyコミュニティ内でもスタイルについての統一見解が存在�
   # 悪い例
   def too_much; something; something_else; end
 
-  # 悪くない例 - 最初の ; は必要です。
+  # 悪くない例 - 最初の ; は必要です
   def no_braces_method; body end
 
-  # 悪くない例 - ２つ目の ; は任意です。
+  # 悪くない例 - ２つ目の ; は任意です
   def no_braces_method; body; end
 
-  # 悪くない例 - 文法上は正しいです。ただし、; がない記述は少し読みづらいです。
+  # 悪くない例 - 文法上は正しいです、ただし; がない記述は少し読みづらいです
   def some_method() body end
 
   # 良い例
