@@ -271,7 +271,7 @@ Rubyコミュニティ内でもスタイルについての統一見解が存在�
   ```
 
 * <a name="no-space-inside-range-literals"></a>
-  範囲リテラルの内側にスペースは不要です。
+  範囲リテラルの内側にスペースは入れません。
 <sup>[[link](#no-space-inside-range-literals)]</sup>
 
     ```Ruby
