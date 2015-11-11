@@ -155,7 +155,7 @@ Rubyコミュニティ内でもスタイルについての統一見解が存在�
   ```
 
 * <a name="single-line-classes"></a>
-  本文のないクラスは１行のフォーマットが好まれます。
+  本文のないクラスは１行のフォーマットを用いましょう。
 <sup>[[link](#single-line-classes)]</sup>
 
   ```Ruby
