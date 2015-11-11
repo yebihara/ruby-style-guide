@@ -249,6 +249,11 @@ Rubyコミュニティ内でもスタイルについての統一見解が存在�
 <sup>[[link](#no-spaces-braces)]</sup>
 
   ```Ruby
+  # bad
+  some( arg ).other
+  [ 1, 2, 3 ].size
+
+  # good
   some(arg).other
   [1, 2, 3].size
   ```
