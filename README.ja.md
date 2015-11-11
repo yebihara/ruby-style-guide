@@ -979,7 +979,7 @@ Rubyコミュニティ内でもスタイルについての統一見解が存在�
   ```
 
 * <a name="unless-for-negatives"></a>
-  否定形のときは`if`より`unless`が好まれます。(もしくは`||`構文を使いましょう)。
+  否定形のときは`if`より`unless`を優先的に使いましょう。(もしくは`||`構文を使いましょう)。
 <sup>[[link](#unless-for-negatives)]</sup>
 
   ```Ruby
