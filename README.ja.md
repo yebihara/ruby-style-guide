@@ -453,7 +453,7 @@ Rubyコミュニティ内でもスタイルについての統一見解が存在�
 
 * <a name="consistent-multi-line-chains"></a>
   一貫した複数行のメソッドチェーンのスタイルを採用しましょう。
-  Rubyコミュニティには2つの有名なスタイル - 先頭に`.`を付けるもの (Option A)、
+  Rubyコミュニティには2つのよく使われるスタイル - 先頭に`.`を付けるもの (Option A)、
   末尾に`.`を付けるもの (Option B) - があり、
   どちらも良いと考えられています。
 <sup>[[link](#consistent-multi-line-chains)]</sup>
