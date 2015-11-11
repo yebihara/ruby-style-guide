@@ -1307,7 +1307,7 @@ Rubyコミュニティ内でもスタイルについての統一見解が存在�
   ```
 
 * <a name="no-shadowing"></a>
-  当然の帰結として、ローカル変数でメソッドを隠すのは、
+  当然の帰結として、ローカル変数でメソッドをシャドウイングするのは、
   それらが等価なものでない限り避けましょう。
 <sup>[[link](#no-shadowing)]</sup>
 
@@ -1318,7 +1318,7 @@ Rubyコミュニティ内でもスタイルについての統一見解が存在�
     # ok
     def initialize(options)
       self.options = options
-      # both options and self.options are equivalent here
+      # options と self.options はここでは等価
     end
 
     # 悪い例
