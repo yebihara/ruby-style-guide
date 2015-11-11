@@ -1074,7 +1074,7 @@ Rubyコミュニティ内でもスタイルについての統一見解が存在�
   ```
 
 * <a name="until-for-negatives"></a>
-  否定形のときは、`while`よりも`until`の方が好まれます。
+  否定形のときは、`while`よりも`until`を使いましょう。
 <sup>[[link](#until-for-negatives)]</sup>
 
   ```Ruby
