@@ -930,7 +930,7 @@ Rubyコミュニティ内でもスタイルについての統一見解が存在�
 <sup>[[link](#no-multiline-ternary)]</sup>
 
 * <a name="if-as-a-modifier"></a>
-  本文が１行のときは、`if/unless`修飾子を利用するのが好まれます。
+  本文が１行のときは、`if/unless`修飾子を優先的に使いましょう。
   他の良い代替案としては`&&/||`を使った制御構文があります。
 <sup>[[link](#if-as-a-modifier)]</sup>
 
