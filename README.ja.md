@@ -286,9 +286,8 @@ Rubyコミュニティ内でもスタイルについての統一見解が存在�
 
 * <a name="indent-when-to-case"></a>
   `when`は`case`と同じ深さに揃えましょう。
-  多くの人が同意できないのを知っていますが、
   このスタイルは"The Ruby Programming Language"、"Programming Ruby"
-  双方で確立されたものなのです。
+  双方で確立されたものです。
 <sup>[[link](#indent-when-to-case)]</sup>
 
   ```Ruby
