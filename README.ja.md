@@ -836,7 +836,7 @@ Rubyコミュニティ内でもスタイルについての統一見解が存在�
   ```
 
 * <a name="use-if-case-returns"></a>
-  結果を返す`if`や`case`式の値を活用しましょう。
+  `if`や`case`が式で、値を返すという事実を活用しましょう。
 <sup>[[link](#use-if-case-returns)]</sup>
 
   ```Ruby
