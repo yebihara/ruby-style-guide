@@ -561,7 +561,7 @@ Rubyコミュニティ内でもスタイルについての統一見解が存在�
   ```
 
 * <a name="rdoc-conventions"></a>
-  APIのドキュメントのため、RDocの規約に従いましょう。
+  APIドキュメントを書くなら、RDocとその規約に従いましょう。
   コメント行と`def`の間に空行を入れてはいけません。
 <sup>[[link](#rdoc-conventions)]</sup>
 
