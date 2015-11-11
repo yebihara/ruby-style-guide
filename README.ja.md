@@ -1033,6 +1033,8 @@ Rubyコミュニティ内でもスタイルについての統一見解が存在�
   end
   ```
 
+留意しなければならないのは、このルールには例外([条件式中の安全な代入](#safe-assignment-in-condition))があるということです。
+
 * <a name="no-multiline-while-do"></a>
   複数行の`while/until`では、`while/until condition do`を使ってはいけません。
 <sup>[[link](#no-multiline-while-do)]</sup>
