@@ -1250,7 +1250,7 @@ Rubyコミュニティ内でもスタイルについての統一見解が存在�
   # 悪い例
   def with_tmp_dir
     Dir.mktmpdir do |tmp_dir|
-      Dir.chdir(tmp_dir) { |dir| yield dir }  # block just passes arguments
+      Dir.chdir(tmp_dir) { |dir| yield dir }  # 引数を渡しているだけのブロック
     end
   end
 
