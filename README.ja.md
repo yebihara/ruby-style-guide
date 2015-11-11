@@ -494,12 +494,12 @@ Rubyコミュニティ内でもスタイルについての統一見解が存在�
 <sup>[[link](#no-double-indent)]</sup>
 
   ```Ruby
-  # 初期値 (１行がとても長いです)
+  # 初期状態 (１行がとても長いです)
   def send_mail(source)
     Mailer.deliver(to: 'bob@example.com', from: 'us@example.com', subject: 'Important message', body: source.text)
   end
 
-  # 悪い例 (インデント２つで揃えています)
+  # 悪い例 (インデントが倍)
   def send_mail(source)
     Mailer.deliver(
         to: 'bob@example.com',
