@@ -1592,7 +1592,7 @@ Rubyコミュニティ内でもスタイルについての統一見解が存在�
   ```
 
 * <a name="proc"></a>
-  `Proc.new`より`proc`を好みます。
+  `Proc.new`より`proc`を使いましょう。
 <sup>[[link](#proc)]</sup>
 
   ```Ruby
