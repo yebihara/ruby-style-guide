@@ -1661,7 +1661,7 @@ Rubyコミュニティ内でもスタイルについての統一見解が存在�
 <sup>[[link](#warn)]</sup>
 
 * <a name="sprintf"></a>
-  不可解な`String#%`メソッドより`sprintf`や`format`を使いましょう。
+  あまりに暗号めいている`String#%`メソッドよりも`sprintf`や`format`を使いましょう。
 <sup>[[link](#sprintf)]</sup>
 
   ```Ruby
@@ -1686,7 +1686,7 @@ Rubyコミュニティ内でもスタイルについての統一見解が存在�
   ```
 
 * <a name="array-join"></a>
-  不可解な`Array#*`メソッドよりも`Array#join`を好みます。
+  あまりに暗号めいている`Array#*`メソッドよりも`Array#join`を使いましょう。
 <sup>[[link](#array-join)]</sup>
 
   ```Ruby
