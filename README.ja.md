@@ -1766,7 +1766,7 @@ Rubyコミュニティ内でもスタイルについての統一見解が存在�
   ```
 
 * <a name="no-non-nil-checks"></a>
-  ブーリアン値を扱わない限り、露骨な`nil`でないかの検査は避けましょう。
+  boolean値を扱わない限り、露骨な`nil`でないかの検査は避けましょう。
 <sup>[[link](#no-non-nil-checks)]</sup>
 
   ```Ruby
@@ -1777,7 +1777,7 @@ Rubyコミュニティ内でもスタイルについての統一見解が存在�
   # 良い例
   do_something if something
 
-  # 良い例 - ブーリアン値を扱うとき
+  # 良い例 - boolean値を扱うとき
   def value_set?
     !@some_boolean.nil?
   end
