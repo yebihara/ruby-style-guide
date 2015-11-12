@@ -1717,7 +1717,7 @@ Rubyコミュニティ内でもスタイルについての統一見解が存在�
   ```
 
 * <a name="ranges-or-between"></a>
-  複雑な比較ロジックの代わりに、
+  ロジックを使って複雑な比較を行うよりも、
   可能な限り`Range`や`Comparable#between?`を用いましょう。
 <sup>[[link](#ranges-or-between)]</sup>
 
