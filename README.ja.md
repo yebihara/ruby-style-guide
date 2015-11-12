@@ -1793,11 +1793,9 @@ Rubyコミュニティ内でもスタイルについての統一見解が存在�
 
   ```ruby
   # 悪い例
-
   END { puts 'Goodbye!' }
 
   # 良い例
-
   at_exit { puts 'Goodbye!' }
   ```
 
