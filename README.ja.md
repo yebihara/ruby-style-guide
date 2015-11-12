@@ -1604,7 +1604,7 @@ Rubyコミュニティ内でもスタイルについての統一見解が存在�
   ```
 
 * <a name="proc-call"></a>
-  ラムダやprocの呼び出しには`proc[]`や`proc.()`より`proc.call()`を好みます。
+  lambdaやprocの呼び出しには`proc[]`や`proc.()`より`proc.call()`を使いましょう。
 <sup>[[link](#proc-call)]</sup>
 
   ```Ruby
