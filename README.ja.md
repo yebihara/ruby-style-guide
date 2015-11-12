@@ -1018,7 +1018,7 @@ Rubyコミュニティ内でもスタイルについての統一見解が存在�
   ```
 
 * <a name="no-parens-if"></a>
-  `if/unless/while/until`構文では`()`の使用は避けましょう。
+  `if/unless/while/until`の条件式の周囲を括弧で括らないようにしましょう。
 <sup>[[link](#no-parens-if)]</sup>
 
   ```Ruby
