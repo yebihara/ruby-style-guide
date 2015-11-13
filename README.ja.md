@@ -2117,12 +2117,12 @@ Rubyコミュニティ内でもスタイルについての統一見解が存在�
 <sup>[[link](#english-syntax)]</sup>
 
 * <a name="no-superfluous-comments"></a>
-  余計なコメントは避けましょう。
+  過剰なコメントは避けましょう。
 <sup>[[link](#no-superfluous-comments)]</sup>
 
   ```Ruby
   # 悪い例
-  counter += 1 # Increments counter by one.
+  counter += 1 # カウンターをインクリメント
   ```
 
 * <a name="comment-upkeep"></a>
