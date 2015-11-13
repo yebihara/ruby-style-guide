@@ -1973,12 +1973,20 @@ Rubyコミュニティ内でもスタイルについての統一見解が存在�
     ...
   end
 
+  class XmlSomething
+    ...
+  end
+
   # 良い例
   class SomeClass
     ...
   end
 
   class SomeXML
+    ...
+  end
+
+  class XMLSomething
     ...
   end
   ```
