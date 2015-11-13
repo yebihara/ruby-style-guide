@@ -2370,7 +2370,7 @@ Rubyコミュニティ内でもスタイルについての統一見解が存在�
 <sup>[[link](#solid-design)]</sup>
 
 * <a name="define-to-s"></a>
-  クラスの領分を説明するため、常に`to_s`メソッドを提供しましょう。
+  ドメインオブジェクトのクラスにおいては常に適切な`to_s`メソッドを提供しましょう。
 <sup>[[link](#define-to-s)]</sup>
 
   ```Ruby
