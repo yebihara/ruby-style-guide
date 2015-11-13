@@ -2205,7 +2205,7 @@ Rubyコミュニティ内でもスタイルについての統一見解が存在�
 ## クラスとモジュール
 
 * <a name="consistent-classes"></a>
-  クラス定義は置いて一貫性のある構造にしましょう。
+  クラス定義の構造には一貫性をもたせましょう。
 <sup>[[link](#consistent-classes)]</sup>
 
   ```Ruby
