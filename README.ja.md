@@ -2326,7 +2326,7 @@ Rubyコミュニティ内でもスタイルについての統一見解が存在�
 
 * <a name="module-function"></a>
   モジュールのインスタンスメソッドをクラスメソッドにしたいときは、
-  `extend self`よりも`module_function`が好まれます。
+  `extend self`よりも`module_function`を使いましょう。
 <sup>[[link](#module-function)]</sup>
 
   ```Ruby
