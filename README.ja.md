@@ -1833,7 +1833,7 @@ Rubyコミュニティ内でもスタイルについての統一見解が存在�
   end
   ```
 
-  ループ内では条件判定ブロックよりも`next`が好まれます。
+  ループ内では条件判定ブロックよりも`next`を使いましょう。
   ```Ruby
   # 悪い例
   [0, 1, 2, 3].each do |item|
@@ -1850,7 +1850,7 @@ Rubyコミュニティ内でもスタイルについての統一見解が存在�
   ```
 * <a name="map-find-select-reduce-size"></a>
   `collect`より`map`、`detect`より`find`、`find_all`より`select`
-  `inject`より`reduce`、`length`より`size`を好みます。
+  `inject`より`reduce`、`length`より`size`を使いましょう。
   これは厳しい要件ではありません;
   もしエイリアスを用いるほうが可読性が上がるのであれば、
   使うのもOKです。
