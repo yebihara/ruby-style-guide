@@ -3089,8 +3089,7 @@ Rubyコミュニティ内でもスタイルについての統一見解が存在�
   ```
 
 * <a name="hash-fetch-defaults"></a>
-  独自のロジックを用いないようにするため、
-  `Hash#fetch`経由でデフォルト値を導入しましょう。
+  `Hash#fetch`のデフォルト値を使い、自力でロジックを書かないようにしましょう。
 <sup>[[link](#hash-fetch-defaults)]</sup>
 
   ```Ruby
