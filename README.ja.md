@@ -2896,7 +2896,7 @@ Rubyコミュニティ内でもスタイルについての統一見解が存在�
   ```
 
 * <a name="release-resources"></a>
-  外部リソースの含まれるプログラムでは、`ensure`で開放しましょう
+  プログラム内で確保した外部リソースは、`ensure`で開放しましょう
 <sup>[[link](#release-resources)]</sup>
 
   ```Ruby
