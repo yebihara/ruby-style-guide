@@ -1124,7 +1124,7 @@ Rubyコミュニティ内でもスタイルについての統一見解が存在�
   ```
 
 * <a name="no-dsl-parens"></a>
-  内部DSL(例えばRake, Rails, RSpec)や、
+  内部DSL(例えばRake、Rails、RSpec)や、
   Rubyで「キーワード」と認識されているメソッド(例えば`attr_reader` や`puts`)や、
   アトリビュートにアクセスするメソッドでは、
   引数の周りの括弧を省略しましょう。
@@ -1956,7 +1956,7 @@ Rubyコミュニティ内でもスタイルについての統一見解が存在�
   ```
 
 * <a name="camelcase-classes"></a>
-  クラスやモジュールには`CamelCase`を用いましょう。(HTTP, RFC, XMLのような頭字語は大文字を保ちましょう)。
+  クラスやモジュールには`CamelCase`を用いましょう。(HTTP、RFC、XMLのような頭字語は大文字を保ちましょう)。
 <sup>[[link](#camelcase-classes)]</sup>
 
   ```Ruby
@@ -3715,7 +3715,7 @@ Rubyコミュニティ内でもスタイルについての統一見解が存在�
 [RuboCop][]は、このガイドに基づいた
 Rubyコードスタイルチェッカーです。
 Rubocopはすでにこのガイドの重要な部分をカバーしており、
-MRI 1.9, MRI 2.0 双方をサポートし、Emacs向けのよいプラグインがあります。
+MRI 1.9、MRI 2.0 双方をサポートし、Emacs向けのよいプラグインがあります。
 
 ### RubyMine
 
