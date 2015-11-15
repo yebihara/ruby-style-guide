@@ -3131,7 +3131,7 @@ Rubyコミュニティ内でもスタイルについての統一見解が存在�
   ```
 
 * <a name="ordered-hashes"></a>
-  Ruby 1.9現在ではハッシュは順序付けられるということを信頼しましょう。
+  Ruby 1.9以降、ハッシュは順序付けられるということを信頼しましょう。
 <sup>[[link](#ordered-hashes)]</sup>
 
 * <a name="no-modifying-collections"></a>
