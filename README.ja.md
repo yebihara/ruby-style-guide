@@ -3465,6 +3465,12 @@ Rubyコミュニティ内でもスタイルについての統一見解が存在�
   `sub`/`gsub`での複雑な置換は、ブロックやハッシュを用いることで実現できます。
 <sup>[[link](#gsub-blocks)]</sup>
 
+  ```Ruby
+  words = 'foo bar'
+  words.sub(/f/, 'f' => 'F') # => 'Foo bar'
+  words.gsub(/\w+/) { |word| word.capitalize } # => 'Foo Bar'
+  ```
+
 ## パーセントリテラル
 
 * <a name="percent-q-shorthand"></a>
