@@ -3707,7 +3707,7 @@ Rubyコミュニティ内でもスタイルについての統一見解が存在�
 ## 雑則
 
 * <a name="always-warn"></a>
-  `ruby -w`で安全なコードを書きましょう。
+  `ruby -w`で実行しても何も警告されないコードを書きましょう。
 <sup>[[link](#always-warn)]</sup>
 
 * <a name="no-optional-hash-params"></a>
