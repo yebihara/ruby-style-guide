@@ -3585,7 +3585,7 @@ Rubyコミュニティ内でもスタイルについての統一見解が存在�
   class_eval 'def use_relative_model_naming?; true; end', __FILE__, __LINE__
   ```
 
-  - `define_method`の方が、`class_eval{ def ... }`よりも好まれます。
+  - `define_method`の方が、`class_eval{ def ... }`よりも好ましいです。
 
 * <a name="eval-comment-docs"></a>
   文字列挿入型の`class_eval`(または他の`eval`)を用いる時は、
