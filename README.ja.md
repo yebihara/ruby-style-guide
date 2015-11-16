@@ -3381,8 +3381,11 @@ Rubyコミュニティ内でもスタイルについての統一見解が存在�
 <sup>[[link](#non-capturing-regexp)]</sup>
 
   ```Ruby
-  /(first|second)/   # 悪い例
-  /(?:first|second)/ # 良い例
+  # 悪い例
+  /(first|second)/
+
+  # 良い例
+  /(?:first|second)/
   ```
 
 * <a name="no-perl-regexp-last-matchers"></a>
