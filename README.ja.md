@@ -3572,7 +3572,7 @@ Rubyコミュニティ内でもスタイルについての統一見解が存在�
 <sup>[[link](#no-needless-metaprogramming)]</sup>
 
 * <a name="no-monkey-patching"></a>
-  ライブラリに書かれているコアなクラスを汚すのはやめましょう
+  ライブラリを作成する時にコアクラスを汚染するのはやめましょう。
   (モンキーパッチを当ててはいけません)。
 <sup>[[link](#no-monkey-patching)]</sup>
 
