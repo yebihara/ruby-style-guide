@@ -3757,7 +3757,7 @@ Rubyコミュニティ内でもスタイルについての統一見解が存在�
 <sup>[[link](#time-now)]</sup>
 
 * <a name="functional-code"></a>
-  それで問題ない時は、破壊的処理を避け関数型の手法でコードを書きましょう。
+  破壊的変更をしなくても済むなら、できるだけ関数的プログラミング手法を使いましょう。
 <sup>[[link](#functional-code)]</sup>
 
 * <a name="no-param-mutations"></a>
