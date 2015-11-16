@@ -3362,7 +3362,7 @@ Rubyコミュニティ内でもスタイルについての統一見解が存在�
 > -- Jamie Zawinski
 
 * <a name="no-regexp-for-plaintext"></a>
-  単にプレーンテキストを文字列中から探すだけの時は、
+  単に文字列中から文字列を探すだけの時は、
   正規表現を使ってはいけません: `string['text']`を使いましょう。
 <sup>[[link](#no-regexp-for-plaintext)]</sup>
 
