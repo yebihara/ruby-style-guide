@@ -3177,7 +3177,7 @@ Rubyコミュニティ内でもスタイルについての統一見解が存在�
 ## 文字列
 
 * <a name="string-interpolation"></a>
-  文字列連結の代わりに文字列挿入や文字列整形を好みます。
+  文字列連結の代わりに文字列挿入や文字列整形を使いましょう
 <sup>[[link](#string-interpolation)]</sup>
 
   ```Ruby
