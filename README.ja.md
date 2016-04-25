@@ -2675,44 +2675,42 @@ Rubyコミュニティ内でもスタイルについての統一見解が存在�
 ## 例外
 
 * <a name="fail-method"></a>
-  例外は`fail`を使って発生させましょう。
-  `raise`は例外をキャッチして、再度発生させるときにのみ使いましょう
-  (何故なら、ここでは失敗(fail)ではなく、明示的に意図的に例外を上げ(raise)ているからです)。
+  例外は`fail`ではなく`raise`を使って発生させましょう。
 <sup>[[link](#fail-method)]</sup>
 
   ```Ruby
-  begin
-    fail 'Oops'
-  rescue => error
-    raise if error.message != 'Oops'
-  end
+  # bad
+  fail SomeException, 'message'
+  
+  # good
+  raise SomeException, 'message'
   ```
 
 * <a name="no-explicit-runtimeerror"></a>
-  ２引数の`fail/raise`では、`RuntimeError`を明示しないようにしましょう。
+  ２引数の`raise`では、`RuntimeError`を明示しないようにしましょう。
 <sup>[[link](#no-explicit-runtimeerror)]</sup>
 
   ```Ruby
   # 悪い例
-  fail RuntimeError, 'message'
+  raise RuntimeError, 'message'
 
   # 良い例 - デフォルトでRuntimeErrorが発生します
-  fail 'message'
+  raise 'message'
   ```
 
 * <a name="exception-class-messages"></a>
-  `fail/raise`の引数としては例外クラスのインスタンスよりも、
+  `raise`の引数としては例外クラスのインスタンスよりも、
   例外クラスとメッセージをそれぞれの引数で渡す方を使いましょう。
 <sup>[[link](#exception-class-messages)]</sup>
 
   ```Ruby
   # 悪い例
-  fail SomeException.new('message')
-  # `fail SomeException.new('message'), backtrace`とする書き方が存在しないことに注意しましょう。
+  raise SomeException.new('message')
+  # `raise SomeException.new('message'), backtrace`とする書き方が存在しないことに注意しましょう。
 
   # 良い例
-  fail SomeException, 'message'
-  # `fail SomeException, 'message', backtrace`の用法と一貫性があります
+  raise SomeException, 'message'
+  # `raise SomeException, 'message', backtrace`の用法と一貫性があります
   ```
 
 * <a name="no-return-ensure"></a>
@@ -2725,7 +2723,7 @@ Rubyコミュニティ内でもスタイルについての統一見解が存在�
 
   ```Ruby
   def foo
-    fail
+    raise
   ensure
     return 'very bad idea'
   end
